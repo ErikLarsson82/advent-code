@@ -7,12 +7,12 @@ function spiralMemorySize(input, length) {
   return spiralMemorySize(input, length + 2)
 }
 
-function hydrateMem(_memory) {
+function hydrateMem(_memory, steps) {
   const memory = clone(_memory)
   const side = memory.length
-  const x = Math.ceil(side / 2) -1
-  const y = Math.ceil(side / 2) -1
-  memory[x][y] = 1
+  //let x = side - 1
+  //let y = Math.ceil(side / 2) - 1
+  //memory[y][x] = 1
   return memory
 }
 
@@ -20,13 +20,24 @@ function blankArray(size) {
   return R.map( x => 0, new Array(size) )
 }
 
-function spiralMemory(input) {
-  const sideLength = spiralMemorySize(input, 1)
-
-  const memory = R.map( item => item = blankArray(sideLength), blankArray(sideLength) )
-  const hydratedMemory = hydrateMem(memory)
-  return hydratedMemory
+function steps(sideLength, input) {
+  if (sideLength === 1)
+    return 0
+  if (sideLength === 3)
+    return (input % 2 === 0) ? 1 : 2;
 }
 
-console.log(spiralMemory(10))
+function spiralMemory(input) {
+  const sideLength = spiralMemorySize(input, 1)
+  const prevSize = Math.max(1, (sideLength - 2) * (sideLength - 2))
+  const delta = input - prevSize
+  
+  //const memory = R.map( item => item = blankArray(sideLength), blankArray(sideLength) )
+  //const hydratedMemory = hydrateMem(memory, delta)
+  //return hydratedMemory
+  
+  return steps(sideLength, input)
+}
+
+R.map ( idx => console.log(idx + ": " + spiralMemory(idx)), R.range(1, 11) )
 
