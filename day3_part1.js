@@ -39,11 +39,13 @@ function steps(sideLength, input) {
 
   const currentLayerSize = layerSize(layer) - 1
 
+  const offset = Math.max(0, layer - 2)
+
   const resetCount = input - firstIndexInOnionLayer(layer)
   
   const divisor = layerSize(layer) / 4
 
-  const stepAmount = resetCount % divisor
+  const stepAmount = (resetCount % divisor) + -offset
 
   console.log('sideLength ' + sideLength + ", input " + input + ", divisor " + divisor + ", layer " + layer + ", resetCount " + resetCount + ", currentLayerSize " + currentLayerSize + ", stepAmount " + stepAmount)
   
