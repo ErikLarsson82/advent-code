@@ -6,16 +6,24 @@ function spiralMemorySize(input, length) {
   return spiralMemorySize(input, length + 2)
 }
 
-function spiralMemoryLayers(input, length, multi) {
+function spiralMemoryLayers(input, layer) {
   if (input === 1)
-    return 0
-  if (input <= length + multi)
-    return length
-  return spiralMemoryLayers(input, length + 1, multi + 7)
+    return 1
+  if (input <= accOnionLength(layer))
+    return layer + 1
+  return spiralMemoryLayers(input, layer + 1)
+}
+
+function getOnionLayers(input) {
+  return spiralMemoryLayers(input, 1, 0)
 }
 
 function onionLengthFromLayer(layer) {
   return layer * 8
+}
+
+function accOnionLength(layer) {
+  return R.range(0, layer + 1).reduce( (acc, curr) => acc + onionLengthFromLayer(curr), 1)
 }
 
 function rangeFromLayer(layer) {
@@ -39,26 +47,40 @@ function convertIndexToValue(layer, index) {
 }
 
 function spiralMemory(input) {
-  const onionLayers = spiralMemoryLayers(input, 0, 1)
+  const onionLayers = getOnionLayers(input)
 
   const rest = input - firstValueInOnionLayer(onionLayers - 1) // + onionLayers + 1
-  const offset = onionLayers - 2
-  /*console.log('onionLayers', onionLayers)
-  console.log('offset', offset)
-  console.log('rest', rest)
-  console.log('diff', rest - offset)
-  console.log('firstValueInOnionLayer(onionLayers - 1)', firstValueInOnionLayer(onionLayers - 1))*/
-  return Math.max(0, stepsToCenter(onionLayers)(rest - offset) + onionLayers)
+  const offset = Math.max(0, onionLayers - 2)
+
+  return Math.max(0, stepsToCenter(onionLayers - 1)(rest - offset)) + (onionLayers - 1)
 }
 
-R.map ( idx => console.log(idx + ": " + spiralMemory(idx)), R.range(1, 26))
+R.map ( idx => console.log(idx + ": " + spiralMemory(idx)), R.range(1, 50))
 
-//console.log(spiralMemory(23))
-
+//console.log(spiralMemory(10))
 return
+
 console.log('onionLengthFromLayer(0) ' + onionLengthFromLayer(0))
 console.log('onionLengthFromLayer(1) ' + onionLengthFromLayer(1))
 console.log('onionLengthFromLayer(2) ' + onionLengthFromLayer(2))
+console.log('onionLengthFromLayer(3) ' + onionLengthFromLayer(3))
+console.log('onionLengthFromLayer(4) ' + onionLengthFromLayer(4))
+console.log('onionLengthFromLayer(5) ' + onionLengthFromLayer(5))
+
+console.log('accOnionLength(0) ' + accOnionLength(0))
+console.log('accOnionLength(1) ' + accOnionLength(1))
+console.log('accOnionLength(2) ' + accOnionLength(2))
+console.log('accOnionLength(3) ' + accOnionLength(3))
+console.log('accOnionLength(4) ' + accOnionLength(4))
+console.log('accOnionLength(5) ' + accOnionLength(5))
+
+console.log('firstValueInOnionLayer(0) ' + firstValueInOnionLayer(0))
+console.log('firstValueInOnionLayer(1) ' + firstValueInOnionLayer(1))
+console.log('firstValueInOnionLayer(2) ' + firstValueInOnionLayer(2))
+console.log('firstValueInOnionLayer(3) ' + firstValueInOnionLayer(3))
+console.log('firstValueInOnionLayer(4) ' + firstValueInOnionLayer(4))
+console.log('firstValueInOnionLayer(5) ' + firstValueInOnionLayer(5))
+
 
 console.log('spiralMemorySize(1) ' + spiralMemorySize(1, 1))
 console.log('spiralMemorySize(2) ' + spiralMemorySize(2, 1))
@@ -73,12 +95,6 @@ console.log('rangeFromLayer(0) ' + rangeFromLayer(0))
 console.log('rangeFromLayer(1) ' + rangeFromLayer(1))
 console.log('rangeFromLayer(2) ' + rangeFromLayer(2))
 console.log('rangeFromLayer(3) ' + rangeFromLayer(3))
-
-console.log('firstValueInOnionLayer(0) ' + firstValueInOnionLayer(0))
-console.log('firstValueInOnionLayer(1) ' + firstValueInOnionLayer(1))
-console.log('firstValueInOnionLayer(2) ' + firstValueInOnionLayer(2))
-console.log('firstValueInOnionLayer(3) ' + firstValueInOnionLayer(3))
-console.log('firstValueInOnionLayer(4) ' + firstValueInOnionLayer(4))
 
 
 console.log('stepsToCenter(0)(0) ' + stepsToCenter(0)(0))
