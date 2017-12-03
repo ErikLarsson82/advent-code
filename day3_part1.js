@@ -33,13 +33,13 @@ function rangeFromLayer(layer) {
 function stepsToCenter(layer) {
   if (layer === 0)
     return () => 0
-  return idx => Math.abs(Math.round(Math.sin(Math.PI / (layer * 2) * idx) * layer))
+  return idx => Math.floor(Math.abs(Math.sin(Math.PI / (layer * 2) * idx) * layer))
 }
 
 function firstValueInOnionLayer(layer) {
   if (layer === 0)
     return 1
-  return onionLengthFromLayer(layer - 1) + 2
+  return accOnionLength(layer - 1) + 1
 }
 
 function convertIndexToValue(layer, index) {
@@ -49,15 +49,16 @@ function convertIndexToValue(layer, index) {
 function spiralMemory(input) {
   const onionLayers = getOnionLayers(input)
 
-  const rest = input - firstValueInOnionLayer(onionLayers - 1) // + onionLayers + 1
+  const rest = input - firstValueInOnionLayer(onionLayers - 1)
   const offset = Math.max(0, onionLayers - 2)
 
-  return Math.max(0, stepsToCenter(onionLayers - 1)(rest - offset)) + (onionLayers - 1)
+  const stepsToCenterValue = stepsToCenter(onionLayers - 1)(rest - offset)
+
+  return Math.max(0, stepsToCenterValue) + (onionLayers - 1)
 }
 
-R.map ( idx => console.log(idx + ": " + spiralMemory(idx)), R.range(1, 50))
+R.map ( idx => console.log(idx + ": " + spiralMemory(idx)), R.range(1, 130))
 
-//console.log(spiralMemory(10))
 return
 
 console.log('onionLengthFromLayer(0) ' + onionLengthFromLayer(0))
@@ -80,7 +81,9 @@ console.log('firstValueInOnionLayer(2) ' + firstValueInOnionLayer(2))
 console.log('firstValueInOnionLayer(3) ' + firstValueInOnionLayer(3))
 console.log('firstValueInOnionLayer(4) ' + firstValueInOnionLayer(4))
 console.log('firstValueInOnionLayer(5) ' + firstValueInOnionLayer(5))
-
+console.log('firstValueInOnionLayer(6) ' + firstValueInOnionLayer(6))
+console.log('firstValueInOnionLayer(7) ' + firstValueInOnionLayer(7))
+console.log('firstValueInOnionLayer(8) ' + firstValueInOnionLayer(8))
 
 console.log('spiralMemorySize(1) ' + spiralMemorySize(1, 1))
 console.log('spiralMemorySize(2) ' + spiralMemorySize(2, 1))
