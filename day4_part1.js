@@ -9,12 +9,14 @@ const securityWordsDuplicates = contentStr.split(/[\n ]/)
 
 const securityWords = uniq(securityWordsDuplicates)
 
-const words = new BigNumber(securityWords.length)
+//const words = new BigNumber(securityWords.length)
+const words = [1,2,3]
 
+function exponent(input) {
+    if (input === 1)
+        return new BigNumber(1)
+    return exponent(input - 1).times(input)
+}
 //console.log(words.pow(words.minus(1)).toString())
-let wat = "4"
 
-const list = R.range(0, 12250)
-list.forEach( () => wat += "0" )
-
-console.log(wat)
+console.log(exponent(words.length).toString())
