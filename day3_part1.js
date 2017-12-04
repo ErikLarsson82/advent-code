@@ -82,7 +82,7 @@ function spiralMemory(input) {
   return Math.max(0, stepsToCenterValue) + (onionLayers - 1)
 }
 
-//R.map ( idx => console.log(idx + ": " + spiralMemory(idx)), R.range(1, 52))
+R.map ( idx => console.log(idx + ": " + spiralMemory(idx)), R.range(1, 52))
 
 
 //R.map ( idx => console.log("accOnionLength " + idx + ": " + firstValueInOnionLayer(idx)), R.range(0, 368079))
@@ -95,7 +95,7 @@ function spiralMemory(input) {
 
 //console.log('stepsToCenter(17)(1024) ' + stepsToCenter(17)(1024))
 
-console.log(spiralMemory(23))
+//console.log(spiralMemory(23))
 
 return
 
