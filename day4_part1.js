@@ -1,22 +1,27 @@
 const fs = require('fs')
 const R = require('ramda')
 const uniq = require('uniq')
+const clone = require('clone')
 const BigNumber = require('bignumber.js')
 
 const contentStr = fs.readFileSync('day4.txt', 'utf-8')
 
-const securityWordsDuplicates = contentStr.split(/[\n ]/)
+const phrases = contentStr.split(/\n/)
 
-const securityWords = uniq(securityWordsDuplicates)
+//phrases.forEach( (item, idx) => console.log(idx + ": " + item) )
 
-//const words = new BigNumber(securityWords.length)
-const words = [1,2,3]
+const nonEmptyPhrases = R.filter( str => !!str, phrases )
 
-function exponent(input) {
-    if (input === 1)
-        return new BigNumber(1)
-    return exponent(input - 1).times(input)
-}
-//console.log(words.pow(words.minus(1)).toString())
+const words = R.map( str => str.split(" "), nonEmptyPhrases )
 
-console.log(exponent(words.length).toString())
+const validPhrases = R.filter( list => {
+    let copy = clone(list)
+    uniq(copy)
+    const same = list.length === copy.length
+    //console.log(list + " : " + copy + " - " + same)
+    return same
+}, words )
+
+console.log("validPhrases", validPhrases.length)
+//console.log("validPhrases", validPhrases)
+
