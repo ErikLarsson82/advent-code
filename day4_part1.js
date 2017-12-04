@@ -18,7 +18,8 @@ const validPhrases = R.filter( list => {
     let copy = clone(list)
     uniq(copy)
     const same = list.length === copy.length
-    //console.log(list + " : " + copy + " - " + same)
+    if (!same)
+        console.log(list + " : " + copy + " - " + same)
     return same
 }, words )
 
