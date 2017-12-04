@@ -30,10 +30,35 @@ function rangeFromLayer(layer) {
   return R.range(0, onionLengthFromLayer(layer))
 }
 
+/*
 function stepsToCenter(layer) {
   if (layer === 0)
     return () => 0
-  return idx => Math.floor(Math.abs(Math.sin(Math.PI / (layer * 2) * idx) * layer))
+  if (layer === 1)
+    return idx => idx % (layer + 1)
+  return idx => (idx % (layer * layer) > layer) ? (idx % (layer * layer)) - layer : idx % (layer * layer);
+}
+*/
+//Math.floor(Math.abs(Math.sin(Math.PI / (layer * 2) * idx) * layer)) //
+
+function stepsToCenter(layer) {
+  if (layer === 0)
+    return () => 0
+  const range = rangeFromLayer(layer)
+  return linearSinus(range[range.length-1])
+}
+
+function linearSinus(length) {
+  const data = R.range(0, length)
+
+  const halfLinearSine = data.map( val => val % (length / 4) )
+  const crazyConversion = halfLinearSine.map( val => {
+    if (val > (length / 8))
+      return (length / 4) - val
+    return val
+  })
+
+  return idx => Math.floor(crazyConversion[idx])
 }
 
 function firstValueInOnionLayer(layer) {
@@ -57,7 +82,50 @@ function spiralMemory(input) {
   return Math.max(0, stepsToCenterValue) + (onionLayers - 1)
 }
 
-R.map ( idx => console.log(idx + ": " + spiralMemory(idx)), R.range(1, 130))
+//R.map ( idx => console.log(idx + ": " + spiralMemory(idx)), R.range(1, 52))
+
+
+//R.map ( idx => console.log("accOnionLength " + idx + ": " + firstValueInOnionLayer(idx)), R.range(0, 368079))
+
+//R.map ( idx => console.log("spiralMemorySize " + idx + ": " + spiralMemorySize(idx, 1)), R.range(1, 368079))
+
+//R.map ( idx => console.log("linearSinus " + idx + ": " + linearSinus(32)(idx)), R.range(0, 32))
+
+//console.log('spiralMemoryLayers(1024) ' + spiralMemoryLayers(1024, 1))
+
+//console.log('stepsToCenter(17)(1024) ' + stepsToCenter(17)(1024))
+
+console.log(spiralMemory(23))
+
+return
+
+console.log('linearSinus(0)(0) ' + linearSinus(0)(0))
+console.log('---------')
+console.log('linearSinus(8)(0) ' + linearSinus(8)(0))
+console.log('linearSinus(8)(1) ' + linearSinus(8)(1))
+console.log('linearSinus(8)(2) ' + linearSinus(8)(2))
+console.log('linearSinus(8)(3) ' + linearSinus(8)(3))
+console.log('linearSinus(8)(4) ' + linearSinus(8)(4))
+console.log('linearSinus(8)(5) ' + linearSinus(8)(5))
+console.log('linearSinus(8)(6) ' + linearSinus(8)(6))
+console.log('linearSinus(8)(7) ' + linearSinus(8)(7))
+console.log('---------')
+console.log('linearSinus(16)(0) ' + linearSinus(16)(0))
+console.log('linearSinus(16)(1) ' + linearSinus(16)(1))
+console.log('linearSinus(16)(2) ' + linearSinus(16)(2))
+console.log('linearSinus(16)(3) ' + linearSinus(16)(3))
+console.log('linearSinus(16)(4) ' + linearSinus(16)(4))
+console.log('linearSinus(16)(5) ' + linearSinus(16)(5))
+console.log('linearSinus(16)(6) ' + linearSinus(16)(6))
+console.log('linearSinus(16)(7) ' + linearSinus(16)(7))
+console.log('linearSinus(16)(8) ' + linearSinus(16)(8))
+console.log('linearSinus(16)(9) ' + linearSinus(16)(9))
+console.log('linearSinus(16)(10) ' + linearSinus(16)(10))
+console.log('linearSinus(16)(11) ' + linearSinus(16)(11))
+console.log('linearSinus(16)(12) ' + linearSinus(16)(12))
+console.log('linearSinus(16)(13) ' + linearSinus(16)(13))
+console.log('linearSinus(16)(14) ' + linearSinus(16)(14))
+console.log('linearSinus(16)(15) ' + linearSinus(16)(15))
 
 return
 
@@ -100,33 +168,35 @@ console.log('rangeFromLayer(2) ' + rangeFromLayer(2))
 console.log('rangeFromLayer(3) ' + rangeFromLayer(3))
 
 
-console.log('stepsToCenter(0)(0) ' + stepsToCenter(0)(0))
+console.log('stepsToCenter(0)(0) ' + (stepsToCenter(0)(0) === 0))
 console.log('---------')
-console.log('stepsToCenter(1)(0) ' + stepsToCenter(1)(0))
-console.log('stepsToCenter(1)(1) ' + stepsToCenter(1)(1))
-console.log('stepsToCenter(1)(2) ' + stepsToCenter(1)(2))
-console.log('stepsToCenter(1)(3) ' + stepsToCenter(1)(3))
-console.log('stepsToCenter(1)(4) ' + stepsToCenter(1)(4))
-console.log('stepsToCenter(1)(5) ' + stepsToCenter(1)(5))
-console.log('stepsToCenter(1)(6) ' + stepsToCenter(1)(6))
-console.log('stepsToCenter(1)(7) ' + stepsToCenter(1)(7))
+console.log('stepsToCenter(1)(0) ' + stepsToCenter(1)(0) + ", " + (stepsToCenter(1)(0) === 0))
+console.log('stepsToCenter(1)(1) ' + stepsToCenter(1)(1) + ", " + (stepsToCenter(1)(1) === 1))
+console.log('stepsToCenter(1)(2) ' + stepsToCenter(1)(2) + ", " + (stepsToCenter(1)(2) === 0))
+console.log('stepsToCenter(1)(3) ' + stepsToCenter(1)(3) + ", " + (stepsToCenter(1)(3) === 1))
+console.log('stepsToCenter(1)(4) ' + stepsToCenter(1)(4) + ", " + (stepsToCenter(1)(4) === 0))
+console.log('stepsToCenter(1)(5) ' + stepsToCenter(1)(5) + ", " + (stepsToCenter(1)(5) === 1))
+console.log('stepsToCenter(1)(6) ' + stepsToCenter(1)(6) + ", " + (stepsToCenter(1)(6) === 0))
+console.log('stepsToCenter(1)(7) ' + stepsToCenter(1)(7) + ", " + (stepsToCenter(1)(7) === 1))
 console.log('---------')
-console.log('stepsToCenter(2)(0) ' + stepsToCenter(2)(0))
-console.log('stepsToCenter(2)(1) ' + stepsToCenter(2)(1))
-console.log('stepsToCenter(2)(2) ' + stepsToCenter(2)(2))
-console.log('stepsToCenter(2)(3) ' + stepsToCenter(2)(3))
-console.log('stepsToCenter(2)(4) ' + stepsToCenter(2)(4))
-console.log('stepsToCenter(2)(5) ' + stepsToCenter(2)(5))
-console.log('stepsToCenter(2)(6) ' + stepsToCenter(2)(6))
-console.log('stepsToCenter(2)(7) ' + stepsToCenter(2)(7))
-console.log('stepsToCenter(2)(8) ' + stepsToCenter(2)(8))
-console.log('stepsToCenter(2)(9) ' + stepsToCenter(2)(9))
-console.log('stepsToCenter(2)(10) ' + stepsToCenter(2)(10))
-console.log('stepsToCenter(2)(11) ' + stepsToCenter(2)(11))
-console.log('stepsToCenter(2)(12) ' + stepsToCenter(2)(12))
-console.log('stepsToCenter(2)(13) ' + stepsToCenter(2)(13))
-console.log('stepsToCenter(2)(14) ' + stepsToCenter(2)(14))
-console.log('stepsToCenter(2)(15) ' + stepsToCenter(2)(15))
+console.log('stepsToCenter(2)(0) ' + stepsToCenter(2)(0) + ", " + (stepsToCenter(2)(0) === 0))
+console.log('stepsToCenter(2)(1) ' + stepsToCenter(2)(1) + ", " + (stepsToCenter(2)(1) === 1))
+console.log('stepsToCenter(2)(2) ' + stepsToCenter(2)(2) + ", " + (stepsToCenter(2)(2) === 2))
+console.log('stepsToCenter(2)(3) ' + stepsToCenter(2)(3) + ", " + (stepsToCenter(2)(3) === 1))
+console.log('stepsToCenter(2)(4) ' + stepsToCenter(2)(4) + ", " + (stepsToCenter(2)(4) === 0))
+console.log('stepsToCenter(2)(5) ' + stepsToCenter(2)(5) + ", " + (stepsToCenter(2)(5) === 1))
+console.log('stepsToCenter(2)(6) ' + stepsToCenter(2)(6) + ", " + (stepsToCenter(2)(6) === 2))
+console.log('stepsToCenter(2)(7) ' + stepsToCenter(2)(7) + ", " + (stepsToCenter(2)(7) === 1))
+console.log('stepsToCenter(2)(8) ' + stepsToCenter(2)(8) + ", " + (stepsToCenter(2)(8) === 0))
+console.log('stepsToCenter(2)(9) ' + stepsToCenter(2)(9) + ", " + (stepsToCenter(2)(9) === 1))
+console.log('stepsToCenter(2)(10) ' + stepsToCenter(2)(10) + ", " + (stepsToCenter(2)(10) === 2))
+console.log('stepsToCenter(2)(11) ' + stepsToCenter(2)(11) + ", " + (stepsToCenter(2)(11) === 1))
+console.log('stepsToCenter(2)(12) ' + stepsToCenter(2)(12) + ", " + (stepsToCenter(2)(12) === 0))
+console.log('stepsToCenter(2)(13) ' + stepsToCenter(2)(13) + ", " + (stepsToCenter(2)(13) === 1))
+console.log('stepsToCenter(2)(14) ' + stepsToCenter(2)(14) + ", " + (stepsToCenter(2)(14) === 2))
+console.log('stepsToCenter(2)(15) ' + stepsToCenter(2)(15) + ", " + (stepsToCenter(2)(15) === 1))
+
+return 
 
 console.log('convertIndexToValue(0,0) ' + convertIndexToValue(0,0))
 console.log('convertIndexToValue(1,0) ' + convertIndexToValue(1,0))
