@@ -33,19 +33,16 @@ const right = (function() {
   return () => pos.x += 1
 })()
 
-function crawl(iterations) {
-  while(iterations > 0) {
+function crawl(maxIterations) {
+  let iterations = 0
+  while(iterations <= maxIterations) {
     grow(matrix)
     console.log(matrix)
-    //right()
-    iterations--
 
-    let sequence
-    if (iterations === 1)
-      sequence = [right]
+    let sequence = []
     if (iterations === 0)
-      sequence = [up, left, left, down, down, right, right, right, right]
-    if (iterations === 1337)
+      sequence = [right, up, left, left, down, down, right, right, right]
+    if (iterations === 1)
       sequence = [up, up, up, left, left, left, left, down, down, down, down, right, right, right, right]
 
     while(sequence.length > 0) {
@@ -53,7 +50,10 @@ function crawl(iterations) {
       setValue(value)
       sequence.shift()()
     }
+
+    iterations++
   }
+  console.log(matrix)
 }
 
 const matrix = [[1]]
@@ -61,13 +61,10 @@ const matrix = [[1]]
 let pos = { x: 0, y: 0 }
 let value = 0
 
-crawl(1)
+//grow(matrix)
 
-console.log(matrix[0][0] + " " + matrix[1][0] + " " + matrix[2][0] + " " + matrix[3][0] + " " + matrix[4][0])
-console.log(matrix[0][1] + " " + matrix[1][1] + " " + matrix[2][1] + " " + matrix[3][1] + " " + matrix[4][1])
-console.log(matrix[0][2] + " " + matrix[1][2] + " " + matrix[2][2] + " " + matrix[3][2] + " " + matrix[4][2])
-console.log(matrix[0][3] + " " + matrix[1][3] + " " + matrix[2][3] + " " + matrix[3][3] + " " + matrix[4][3])
-console.log(matrix[0][4] + " " + matrix[1][4] + " " + matrix[2][4] + " " + matrix[3][4] + " " + matrix[4][4])
+crawl(2)
+
 //grow(matrix)
 
 //console.log(matrix, value())
