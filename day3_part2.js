@@ -9,8 +9,8 @@ function grow(matrix) {
   pos.y +=1
 }
 
-function getValue() {
-  return matrix[pos.x][pos.y]
+function getValue(x, y) {
+  return matrix[x] && matrix[x][y] || 0
 }
 
 function setValue(value) {
@@ -33,8 +33,19 @@ const right = function() {
   return pos.x += 1
 }
 
+function getNeighborSum(pos) {
+  return getValue(pos.x - 1, pos.y - 1) +
+    getValue(pos.x, pos.y - 1) +
+    getValue(pos.x + 1, pos.y - 1) +
+    getValue(pos.x - 1, pos.y) +
+    getValue(pos.x, pos.y) +
+    getValue(pos.x + 1, pos.y) +
+    getValue(pos.x - 1, pos.y + 1) +
+    getValue(pos.x, pos.y + 1) +
+    getValue(pos.x + 1, pos.y + 1)
+}
+
 function crawl(goal) {
-  let iterations = 1
   while(true) {
     grow(matrix)
 
@@ -47,17 +58,13 @@ function crawl(goal) {
     new Array(matrix.length - 1).fill(1).forEach( () => sequence.push(right) )
 
     while(sequence.length > 0) {
-      value ++
+      value = getNeighborSum(pos)
       setValue(value)
-      if (getValue() === goal) {
-        const xDiff = pos.x - Math.floor(matrix[0].length/2)
-        const yDiff = pos.y - Math.floor(matrix[0].length/2)
-        return Math.abs(xDiff) + Math.abs(yDiff)
-      }
+      if (value > goal)
+        return value
+
       sequence.shift()()
     }
-
-    iterations++
   }
 }
 
@@ -68,6 +75,5 @@ function reset() {
 }
 
 reset()
-console.log(crawl(1024)) //31
-reset()
-console.log(crawl(368078)) //371
+console.log(crawl(368078)) //369601
+console.log(matrix)
