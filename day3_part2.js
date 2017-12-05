@@ -13,7 +13,6 @@ function getValue() {
 }
 
 function setValue(value) {
-  console.log(pos)
   return matrix[pos.x][pos.y] = value
 }
 
@@ -33,42 +32,78 @@ const right = (function() {
   return () => pos.x += 1
 })()
 
-function crawl(maxIterations) {
-  let iterations = 0
-  while(iterations <= maxIterations) {
+function crawl(goal) {
+  let iterations = 1
+  while(true) {
     grow(matrix)
-    console.log(matrix)
+
+    //console.log(matrix)
+    //console.log('pos', pos)
 
     let sequence = []
-    if (iterations === 0)
-      sequence = [right, up, left, left, down, down, right, right, right]
     if (iterations === 1)
-      sequence = [up, up, up, left, left, left, left, down, down, down, down, right, right, right, right]
+      sequence = [right, up, left, left, down, down, right, right]
+    if (iterations === 2)
+      sequence = [right, up, up, up, left, left, left, left, down, down, down, down, right, right, right, right]
+    if (iterations === 3)
+      sequence = [right, up, up, up, up, up, left, left, left, left, left, left, down, down, down, down, down, down, right, right, right, right, right, right]
 
     while(sequence.length > 0) {
       value ++
       setValue(value)
+      //console.log('compare ' +  getValue() + " " + goal)
+      if (getValue() === goal) {
+        //console.log('found goal', pos, matrix)
+        const xDiff = pos.x - Math.floor(matrix[0].length/2)
+        const yDiff = pos.y - Math.floor(matrix[0].length/2)
+        //console.log('xDiff, yDiff ' + xDiff + " : " + yDiff)
+        return Math.abs(xDiff) + Math.abs(yDiff)
+      }
       sequence.shift()()
     }
 
     iterations++
   }
-  console.log(matrix)
 }
 
-const matrix = [[1]]
+let matrix
+let pos
+let value
 
-let pos = { x: 0, y: 0 }
-let value = 0
+function reset() {
+  matrix = [[1]]
+  pos = { x: 0, y: 0 }
+  value = 0
+}
 
-//grow(matrix)
-
-crawl(2)
-
-//grow(matrix)
-
-//console.log(matrix, value())
-
-//grow(matrix)
-
-//console.log(matrix, value())
+reset()
+console.log(crawl(20))
+/*
+reset()
+console.log(crawl(3, 1))
+reset()
+console.log(crawl(3, 2))
+reset()
+console.log(crawl(3, 3))
+reset()
+console.log(crawl(3, 4))
+reset()
+console.log(crawl(3, 5))
+reset()
+console.log(crawl(3, 6))
+reset()
+console.log(crawl(3, 7))
+reset()
+console.log(crawl(3, 8))
+reset()
+console.log(crawl(3, 9))
+reset()
+console.log(crawl(3, 10))
+reset()
+console.log(crawl(3, 11))
+reset()
+console.log(crawl(3, 12))
+reset()
+console.log(crawl(3, 13))
+*/
+console.log(matrix)
