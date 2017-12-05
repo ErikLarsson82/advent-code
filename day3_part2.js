@@ -1,3 +1,4 @@
+let matrix, pos, value
 
 function grow(matrix) {
   matrix.forEach( list => list.unshift(0) )
@@ -59,10 +60,6 @@ function crawl(goal) {
     iterations++
   }
 }
-
-let matrix
-let pos
-let value
 
 function reset() {
   matrix = [[1]]
