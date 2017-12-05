@@ -61,4 +61,4 @@ function spiralMemory(input) {
   return Math.max(0, stepsToCenterValue) + (onionLayers - 1)
 }
 
-console.log(spiralMemory(368078))
+console.log(spiralMemory(111368078))

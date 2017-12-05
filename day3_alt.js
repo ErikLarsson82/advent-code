@@ -54,3 +54,4 @@ function forward({ horizontal, vertical, direction }) {
 
 crawl(1024, console.log) //31
 crawl(368078, console.log) //371
+//crawl(1111368078, console.log) //20829 - in like 30 mins
