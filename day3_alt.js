@@ -1,14 +1,16 @@
 
-function crawl(goal) {
+function crawl(goal, callback) {
   if (goal === 1)
     return 0
-  return findValue({ horizontal: 1, vertical: 0, value: 2, direction: "up" }, goal)
+  findValue({ horizontal: 1, vertical: 0, value: 2, direction: "up" }, goal, callback)
 }
 
-function findValue({ horizontal, vertical, value, direction }, goal) {
+function findValue({ horizontal, vertical, value, direction }, goal, callback) {
 
-  if (value === goal)
-    return Math.abs(horizontal) + Math.abs(vertical)
+  if (value === goal) {
+    callback(Math.abs(horizontal) + Math.abs(vertical))
+    return
+  }
     
   const bottomLeft = (horizontal >= 1 && vertical <= -1)
   const newLayer = (horizontal >= 1 && vertical <= -1 && horizontal+vertical === 1)
@@ -20,7 +22,7 @@ function findValue({ horizontal, vertical, value, direction }, goal) {
     
   value++
 
-  return findValue({ horizontal, vertical, value, direction, ...updated }, goal)
+  process.nextTick(() => findValue({ horizontal, vertical, value, direction, ...updated }, goal, callback))
 }
 
 function turn(direction) {
@@ -50,6 +52,5 @@ function forward({ horizontal, vertical, direction }) {
   return { horizontal, vertical }
 }
 
-console.log(crawl(1024)) //31
-
-console.log(crawl(368078)) //
+crawl(1024, console.log) //31
+crawl(368078, console.log) //371
