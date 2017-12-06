@@ -15,7 +15,9 @@ function selectBlockForDistribution(list) {
   return list.indexOf(max)
 }
 
-function memoryReallocationDebugger(archive, initialMemoryState) {
+function memoryReallocationDebugger(initialMemoryState) {
+
+  const archive = stateArchive()
 
   archive(initialMemoryState)
 
@@ -36,21 +38,16 @@ function memoryReallocationDebugger(archive, initialMemoryState) {
 }
 
 function infiniteLoopDebugger(initialMemoryState) {
-  const loopStartList = memoryReallocationDebugger(stateArchive(), initialMemoryState).state
+  const loopStartList = memoryReallocationDebugger(initialMemoryState).state
+
   console.log('loopStartList detected', loopStartList)
   console.log('memoryReallocationDebugger started')
-  return memoryReallocationDebugger(stateArchive(), loopStartList.concat())
+  
+  return memoryReallocationDebugger(loopStartList.concat())
 }
 
-//console.log( "Result: " + memoryReallocationDebugger( stateArchive(), [10, 3, 15, 10, 5, 15, 5, 15, 9, 2, 5, 8, 5, 2, 3, 6]).iterations ) // 14029
-console.log( "Result: " + infiniteLoopDebugger( [10, 3, 15, 10, 5, 15, 5, 15, 9, 2, 5, 8, 5, 2, 3, 6]).iterations )
+console.log( "Result 1: " + memoryReallocationDebugger([0, 2, 7, 0]).iterations ) // 5
+console.log( "Result 2: " + infiniteLoopDebugger([0, 2, 7, 0]).iterations ) // 4
 
-//console.log( "Result: " + memoryReallocationDebugger(stateArchive(), [0, 2, 7, 0]).iterations ) // 5
-//console.log( "Result: " + infiniteLoopDebugger([0, 2, 7, 0]).iterations ) // 4
-
-/*
-console.log( selectBlockForDistribution([1, 2, 3]) === 2 )
-console.log( selectBlockForDistribution([1, 2, 3, 8, 0, 8]) === 3 )
-console.log( selectBlockForDistribution([1, 1, 1, 1, 1]) === 0 )
-console.log( selectBlockForDistribution([1, 2, 3, 6, 7, 8, 1337]) === 6 )
-*/
+//console.log( "Result 3: " + memoryReallocationDebugger( [10, 3, 15, 10, 5, 15, 5, 15, 9, 2, 5, 8, 5, 2, 3, 6]).iterations ) // 14029
+//console.log( "Result 4: " + infiniteLoopDebugger( [10, 3, 15, 10, 5, 15, 5, 15, 9, 2, 5, 8, 5, 2, 3, 6]).iterations ) // 2765
