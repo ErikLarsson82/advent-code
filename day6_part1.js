@@ -10,6 +10,8 @@ const stateArchive = () => {
   }
 }
 
+const forEach = (number, func) => new Array(number).fill(1).forEach(func)
+
 function selectBlockForDistribution(list) {
   const max = Math.max.apply(null, list)
   return list.indexOf(max)
@@ -30,7 +32,8 @@ function memoryReallocationDebugger(initialMemoryState) {
     const valueToDistribute = state[idxToDistribute]
     state[idxToDistribute] = 0
 
-    new Array(valueToDistribute).fill(1).forEach( (value, idx) => state[(idxToDistribute + idx + 1) % state.length]++ )
+    forEach(valueToDistribute, (value, idx) => state[(idxToDistribute + idx + 1) % state.length]++ )
+    
     duplicateDetected = archive(state)
     iterations++
   }
