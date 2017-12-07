@@ -1,5 +1,19 @@
 const treeify = require("treeify")
+const fs = require('fs')
 
+const contentStr = fs.readFileSync('day7_input.txt', 'utf-8')
+
+const stringArray = contentStr.split(/[\n\r]/).filter(x => x)
+
+const model = stringArray.map( str => {
+  const arrowDivider = str.split(" -> ")
+  const id = arrowDivider[0].split(" ")[0]
+  const weight = arrowDivider[0].split(" ")[1]
+  const children = arrowDivider[1] && arrowDivider[1].split(", ") || null
+  return { id, weight, children}
+})
+
+/*
 const model = [
   { id: "padx", weight: 45, children: ["pbga", "test"] },
   { id: "test", weight: 45, children: null },
@@ -7,6 +21,7 @@ const model = [
   { id: "pbga", weight: 66, children: null },
   { id: "tknk", weight: 41, children: ["padx", "test2"] }
 ]
+*/
 
 function findParent(node) {
   return model.find( leaf => {
