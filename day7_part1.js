@@ -5,31 +5,15 @@ const contentStr = fs.readFileSync('day7_input.txt', 'utf-8')
 
 const stringArray = contentStr.split(/[\n\r]/).filter(x => x)
 
-const model = stringArray.map( str => {
-  const arrowDivider = str.split(" -> ")
-  const id = arrowDivider[0].split(" ")[0]
-  const weight = arrowDivider[0].split(" ")[1]
-  const children = arrowDivider[1] && arrowDivider[1].split(", ") || null
-  return { id, weight, children}
-})
+const model = formatModel(stringArray)
 
-/*
-const model = [
-  { id: "padx", weight: 45, children: ["pbga", "test"] },
-  { id: "test", weight: 45, children: null },
-  { id: "test2", weight: 45, children: null },
-  { id: "pbga", weight: 66, children: null },
-  { id: "tknk", weight: 41, children: ["padx", "test2"] }
-]
-*/
-
-function findParent(node) {
-  return model.find( leaf => {
-    if (!leaf.children)
-      return false
-    const result = leaf.children.find( searchee => searchee === node )
-    console.log('finding in leaf ' + leaf.id + ", " + result)
-    return result
+function formatModel(input) {
+  return input.map( str => {
+    const arrowDivider = str.split(" -> ")
+    const id = arrowDivider[0].split(" ")[0]
+    const weight = Number(arrowDivider[0].split(" ")[1].replace(/[()]/g, ""))
+    const children = arrowDivider[1] && arrowDivider[1].split(", ") || null
+    return { id, weight, children}
   })
 }
 
@@ -57,17 +41,33 @@ function createTower(model) {
   const findById = id => model.find(leaf => leaf.id === id)
 
   function createBranch({ id, weight, children }) {
+    if (typeof id === "undefined")
+      return { children: null }
     if (children === null)
       return findById(id)
 
     const branchBelow = children.map( childId => createBranch(findById(childId)) )
 
-    return { id, weight, children: branchBelow }
+    const sum = branchBelow.reduce( (acc, curr) => acc + curr.weight, 0 )
+    const average = sum / branchBelow.length
+
+    const everyoneHasAverage = branchBelow.find( node => node.weight === average )
+
+    const newNode = { id, ownWeight: weight, weight: sum + weight, children: branchBelow }
+
+    if (!everyoneHasAverage) {
+      console.log('Weight redistribution mismatch detected: \n')
+      console.log('id: ' + id + ', ownWeight: ' + weight)
+      branchBelow.map( node => console.log(node.id + ": " + node.weight + " - own: " + node.ownWeight))
+      return { children: null }
+    }
+
+    return newNode
   }
 
-  return createBranch(findById(model[0].id))
+  return createBranch(findRootNode(model))
 }
 
-//console.log(treeify.asTree(createTower(model), true))
+console.log(treeify.asTree(createTower(model), true)) // Remove 8 -> apjxafk 1513 -> 1505
 
-console.log(findRootNode(model))
+//console.log(findRootNode(model)) // -> id "hlhomy"
