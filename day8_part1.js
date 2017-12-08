@@ -30,22 +30,23 @@ const modifyers = {
     "dec": (x, y) => x - y,
 }
 
-function maximumStore() {
-    let max
-
-    return obj => {
-        for (i in obj) {
-            if (!max || obj[i] > max)
-                max = obj[i]
+class MaximumStore {
+    constructor() {
+        this.max = null
+    }
+    maximum(obj) {
+        for (let i in obj) {
+            if (!this.max || obj[i] > this.max)
+                this.max = obj[i]
         }
-        return max
+        return this.max
     }
 }
 
 function calculateSum(operations) {
     const registers = {}
-    const allTimeMax = maximumStore()
-    
+    const allTimeMax = new MaximumStore()
+        
     function getRegister(name) {
         return registers[name] || 0
     }
@@ -57,12 +58,12 @@ function calculateSum(operations) {
         if (comparee && operands[operand](getRegister(comparee), compareeAmount))
             setRegister(register, modifyers[operation](getRegister(register), amount)) 
 
-        allTimeMax(registers)
+        allTimeMax.maximum(registers)
     })
 
     return {
-        lastMax: maximumStore()(registers),
-        allTimeMax: allTimeMax()
+        lastMax: new MaximumStore().maximum(registers),
+        allTimeMax: allTimeMax.maximum()
     }
 }
 
