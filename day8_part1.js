@@ -32,6 +32,7 @@ const modifyers = {
 
 function calculateSum(operations) {
     const registers = {}
+    let max
 
     function getRegister(name) {
         return registers[name] || 0
@@ -40,6 +41,13 @@ function calculateSum(operations) {
         return registers[name] = value
     }
 
+    function getMax() {
+        for (i in registers) {
+            if (!max || registers[i] > max)
+                max = registers[i]
+        }
+    }
+    
     operations.forEach( x => {  
         let register = x.register
         let operation = x.operation
@@ -49,15 +57,12 @@ function calculateSum(operations) {
         let compareeAmount = x.compareeAmount
         if (comparee && operands[operand](getRegister(comparee), compareeAmount))
             setRegister(register, modifyers[operation](getRegister(register), amount)) 
-    })
 
-    let max
-    for (i in registers) {
-        if (!max || registers[i] > max)
-            max = registers[i]
-    }
+        getMax()
+    })
 
     return max
 }
 
-console.log(calculateSum(operations)) // 6061
+//console.log(calculateSum(operations)) // 6061 (part1)
+console.log(calculateSum(operations)) // 6696 (part 2)
