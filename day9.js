@@ -1,7 +1,5 @@
 
-function streamHandler(acc, curr) {
-
-  let { score, depth, garbage, garbageCollected, ignore } = acc
+function streamHandler({ score, depth, garbage, garbageCollected, ignore }, curr) {
 
   if (ignore) {
     ignore = false
@@ -50,4 +48,4 @@ function streamProcessor(inputStr) {
   return dataStream.reduce( streamHandler, initialState )
 }
 
-module.exports = streamProcessor
+module.exports = { streamProcessor, streamHandler }
