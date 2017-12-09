@@ -46,7 +46,7 @@ class MaximumStore {
 function calculateSum(operations) {
     const registers = {}
     const allTimeMax = new MaximumStore()
-        
+
     function getRegister(name) {
         return registers[name] || 0
     }
