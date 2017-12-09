@@ -58,23 +58,6 @@ describe('streamHandler', () => {
     }
     assert(compare(streamHandler(inputState, '{'), expected))
   })
-  it('closes garbage', () => {
-    const inputState = {
-      score: 0,
-      depth: 1,
-      garbage: true,
-      garbageCollected: 0,
-      ignore: false
-    }
-    const expected = {
-      score: 0,
-      depth: 1,
-      garbage: false,
-      garbageCollected: 0,
-      ignore: false
-    }
-    assert(compare(streamHandler(inputState, '>'), expected))
-  })
   it('closes block and gives points', () => {
     const inputState = {
       score: 0,
@@ -91,6 +74,40 @@ describe('streamHandler', () => {
       ignore: false
     }
     assert(compare(streamHandler(inputState, '}'), expected))
+  })
+  it('open garbage block', () => {
+    const inputState = {
+      score: 0,
+      depth: 1,
+      garbage: false,
+      garbageCollected: 0,
+      ignore: false
+    }
+    const expected = {
+      score: 0,
+      depth: 1,
+      garbage: true,
+      garbageCollected: 0,
+      ignore: false
+    }
+    assert(compare(streamHandler(inputState, '<'), expected))
+  })
+  it('closes garbage', () => {
+    const inputState = {
+      score: 0,
+      depth: 1,
+      garbage: true,
+      garbageCollected: 0,
+      ignore: false
+    }
+    const expected = {
+      score: 0,
+      depth: 1,
+      garbage: false,
+      garbageCollected: 0,
+      ignore: false
+    }
+    assert(compare(streamHandler(inputState, '>'), expected))
   })
   describe('ignores all types of characters after !', () => {
     const inputState = {
@@ -110,5 +127,24 @@ describe('streamHandler', () => {
     const chars = ['{', '}', '<', '>', '!', 'a', 'b','c']
 
     chars.forEach(char => it('ignores ' + char, () => assert(compare(streamHandler(inputState, char), expected))))
+  })
+  describe('collects all characters as garbage', () => {
+    const inputState = {
+      score: 0,
+      depth: 1,
+      garbage: true,
+      garbageCollected: 0,
+      ignore: false
+    }
+    const expected = {
+      score: 0,
+      depth: 1,
+      garbage: true,
+      garbageCollected: 1,
+      ignore: false
+    }
+    const chars = ['{', '}', '<', 'a', 'b','c']
+
+    chars.forEach(char => it('collects ' + char, () => assert(compare(streamHandler(inputState, char), expected))))
   })
 })
