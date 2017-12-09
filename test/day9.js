@@ -100,35 +100,15 @@ describe('streamHandler', () => {
       garbageCollected: 0,
       ignore: true
     }
-    it('ignores }', () => {
-      const expected = {
-        score: 0,
-        depth: 1,
-        garbage: false,
-        garbageCollected: 0,
-        ignore: false
-      }
-      assert(compare(streamHandler(inputState, '}'), expected))
-    })
-    it('ignores <', () => {
-      const expected = {
-        score: 0,
-        depth: 1,
-        garbage: false,
-        garbageCollected: 0,
-        ignore: false
-      }
-      assert(compare(streamHandler(inputState, '<'), expected))
-    })
-    it('ignores !', () => {
-      const expected = {
-        score: 0,
-        depth: 1,
-        garbage: false,
-        garbageCollected: 0,
-        ignore: false
-      }
-      assert(compare(streamHandler(inputState, '!'), expected))
-    })
+    const expected = {
+      score: 0,
+      depth: 1,
+      garbage: false,
+      garbageCollected: 0,
+      ignore: false
+    }
+    const chars = ['{', '}', '<', '>', '!', 'a', 'b','c']
+
+    chars.forEach(char => it('ignores ' + char, () => assert(compare(streamHandler(inputState, char), expected))))
   })
 })
