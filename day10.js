@@ -40,7 +40,6 @@ function knotHash(lengths, initSize = 255) {
   let skipSize = 0
 
   lengths.forEach(length => {
-    console.log('before iteration', currentPosition, skipSize, JSON.stringify(list)) 
     list = reverser(list, currentPosition, length)
     currentPosition += length + skipSize
     currentPosition = currentPosition % initSize
