@@ -43,23 +43,26 @@ function densify({ idx, denseList, accumulator }, curr) {
   idx++
 
   if (!accumulator) 
-    return { idx, denseList, accumulator: new Buffer(curr.toString(), 'hex') }
+    return { idx, denseList, accumulator: new Buffer(curr, 'hex') }
 
-  const comparee = new Buffer(curr.toString(), 'hex')
+  const comparee = new Buffer(curr, 'hex')
 
   const result = xor(accumulator, comparee)
 
-  if (idx % 16 === 0) {
+  const currentInBase10 = parseInt(result.toString('hex'), 16)
+  console.log(currentInBase10)
+  
+  /*if (idx % 16 === 0) {
     const newList = denseList.concat()
-    newList.push(result)
+    newList.push(currentInBase10)
     return { idx, denseList: newList }
-  }
+  }*/
 
   return { idx, denseList, accumulator: result }
 }
 
 function hashDenser(list) {
-  return list.reduce( densify, { idx: 0, denseList: [] })
+  return list.map( x => x.toString(16) ).reduce( densify, { idx: 0, denseList: [] })
 }
 
 function knotHash(str) {
@@ -88,6 +91,17 @@ function knotHash(str) {
 
 //console.log(knotHash("1,2,3"))
 
-console.log(JSON.stringify(hashDenser([65, 27, 9, 1, 4, 3, 40, 50, 91, 7, 6, 0, 2, 5, 68, 22])))
+console.log(hashDenser([65, 27, 9, 1, 4, 3, 40, 50, 91, 7, 6, 0, 2, 5, 68, 22]))
+
+console.log(xor(new Buffer("65", 'hex'), new Buffer("27", 'hex')))
 
 module.exports = { reverser, knotHash, densify, hashDenser }
+
+/*
+
+65 ^ 27 ^ 9 ^ 1 ^ 4 ^ 3 ^ 40 ^ 50 ^ 91 ^ 7 ^ 6 ^ 0 ^ 2 ^ 5 ^ 68 ^ 22 = 64
+
+base 10:
+
+
+*/
