@@ -1,5 +1,6 @@
-const { reverser } = require('../day10.js')
+const { reverser, knotHash } = require('../day10.js')
 const assert = require('assert')
+const _ = require('underscore')
 //const fs = require('fs')
 //const contentStr = fs.readFileSync('day9_input.txt', 'utf-8')
 
@@ -7,7 +8,35 @@ function compare(a, b) {
   return JSON.stringify(a) === JSON.stringify(b)
 }
 
+describe.only('knotHash', () => {
+  it('hashes an easy one', () => {
+    const expected = _.range(0, 255)
+    expected[0] = 4
+    expected[1] = 3
+    expected[2] = 2
+    expected[3] = 1
+    expected[4] = 0
+    assert(compare(knotHash([5]).list, expected))
+  })
+  it.only('hashes the example one', () => {
+    const expected = [3, 4, 2, 1, 0]
+    const result = knotHash([3, 4, 1, 5], 5)
+    assert(compare(result.list, expected))
+  })
+  it.only('hashes the puzzle input', () => {
+    //const expected = [3, 4, 2, 1, 0]
+    const result = knotHash([76,1,88,148,166,217,130,0,128,254,16,2,130,71,255,229], 255)
+    console.log(result)
+    //assert(compare(result.list, expected))
+  })
+})
+
 describe.only('reverser', () => {
+  describe('wrap', () => {
+    it('solves length 1', () => {
+      
+    })
+  })
   it('reverses a list with no wrap', () => {
     const input =    [10, 20, 30, 40, 50]
     const expected = [30, 20, 10, 40, 50]

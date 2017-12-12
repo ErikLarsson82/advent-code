@@ -1,3 +1,4 @@
+const _ = require('underscore')
 
 function reverser(inputArray, position, length) {
 
@@ -33,4 +34,23 @@ function reverser(inputArray, position, length) {
   }
 }
 
-module.exports = { reverser }
+function knotHash(lengths, initSize = 255) {
+  let list = _.range(0, initSize)
+  let currentPosition = 0
+  let skipSize = 0
+
+  lengths.forEach(length => {
+    console.log('before iteration', currentPosition, skipSize, JSON.stringify(list)) 
+    list = reverser(list, currentPosition, length)
+    currentPosition += length + skipSize
+    currentPosition = currentPosition % initSize
+    skipSize++
+  })
+
+  return {
+    list,
+    firstEntries: list[0] * list[1]
+  }
+}
+
+module.exports = { reverser, knotHash }
