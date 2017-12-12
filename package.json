@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "bignumber.js": "^5.0.0",
+    "buffer-xor": "^2.0.2",
     "clone": "^2.1.1",
     "console.table": "^0.9.1",
     "d3": "^4.12.0",

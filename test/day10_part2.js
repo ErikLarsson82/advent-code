@@ -1,4 +1,5 @@
-const { reverser, knotHash } = require('../day10.js')
+const { reverser, knotHash, densify } = require('../day10_part2.js')
+const xor = require('buffer-xor')
 const assert = require('assert')
 const _ = require('underscore')
 //const fs = require('fs')
@@ -7,6 +8,25 @@ const _ = require('underscore')
 function compare(a, b) {
   return JSON.stringify(a) === JSON.stringify(b)
 }
+
+describe.only('densify', () => {
+  it('iterates once', () => {
+    const result = densify( { idx: 0, denseList: [] }, "65")
+    const expected = { idx: 1, denseList :[], accumulator: { type: "Buffer", "data": [101] } } // 65
+    assert(compare(result, expected))
+  })
+  it('iterates again', () => {
+    const result = densify( { idx: 1, denseList: [], accumulator: new Buffer("65", "hex") }, "27")
+    const expected = { idx: 2, denseList :[], accumulator: { type: "Buffer", "data": [66] } } // 42
+    assert(compare(result, expected ))
+  })
+  it.only('adds nr 16 to the list', () => {
+    //const expected = { idx: 16, denseList :["test"] }
+    const result = densify( { idx: 15, denseList: [], accumulator: new Buffer("1", "hex") }, "27")
+    console.log(JSON.stringify(result))
+    assert(compare(result, expected ))
+  })
+})
 
 describe('knotHash', () => {
   it('hashes an easy one', () => {
