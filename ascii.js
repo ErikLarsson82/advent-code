@@ -99,6 +99,8 @@ const ascii = {
 module.exports = {
     ascii: ascii,
     find: function(char) {
-        return ascii[char] || 0
+        if (typeof ascii[char] === "undefined")
+            console.error("Missing char: " + char)
+        return ascii[char]
     }
 }

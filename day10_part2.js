@@ -89,12 +89,14 @@ function hashDenser(list) {
 
 function knotHash(str) {
   const size = 256
+
   const arrayified = str.split("")
   const asciiConverted = arrayified.map( find )
 
-  let list = asciiConverted.concat(new Array(size).fill(0)).slice(0, size)
+  let list = _.range(0, size)
   
   const lengths = asciiConverted.concat([17, 31, 73, 47, 23])
+  console.log(asciiConverted, lengths)
 
   let currentPosition = 0
   let skipSize = 0
@@ -108,8 +110,11 @@ function knotHash(str) {
     })
   })
 
-  return JSON.stringify(list)
-}
+  const denseHash = hashDenser(list).denseList
 
+  const denseHashHex = denseHash.map( paddedHex )
+
+  return denseHashHex.join("")
+}
 
 module.exports = { reverser, knotHash, densify, hashDenser, pad, paddedHex }

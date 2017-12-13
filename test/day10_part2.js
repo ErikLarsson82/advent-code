@@ -2,8 +2,8 @@ const { reverser, knotHash, densify, pad, paddedHex, hashDenser } = require('../
 const xor = require('buffer-xor')
 const assert = require('assert')
 const _ = require('underscore')
-//const fs = require('fs')
-//const contentStr = fs.readFileSync('day9_input.txt', 'utf-8')
+const fs = require('fs')
+const contentStr = fs.readFileSync('day10_input.txt', 'utf-8')
 
 function compare(a, b) {
   return JSON.stringify(a) === JSON.stringify(b)
@@ -45,6 +45,21 @@ describe('hashDenser', () => {
 })
 
 describe('knotHash', () => {
+  describe.only('hashes', () => {
+    it('hashes an empty string', () => assert( knotHash("")         === "a2582a3a0e66e6e86e3812dcb672a272" ) )
+    it('hashes "AoC 2017"',      () => assert( knotHash("AoC 2017") === "33efeb34ea91902bb2f59c9920caa6cd" ) )
+    it('hashes "1,2,3"',         () => assert( knotHash("1,2,3")    === "3efbe78a8d82f29979031a4aa0b16a9d" ) )
+    it('hashes "1,2,4"',         () => assert( knotHash("1,2,4")    === "63960835bcdc130f0b66d7ff4f6a5a8e" ) )
+
+    it.only('hashes the puzzle input', () => {
+      const allowed = ["0","1","2","3","4","5","6","7","8","9",","]
+      const parsedContent = contentStr.split("").filter( x => allowed.indexOf(x) !== -1 ).join("")
+      const result = knotHash(contentStr)
+      console.log(JSON.stringify(parsedContent))
+      console.log(result)
+      //assert( result === "63960835bcdc130f0b66d7ff4f6a5a8e" ) 
+    })
+  })
   it('hashes an easy one', () => {
     const expected = _.range(0, 255)
     expected[0] = 4
