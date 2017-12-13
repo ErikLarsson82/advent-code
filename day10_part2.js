@@ -2,6 +2,8 @@ const _ = require('underscore')
 const xor = require('buffer-xor')
 const { find } = require('./ascii')
 
+
+
 function reverser(inputArray, position, length) {
 
   const extended = inputArray.concat(inputArray)
@@ -36,9 +38,9 @@ function reverser(inputArray, position, length) {
   }
 }
 
-function densify({ idx, denseList, accumulator }, curr) {
 
-  console.log('running', idx, denseList, accumulator, curr)
+
+function densify({ idx, denseList, accumulator }, curr) {
 
   idx++
 
@@ -46,24 +48,44 @@ function densify({ idx, denseList, accumulator }, curr) {
     return { idx, denseList, accumulator: new Buffer(curr, 'hex') }
 
   const comparee = new Buffer(curr, 'hex')
-
+  
   const result = xor(accumulator, comparee)
 
-  const currentInBase10 = parseInt(result.toString('hex'), 16)
-  console.log(currentInBase10)
+  const currentInBase10 = parseInt(result.toString('hex'), 16).toString()
   
-  /*if (idx % 16 === 0) {
+  if (idx % 16 === 0) {
     const newList = denseList.concat()
     newList.push(currentInBase10)
     return { idx, denseList: newList }
-  }*/
+  }
 
   return { idx, denseList, accumulator: result }
 }
 
-function hashDenser(list) {
-  return list.map( x => x.toString(16) ).reduce( densify, { idx: 0, denseList: [] })
+
+
+function pad(str) {
+  if (!str || str.length === 0)
+    return "00"
+  if (str.length === 1)
+    return "0" + str
+  return str
 }
+
+
+
+function paddedHex(str) {
+  return pad(parseInt(str).toString(16))
+}
+
+
+
+function hashDenser(list) {
+  return list.map( paddedHex )
+    .reduce( densify, { idx: 0, denseList: [] })
+}
+
+
 
 function knotHash(str) {
   const size = 256
@@ -89,19 +111,5 @@ function knotHash(str) {
   return JSON.stringify(list)
 }
 
-//console.log(knotHash("1,2,3"))
 
-console.log(hashDenser([65, 27, 9, 1, 4, 3, 40, 50, 91, 7, 6, 0, 2, 5, 68, 22]))
-
-console.log(xor(new Buffer("65", 'hex'), new Buffer("27", 'hex')))
-
-module.exports = { reverser, knotHash, densify, hashDenser }
-
-/*
-
-65 ^ 27 ^ 9 ^ 1 ^ 4 ^ 3 ^ 40 ^ 50 ^ 91 ^ 7 ^ 6 ^ 0 ^ 2 ^ 5 ^ 68 ^ 22 = 64
-
-base 10:
-
-
-*/
+module.exports = { reverser, knotHash, densify, hashDenser, pad, paddedHex }

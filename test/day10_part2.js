@@ -1,4 +1,4 @@
-const { reverser, knotHash, densify } = require('../day10_part2.js')
+const { reverser, knotHash, densify, pad, paddedHex, hashDenser } = require('../day10_part2.js')
 const xor = require('buffer-xor')
 const assert = require('assert')
 const _ = require('underscore')
@@ -9,22 +9,38 @@ function compare(a, b) {
   return JSON.stringify(a) === JSON.stringify(b)
 }
 
-describe.only('densify', () => {
+describe('pad', () => {
+  it('doesn\'t touch double digits', () => assert( pad("5b") === "5b") )
+  it('adds a zero to single digits', () => assert( pad("9") === "09") )
+  it('adds two zeroes to nothing', () => assert( pad() === "00") )
+})
+
+describe('paddedHex', () => {
+  it('converts', () => assert( paddedHex("65") === "41") )
+  it('converts and pads', () => assert( paddedHex("9") === "09") )
+})
+
+describe('densify', () => {
   it('iterates once', () => {
-    const result = densify( { idx: 0, denseList: [] }, "65")
-    const expected = { idx: 1, denseList :[], accumulator: { type: "Buffer", "data": [101] } } // 65
+    const result = densify( { idx: 0, denseList: [] }, paddedHex("65") )
+    const expected = { idx: 1, denseList :[], accumulator: { type: "Buffer", "data": [65] } }
     assert(compare(result, expected))
   })
   it('iterates again', () => {
-    const result = densify( { idx: 1, denseList: [], accumulator: new Buffer("65", "hex") }, "27")
-    const expected = { idx: 2, denseList :[], accumulator: { type: "Buffer", "data": [66] } } // 42
+    const result = densify( { idx: 1, denseList: [], accumulator: new Buffer("41", "hex") }, paddedHex("27") )
+    const expected = { idx: 2, denseList :[], accumulator: { type: "Buffer", "data": [90] } }
     assert(compare(result, expected ))
   })
-  it.only('adds nr 16 to the list', () => {
-    //const expected = { idx: 16, denseList :["test"] }
-    const result = densify( { idx: 15, denseList: [], accumulator: new Buffer("1", "hex") }, "27")
-    console.log(JSON.stringify(result))
+  it('adds nr 16 to the list', () => {
+    const expected = { idx: 16, denseList :[ "64" ] }
+    const result = densify( { idx: 15, denseList: [], accumulator: new Buffer("56", "hex") }, paddedHex("22") )
     assert(compare(result, expected ))
+  })
+})
+
+describe('hashDenser', () => {
+  it('dense hashes this example', () => {
+    assert(compare(hashDenser([65, 27, 9, 1, 4, 3, 40, 50, 91, 7, 6, 0, 2, 5, 68, 22]).denseList, ["64"]))
   })
 })
 
@@ -141,3 +157,26 @@ describe('reverser', () => {
     assert(compare(reverser(input, position, length), input))
   })
 })
+
+/*
+
+65 ^ 27 ^ 9 ^ 1 ^ 4 ^ 3 ^ 40 ^ 50 ^ 91 ^ 7 ^ 6 ^ 0 ^ 2 ^ 5 ^ 68 ^ 22 = 64
+
+base 10:
+65 ^ 27 = 90
+90   9  = 83
+83   1  = 82
+82   4  = 86
+86   3  = 85
+85   40 = 125
+125  50 = 79
+79   91 = 20
+20    7 = 19
+19    6 = 21
+21    0 = 21
+21    2 = 23
+23    5 = 18
+18   68 = 86
+86   22 = 64
+
+*/
