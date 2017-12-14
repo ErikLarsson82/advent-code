@@ -8,6 +8,7 @@ function hexSteps(str) {
   }
 
   const result = instructions.reduce( traverse, pos )
+  console.log(result)
   return distance( result.x, result.y )
 }
 
@@ -25,8 +26,42 @@ function traverse( { x, y }, direction ) {
   return { x: x + delta.x, y: y + delta.y }
 }
 
-function distance(a, b) {
-  return Math.abs(a) + Math.abs(b)
+function distance(x, y) {
+  
+  let counter = 0
+  if (y > 0) {
+    if (x > y) {
+      while(y > 0) {
+        counter++
+        x--
+        y--
+      }
+
+      return counter + x
+    }
+    if (y > x) {
+      console.log('its true')
+      while(x > 0) {
+        counter++
+        x--
+        y--
+      }
+
+      return counter + y
+    }
+  }
+
+  if (y < 0) {
+    while(y < 0) {
+      counter++
+      y++
+      x++
+    }
+
+    return counter + x
+  }
+    
+  return Math.abs(x) + Math.abs(y)
 }
 
 if (process.argv[2])
