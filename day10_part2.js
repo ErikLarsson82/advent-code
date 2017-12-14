@@ -92,12 +92,10 @@ function knotHash(str) {
 
   const arrayified = str.split("")
   const asciiConverted = arrayified.map( find )
+  const lengths = asciiConverted.concat([17, 31, 73, 47, 23])
 
   let list = _.range(0, size)
   
-  const lengths = asciiConverted.concat([17, 31, 73, 47, 23])
-  console.log(asciiConverted, lengths)
-
   let currentPosition = 0
   let skipSize = 0
 
@@ -116,5 +114,8 @@ function knotHash(str) {
 
   return denseHashHex.join("")
 }
+
+if (process.argv[2])
+  console.log(process.argv[2] + ": " + knotHash(process.argv[2]))
 
 module.exports = { reverser, knotHash, densify, hashDenser, pad, paddedHex }
