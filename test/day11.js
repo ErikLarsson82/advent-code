@@ -13,7 +13,7 @@ describe('hexSteps', () => {
   it('moves some more', () => assert(hexSteps('ne,ne,sw,sw').endDistance    === 0))
   it('moves again',     () => assert(hexSteps('ne,ne,s,s').endDistance      === 2))
   it('moves more',      () => assert(hexSteps('se,sw,se,sw,sw').endDistance === 3))
-  it('puzzle input',     () => {
+  it('puzzle input',    () => {
     const parsedContent = contentStr.split("").filter( x => allowed.indexOf(x) !== -1 ).join("")
     assert(hexSteps(parsedContent).endDistance === 664)
   })
@@ -32,6 +32,6 @@ describe('distanceRec', () => {
   it('-2,-1',    () => assert(distanceRec(-2, -1) === 2   ))
   it('2,-1',     () => assert(distanceRec(2, -1)  === 3   ))
   it('-2,1',     () => assert(distanceRec(-2, 1)  === 3   ))
-  it('2,3',     () => assert(distanceRec(2, 3)  === 3   ))
+  it('2,3',      () => assert(distanceRec(2, 3)   === 3   ))
   
 })    
