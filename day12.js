@@ -3,13 +3,13 @@ function archive() {
   const list = []
   return x => {
     if (typeof x === "undefined")
-      return list.length
+      return list
 
     if (list.indexOf(x) === -1) {
       list.push(x)
       return -1
     }
-    return list.length
+    return list
   }
 }
 
@@ -24,16 +24,33 @@ function traverse(hashTable, pipe, pipeArchive) {
 }
 
 
+function foundInList(list, pipe) {
+  let ret = -1
+  list.forEach(x => {
+    const arch = x()
+    const result = arch.indexOf(parseInt(pipe))
+    if (result !== -1)
+      ret = result
+  })
+  return ret
+}
+
 
 function pipeCounter(str) {
 
-  const pipeArchive = archive()
-
+  const pipeArchives = []
   const hashTable = createPipeHashTable(str)
-  
-  traverse(hashTable, 0, pipeArchive)
 
-  return pipeArchive()
+  for (pipe in hashTable) {
+    const search = foundInList(pipeArchives, pipe)
+     if (search === -1) {
+        const freshArchive = archive()
+        traverse(hashTable, parseInt(pipe), freshArchive)
+        pipeArchives.push(freshArchive)
+     }
+  }
+  
+  return pipeArchives
 }
 
 
@@ -58,4 +75,4 @@ function createPipeHashTable(str) {
 
 
 
-module.exports = { pipeCounter }
+module.exports = { pipeCounter, foundInList, archive }
