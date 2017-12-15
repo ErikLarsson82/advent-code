@@ -2,14 +2,12 @@
 function hexSteps(str) {
   const instructions = str.split(",")
 
-  const pos = {
-    x: 0,
-    y: 0
-  }
+  const result = instructions.reduce( traverse, { x: 0, y: 0, max: 0 } )
 
-  const result = instructions.reduce( traverse, pos )
-  console.log(result)
-  return distance( result.x, result.y )
+  return {
+    endDistance: distanceRec( result.x, result.y ),
+    max: result.max
+  }
 }
 
 const directions = {
@@ -21,50 +19,37 @@ const directions = {
   "se": { x: 1,  y: 1  }
 }
 
-function traverse( { x, y }, direction ) {
+function traverse( { x, y, max }, direction ) {
   const delta = directions[direction]
-  return { x: x + delta.x, y: y + delta.y }
+  const newPos = { x: x + delta.x, y: y + delta.y }
+  const currentDist = distanceRec( newPos.x, newPos.y )
+  if (currentDist > max)
+    max = currentDist
+  return { x: newPos.x, y: newPos.y, max }
 }
 
-function distance(x, y) {
+function distanceRec(x, y) {
+
+  if (x === y) return Math.abs(x)
+
+  if (x === 0) return Math.abs(y)
+  if (y === 0) return Math.abs(x)
+
+  if (x < 0 && y < 0)
+    return distanceRec(Math.abs(x), Math.abs(y))
   
-  let counter = 0
-  if (y > 0) {
-    if (x > y) {
-      while(y > 0) {
-        counter++
-        x--
-        y--
-      }
+  if (x < 0)
+    return distanceRec(y + 1, Math.abs(x) + 1)
 
-      return counter + x
-    }
-    if (y > x) {
-      console.log('its true')
-      while(x > 0) {
-        counter++
-        x--
-        y--
-      }
-
-      return counter + y
-    }
-  }
-
-  if (y < 0) {
-    while(y < 0) {
-      counter++
-      y++
-      x++
-    }
-
-    return counter + x
-  }
-    
-  return Math.abs(x) + Math.abs(y)
+  if (y < 0)
+    return distanceRec(Math.abs(y), x + 1)
+  
+  return distanceRec(x - 1, y - 1) + 1
 }
+
+
 
 if (process.argv[2])
   console.log(process.argv[2] + ": " + hexSteps(process.argv[2]))
 
-module.exports = { hexSteps }
+module.exports = { hexSteps, distanceRec }
