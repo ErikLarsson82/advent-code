@@ -116,13 +116,14 @@ function firewallPrinter(firewall, depth, amount) {
 }
 
 
-
+// 0 - 65,000 has been tested
 function firewallDelaySolver(str) {
   let delay = 0
   let result = { caught: true }
   while(result.caught === true) {
     result = packetScanner(str, delay)
-    console.log('Testing with delay: ' + delay + ' and caught was ' + result.caught + ' and severity was ' + result.severitySum)
+    if (delay % 500 === 0)
+      console.log('Testing with delay: ' + delay + ' and caught was ' + result.caught + ' and severity was ' + result.severitySum)
     delay++
   }
   return delay - 1

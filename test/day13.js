@@ -9,7 +9,7 @@ function compare(a, b) {
 }
 
 
-describe.only('packetScanner', () => {
+describe('packetScanner', () => {
   it('scans', () => assert(packetScanner(contentStrExample).severitySum === 24) )
   it('scans', () => assert(packetScanner(contentStrInput).severitySum === 1876) )
 })
@@ -17,13 +17,13 @@ describe.only('packetScanner', () => {
 
 
 describe('firewallDelaySolver', () => {
-  it.only('finds it', () => console.log(firewallDelaySolver(contentStrExample)))
-  it('finds it', () => console.log(firewallDelaySolver(contentStrInput)) )
+  it('finds it', () => console.log(firewallDelaySolver(contentStrExample)))
+  it.only('finds it', () => console.log(firewallDelaySolver(contentStrInput)) )
 })
 
 
 
-describe.only('step', () => {
+describe('step', () => {
   describe('down', () => {
     it('steps starting at one', () => {
       const result = step({ pos: 0, range: 6, down: true })
