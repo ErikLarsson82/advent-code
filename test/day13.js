@@ -1,4 +1,4 @@
-const { step, packetScanner } = require('../day13.js')
+const { step, packetScanner, firewallDelaySolver } = require('../day13.js')
 const assert = require('assert')
 const fs = require('fs')
 const contentStrExample = fs.readFileSync('day13_example.txt', 'utf-8')
@@ -9,18 +9,21 @@ function compare(a, b) {
 }
 
 
-describe('packetScanner', () => {
-  it('scans', () => assert(packetScanner(contentStrExample) === 24) )
-  it('scans', () => assert(packetScanner(contentStrInput) === 1876) )
+describe.only('packetScanner', () => {
+  it('scans', () => assert(packetScanner(contentStrExample).severitySum === 24) )
+  it('scans', () => assert(packetScanner(contentStrInput).severitySum === 1876) )
 })
 
 
-describe('step', () => {
-  it('returns other data in object', () => {
-    const result = step({ pos: 0, range: 6, down: true, test: 123 })
-    const expected =    { pos: 1, range: 6, down: true, test: 123 }
-    assert(compare(result, expected))
-  })
+
+describe('firewallDelaySolver', () => {
+  it.only('finds it', () => console.log(firewallDelaySolver(contentStrExample)))
+  it('finds it', () => console.log(firewallDelaySolver(contentStrInput)) )
+})
+
+
+
+describe.only('step', () => {
   describe('down', () => {
     it('steps starting at one', () => {
       const result = step({ pos: 0, range: 6, down: true })
