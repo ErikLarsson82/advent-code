@@ -9,6 +9,7 @@ function compare(a, b) {
 
 describe('dance', () => {
   it('dances', () => assert( dance(contentStr).join("") === "cknmidebghlajpfo") )
+  it.only('dances on BILLION times', () => console.log(dance(contentStr, 1000000000).join("")) )
 })
 
 describe('spin', () => {

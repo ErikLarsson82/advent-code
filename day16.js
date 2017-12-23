@@ -1,13 +1,21 @@
 const { curry, times } = require('ramda')
+const fs = require('fs')
+const contentStr = fs.readFileSync('day16_input.txt', 'utf-8')
 
-function dance(str) {
-  const list = "abcdefghijklmnop".split("")
+function dance(str, amount = 1) {
+  let list = "abcdefghijklmnop".split("")
 
   const instructionStrings = str.trim().split(",").map( x => x.trim() )
 
   const instructions = instructionStrings.map( translateInstruction )
 
-  return instructions.reduce( (acc, curr) => curr(acc), list )
+  times( () => {
+    list = instructions.reduce( (acc, curr) => curr(acc), list )
+  }, amount)
+
+  return list
+  //const loop = new Array(amount).fill(1)
+  //return loop.reduce( (_acc, _curr) => instructions.reduce( (acc, curr) => curr(acc), _acc ), list )
 }
 
 function translateInstruction(str) {
@@ -60,5 +68,11 @@ const partner = curry((x, y, list) => {
   const yIdx = list.indexOf(y)
   return exchange(xIdx, yIdx, list)
 })
+
+console.time('dance')
+
+dance(contentStr, 1).join("")
+
+console.timeEnd('dance')
 
 module.exports = { dance, spin, exchange, partner }

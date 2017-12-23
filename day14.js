@@ -1,4 +1,4 @@
-
+const { curry } = require('ramda')
 const { knotHash } = require('./day10_part2.js')
 
 function discDefrag(str) {
@@ -39,10 +39,35 @@ function pad(str) {
   return blueprint.substr(0, 4 - str.length) + str
 }
 
+function sectionMarker(matrix, blacklist = [], x, y) {
+  const value = valueAt(matrix, blacklist)
+  if (!valueAt(matrix, [], x, y))
+    return []
+  const north = value(x, y-1)
+  const east = value(x+1, y)
+  const south = value(x, y+1)
+  const west = value(x-1, y)
+
+  blacklist = blacklist.concat(value(x,y), north, east, south, west)
+    .filter(x => x)
+
+  const lists = blacklist.map( pos => sectionMarker(matrix, blacklist, pos.x, pos.y) ) 
+  console.log(lists)
+  return blacklist
+}
+
+const valueAt = curry((matrix, blacklist, x, y) => {
+  if ( blacklist.find(d => d.x === x && d.y === y) )
+    return null
+  if (!matrix[x] || !matrix[x][y])
+    return null
+  return { x, y }
+})
+
 
 
 if (process.argv[2])
   console.log(process.argv[2] + ": " + discDefrag(process.argv[2]))
 
 
-module.exports = { discDefrag, hexToBinary, pad }
+module.exports = { discDefrag, hexToBinary, pad, sectionMarker }
