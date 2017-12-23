@@ -17,8 +17,8 @@ describe('packetScanner', () => {
 
 
 describe('firewallDelaySolver', () => {
-  it('finds it', () => console.log(firewallDelaySolver(contentStrExample)))
-  it.only('finds it', () => console.log(firewallDelaySolver(contentStrInput)) )
+  it('finds it at 10', () => assert(firewallDelaySolver(contentStrExample) === 10))
+  //it('finds it', () => console.log(firewallDelaySolver(contentStrInput)) )
 })
 
 

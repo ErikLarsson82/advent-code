@@ -87,7 +87,7 @@ function printDepth(depth) {
   
   return ({ pos, range }, i) => {
     if (typeof pos === "undefined") {
-      console.log((depth === i) ? '(-)' : ' - ')
+      //console.log((depth === i) ? '(-)' : ' - ')
       return
     }
 
@@ -122,8 +122,8 @@ function firewallDelaySolver(str) {
   let result = { caught: true }
   while(result.caught === true) {
     result = packetScanner(str, delay)
-    if (delay % 500 === 0)
-      console.log('Testing with delay: ' + delay + ' and caught was ' + result.caught + ' and severity was ' + result.severitySum)
+    //if (delay % 500 === 0)
+    //  console.log('Testing with delay: ' + delay + ' and caught was ' + result.caught + ' and severity was ' + result.severitySum)
     delay++
   }
   return delay - 1

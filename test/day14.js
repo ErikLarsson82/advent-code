@@ -6,7 +6,7 @@ function compare(a, b) {
 }
 
 
-describe.only('hexToBinary', () => {
+describe('hexToBinary', () => {
   it('converts 0', () => assert(hexToBinary('0') === '0000') )
   it('converts 1', () => assert(hexToBinary('1') === '0001') )
   it('converts e', () => assert(hexToBinary('e') === '1110') )
