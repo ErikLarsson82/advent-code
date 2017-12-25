@@ -39,7 +39,12 @@ function pad(str) {
   return blueprint.substr(0, 4 - str.length) + str
 }
 
+function is(x) {
+  return x && x.length !== 0
+}
+
 function sectionMarker(matrix, blacklist = [], x, y) {
+  console.log('calling sectionMarker with', blacklist, x, y)
   const value = valueAt(matrix, blacklist)
   if (!valueAt(matrix, [], x, y))
     return []
@@ -48,11 +53,17 @@ function sectionMarker(matrix, blacklist = [], x, y) {
   const south = value(x, y+1)
   const west = value(x-1, y)
 
+  const moreFound = (is(north) || is(east) || is(south) || is(west))
+  console.log(moreFound, 'moreFound')
+
+  if (!moreFound)
+    return blacklist.concat(value(x,y))
+
   blacklist = blacklist.concat(value(x,y), north, east, south, west)
     .filter(x => x)
 
   const lists = blacklist.map( pos => sectionMarker(matrix, blacklist, pos.x, pos.y) ) 
-  console.log(lists)
+  //console.log(lists)
   return blacklist
 }
 

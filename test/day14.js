@@ -8,11 +8,14 @@ function compare(a, b) {
 const matrix = [
   [1,1,1,0],
   [1,0,0,1],
-  [0,0,0,1],
-  [1,1,1,1],
+  [0,0,0,0],
+  [1,0,1,1],
 ]
 describe('sectionMarker', () => {
-  it.only('traverses', () => console.log( sectionMarker(matrix, [], 0,0) ) )
+  it('traverses', () => console.log( 'result', sectionMarker(matrix, [], 3,1) ) )
+  it('traverses', () => console.log( 'result', sectionMarker(matrix, [], 3,3) ) )
+  it('traverses', () => console.log( 'result', sectionMarker(matrix, [], 3,0) ) )
+  it.only('traverses', () => console.log( 'result', sectionMarker(matrix, [], 0,0) ) )
 })
 
 describe('hexToBinary', () => {
