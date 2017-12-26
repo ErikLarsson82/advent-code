@@ -12,7 +12,7 @@ function discDefrag(str) {
 
   const binaryDisc = disc.map( makeBinary )
   
-  return discUsed( binaryDisc, "1" )
+  return binaryDisc
 }
 
 function makeBinary(str) {
@@ -62,6 +62,16 @@ function sectionMarker(matrix, blacklist = [], x, y) {
   return uniq(blacklist, (a, b) => (a.x === b.x && a.y === b.y) ? 0 : 1)
 }
 
+function matrixReplacer(matrix, value) {
+  const region = sectionMarker(matrix, blacklist = [], 0,0)
+
+  let clearedMatrix = matrix.map( list => list.map( y => 0 ) )
+
+  region.forEach( pos => clearedMatrix[pos.x][pos.y] = value )
+
+  return clearedMatrix
+}
+
 const valueAt = curry((matrix, blacklist, x, y) => {
   if ( blacklist.find(d => d.x === x && d.y === y) )
     return null
@@ -70,10 +80,8 @@ const valueAt = curry((matrix, blacklist, x, y) => {
   return { x, y }
 })
 
+function regionCounter(input) {
 
+}
 
-if (process.argv[2])
-  console.log(process.argv[2] + ": " + discDefrag(process.argv[2]))
-
-
-module.exports = { discDefrag, hexToBinary, pad, sectionMarker }
+module.exports = { discDefrag, discUsed, hexToBinary, pad, sectionMarker, matrixReplacer }

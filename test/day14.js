@@ -1,4 +1,4 @@
-const { hexToBinary, pad, sectionMarker } = require('../day14.js')
+const { discDefrag, hexToBinary, pad, sectionMarker, matrixReplacer, discUsed } = require('../day14.js')
 const assert = require('assert')
 
 function compare(a, b) {
@@ -11,6 +11,14 @@ const matrix = [
   [0,0,0,0],
   [1,0,1,1],
 ]
+
+
+describe('discUsed', () => {
+  it('counts', () => {
+    const disc = discDefrag('jzgqcdpd')
+    assert( discUsed(disc, "1") === 8074)
+  })
+})
 
 describe('sectionMarker', () => {
   it('traverses', () => {
@@ -31,6 +39,14 @@ describe('sectionMarker', () => {
   it('traverses', () => {
     const result = sectionMarker(matrix, [], 0,0)
     const expected = [{ x: 0, y: 1 }, { x: 0, y: 2 }, { x: 1, y: 0 }, { x: 0, y: 0 }]
+    assert( compare( result, expected ) )
+  })
+})
+
+describe('matrixReplacer', () => {
+  it('replaces a region with nines', () => {
+    const result = matrixReplacer(matrix, 9)
+    const expected = [ [ 9, 9, 9, 0 ], [ 9, 0, 0, 0 ], [ 0, 0, 0, 0 ], [ 0, 0, 0, 0 ] ]
     assert( compare( result, expected ) )
   })
 })
