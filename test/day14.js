@@ -1,4 +1,13 @@
-const { discDefrag, hexToBinary, pad, sectionMarker, matrixReplacer, discUsed } = require('../day14.js')
+const { 
+  discDefrag,
+  hexToBinary,
+  pad,
+  sectionMarker,
+  matrixReplacer,
+  discUsed,
+  regionCounter
+} = require('../day14.js')
+
 const assert = require('assert')
 
 function compare(a, b) {
@@ -11,6 +20,13 @@ const matrix = [
   [0,0,0,0],
   [1,0,1,1],
 ]
+
+describe('regionCounter', () => {
+  it('counts', () => {
+    this.timeout(4000)
+    assert( regionCounter('jzgqcdpd') === 1212)
+  })
+})
 
 
 describe('discUsed', () => {

@@ -1,6 +1,9 @@
 const { curry } = require('ramda')
 const { knotHash } = require('./day10_part2.js')
+const { times } = require('ramda')
 const uniq = require('uniq')
+const clone = require('clone')
+
 
 function discDefrag(str) {
   const disc = []
@@ -10,18 +13,22 @@ function discDefrag(str) {
     disc.push( knotHash(hash) )
   }
 
-  const binaryDisc = disc.map( makeBinary )
-  
-  return binaryDisc
+  return disc.map( makeBinary )  
 }
+
+
 
 function makeBinary(str) {
   return str.split("").map(hexToBinary).join("")
 }
 
+
+
 function discUsed(disc, char) {
   return disc.reduce( (acc, curr) => countChar(curr, char) + acc , 0 )
 }
+
+
 
 function countChar(str, char) {
   return str.split("").reduce( (acc, curr) => {
@@ -30,23 +37,33 @@ function countChar(str, char) {
   }, 0 )
 }
 
+
+
 function hexToBinary(strHex) {
   const hex = parseInt(strHex, 16)
   return pad(hex.toString(2))
 }
+
+
 
 function pad(str) {
   const blueprint = "0000"
   return blueprint.substr(0, 4 - str.length) + str
 }
 
+
+
 function is(x) {
   return x && x.length !== 0
 }
 
+
+
 function isPresent(list, x, y) {
   return !!list.find( pos => pos.x === x && pos.y === y ) 
 }
+
+
 
 function sectionMarker(matrix, blacklist = [], x, y) {
   const value = valueAt(matrix, blacklist)
@@ -62,15 +79,24 @@ function sectionMarker(matrix, blacklist = [], x, y) {
   return uniq(blacklist, (a, b) => (a.x === b.x && a.y === b.y) ? 0 : 1)
 }
 
+
+
 function matrixReplacer(matrix, value) {
   const region = sectionMarker(matrix, blacklist = [], 0,0)
 
   let clearedMatrix = matrix.map( list => list.map( y => 0 ) )
 
-  region.forEach( pos => clearedMatrix[pos.x][pos.y] = value )
-
-  return clearedMatrix
+  return regionReplacer(clearedMatrix, region, value)
 }
+
+
+function regionReplacer(matrix, region, value) {
+  let matrixCopy = clone(matrix)
+  region.forEach( pos => matrixCopy[pos.x][pos.y] = value )
+  return matrixCopy
+}
+
+
 
 const valueAt = curry((matrix, blacklist, x, y) => {
   if ( blacklist.find(d => d.x === x && d.y === y) )
@@ -80,8 +106,28 @@ const valueAt = curry((matrix, blacklist, x, y) => {
   return { x, y }
 })
 
-function regionCounter(input) {
 
+function createMatrix(disc) {
+  return disc.map( x => x.split("").map(x => parseInt(x)) )
 }
 
-module.exports = { discDefrag, discUsed, hexToBinary, pad, sectionMarker, matrixReplacer }
+function regionCounter(inputStr) {
+  const disc = discDefrag(inputStr)
+  let matrix = createMatrix(disc)
+  let counter = 0
+  times( x => {
+    times( y => {
+        const region = sectionMarker(matrix, [], x, y)
+        if (region.length > 0) {
+          matrix = regionReplacer(matrix, region, 0)
+          counter++
+        }
+    }, matrix.length)
+  }, matrix.length)
+
+  return counter
+}
+
+
+
+module.exports = { discDefrag, discUsed, hexToBinary, pad, sectionMarker, matrixReplacer, regionCounter }
