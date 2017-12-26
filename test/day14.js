@@ -11,11 +11,28 @@ const matrix = [
   [0,0,0,0],
   [1,0,1,1],
 ]
+
 describe('sectionMarker', () => {
-  it('traverses', () => console.log( 'result', sectionMarker(matrix, [], 3,1) ) )
-  it('traverses', () => console.log( 'result', sectionMarker(matrix, [], 3,3) ) )
-  it('traverses', () => console.log( 'result', sectionMarker(matrix, [], 3,0) ) )
-  it.only('traverses', () => console.log( 'result', sectionMarker(matrix, [], 0,0) ) )
+  it('traverses', () => {
+    const result = sectionMarker(matrix, [], 3,1)
+    const expected = []
+    assert( compare( result, expected ) )
+  })
+  it('traverses', () => {
+    const result = sectionMarker(matrix, [], 3,3)
+    const expected = [{ x: 3, y: 2 }, { x: 3, y: 3 }]
+    assert( compare( result, expected ) )
+  })
+  it('traverses', () => {
+    const result = sectionMarker(matrix, [], 3,0)
+    const expected = [{ x: 3, y: 0 }]
+    assert( compare( result, expected ) )
+  })
+  it('traverses', () => {
+    const result = sectionMarker(matrix, [], 0,0)
+    const expected = [{ x: 0, y: 1 }, { x: 0, y: 2 }, { x: 1, y: 0 }, { x: 0, y: 0 }]
+    assert( compare( result, expected ) )
+  })
 })
 
 describe('hexToBinary', () => {

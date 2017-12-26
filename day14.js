@@ -1,5 +1,6 @@
 const { curry } = require('ramda')
 const { knotHash } = require('./day10_part2.js')
+const uniq = require('uniq')
 
 function discDefrag(str) {
   const disc = []
@@ -43,28 +44,22 @@ function is(x) {
   return x && x.length !== 0
 }
 
+function isPresent(list, x, y) {
+  return !!list.find( pos => pos.x === x && pos.y === y ) 
+}
+
 function sectionMarker(matrix, blacklist = [], x, y) {
-  console.log('calling sectionMarker with', blacklist, x, y)
   const value = valueAt(matrix, blacklist)
-  if (!valueAt(matrix, [], x, y))
+  if (!valueAt(matrix, [], x, y) || isPresent(blacklist, x, y))
     return []
-  const north = value(x, y-1)
-  const east = value(x+1, y)
-  const south = value(x, y+1)
-  const west = value(x-1, y)
 
-  const moreFound = (is(north) || is(east) || is(south) || is(west))
-  console.log(moreFound, 'moreFound')
-
-  if (!moreFound)
-    return blacklist.concat(value(x,y))
-
-  blacklist = blacklist.concat(value(x,y), north, east, south, west)
-    .filter(x => x)
-
-  const lists = blacklist.map( pos => sectionMarker(matrix, blacklist, pos.x, pos.y) ) 
-  //console.log(lists)
-  return blacklist
+  blacklist = blacklist.concat(value(x,y))  
+  blacklist = blacklist.concat(sectionMarker(matrix, blacklist, x, y-1))
+  blacklist = blacklist.concat(sectionMarker(matrix, blacklist, x+1, y))
+  blacklist = blacklist.concat(sectionMarker(matrix, blacklist, x, y+1))
+  blacklist = blacklist.concat(sectionMarker(matrix, blacklist, x-1, y))
+  
+  return uniq(blacklist, (a, b) => (a.x === b.x && a.y === b.y) ? 0 : 1)
 }
 
 const valueAt = curry((matrix, blacklist, x, y) => {
