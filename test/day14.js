@@ -22,9 +22,10 @@ const matrix = [
 ]
 
 describe('regionCounter', () => {
-  //it('counts', done => {
-    //assert( regionCounter('jzgqcdpd') === 1212) //Works but times out
-  //})
+  it('counts', function() {
+    this.timeout(5000)
+    assert( regionCounter('jzgqcdpd') === 1212)
+  })
 })
 
 
