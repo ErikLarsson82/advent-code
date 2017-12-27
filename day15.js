@@ -46,9 +46,9 @@ function compareGenerators(startA, startB, amount) {
   console.log('Simulation finishied; Total judge count: ' + judgeTotal)
 }
 
-if (process.argv[2])
-  console.log(process.argv[2] + ": " + compareGenerators(process.argv[2], process.argv[3], process.argv[4]))
+//if (process.argv[2])
+//  console.log(process.argv[2] + ": " + compareGenerators(process.argv[2], process.argv[3], process.argv[4]))
 
-compareGenerators()
+//compareGenerators()
 
 module.exports = { compareGenerators, pad, binaryCompare }

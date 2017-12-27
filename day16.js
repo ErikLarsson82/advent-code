@@ -1,4 +1,5 @@
 const { curry, times } = require('ramda')
+const { pad } = require('./day15')
 const fs = require('fs')
 const contentStr = fs.readFileSync('day16_input.txt', 'utf-8')
 
@@ -58,17 +59,53 @@ const spin = curry((size, list) => {
   return list
 })
 
-const positions = {
-  0: 111100000000000000000000,
-  1: 000011110000000000000000,
-  2: 000000001111000000000000,
-  3: 000000000000111100000000,
-  4: 000000000000000011110000,
-  5: 000000000000000000001111
+function printBinary(int) {
+  return pad(6 * 4, int.toString(2))
 }
+
+const positions = {
+  0: parseInt("111100000000000000000000", 2),
+  1: parseInt("000011110000000000000000", 2),
+  2: parseInt("000000001111000000000000", 2),
+  3: parseInt("000000000000111100000000", 2),
+  4: parseInt("000000000000000011110000", 2),
+  5: parseInt("000000000000000000001111", 2)
+}
+
 function bitwiseExchange(data, x, y) {
-  console.log('first', (data & positions[x]).toString(2))
-  console.log('sec', (data & positions[y]).toString(2))
+  const diff = Math.abs(x - y)
+  const clear = data & ~positions[x] & ~positions[y]
+  let first = data & positions[x]
+  let shift = (x < y) ? first >> diff * 4 : first << diff * 4
+  let sec = data & positions[y]
+  let secShift = (x < y) ? sec << diff * 4 : sec >> diff * 4
+  const result = clear | shift | secShift
+  /*console.log('clear', printBinary(clear))
+  console.log('fir  ', printBinary(first))
+  console.log('shift', printBinary(shift))
+  console.log('sec  ', printBinary(sec))
+  console.log('secSh', printBinary(secShift))
+  console.log('res  ', printBinary(result))*/
+  return result
+}
+
+function bitwiseSpin(data, amount) {
+  times( () => {
+    const extract = data & positions[5]
+    const movedExtract = extract << 4 * 5
+    const movedRest = data >> 4
+    data = movedExtract | movedRest
+    /*console.log('extract     ', printBinary(extract))
+    console.log('movedExtract', printBinary(movedExtract))
+    console.log('movedRest   ', printBinary(movedRest))
+    console.log('result      ', printBinary(result))*/
+    //data = result
+  }, amount)
+  return data
+}
+
+function bitwiseExchange(data) {
+  return data
 }
 
 const exchange = curry((x, y, str) => {
@@ -114,4 +151,4 @@ const partner = curry((x, y, list) => {
 
 //console.timeEnd('dance')
 
-module.exports = { dance, spin, exchange, partner, bitwiseExchange }
+module.exports = { dance, spin, exchange, partner, bitwiseExchange, bitwiseSpin, printBinary }
