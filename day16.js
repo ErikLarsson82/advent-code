@@ -58,6 +58,19 @@ const spin = curry((size, list) => {
   return list
 })
 
+const positions = {
+  0: 111100000000000000000000,
+  1: 000011110000000000000000,
+  2: 000000001111000000000000,
+  3: 000000000000111100000000,
+  4: 000000000000000011110000,
+  5: 000000000000000000001111
+}
+function bitwiseExchange(data, x, y) {
+  console.log('first', (data & positions[x]).toString(2))
+  console.log('sec', (data & positions[y]).toString(2))
+}
+
 const exchange = curry((x, y, str) => {
   //console.log('one list\n', x,y,str)
   if (x > y) {
@@ -89,17 +102,16 @@ const exchange = curry((x, y, str) => {
   //  while(true) {}
 })
 
-
 const partner = curry((x, y, list) => {
   const xIdx = list.indexOf(x)
   const yIdx = list.indexOf(y)
   return exchange(xIdx, yIdx, list)
 })
 
-console.time('dance')
+//console.time('dance')
 
-dance(contentStr, 1000)
+//dance(contentStr, 1000)
 
-console.timeEnd('dance')
+//console.timeEnd('dance')
 
-module.exports = { dance, spin, exchange, partner }
+module.exports = { dance, spin, exchange, partner, bitwiseExchange }

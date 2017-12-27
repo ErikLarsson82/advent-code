@@ -1,4 +1,4 @@
-const { spin, exchange, partner, dance } = require('../day16.js')
+const { spin, exchange, partner, dance, bitwiseExchange } = require('../day16.js')
 const assert = require('assert')
 const fs = require('fs')
 const contentStr = fs.readFileSync('day16_input.txt', 'utf-8')
@@ -32,6 +32,13 @@ describe('partner', () => {
 describe('spin', () => {
   it('spins', () => assert(compare( spin(3, "abcde" ), "cdeab" )))
   it('spins', () => assert(compare( spin(1, "abcde" ), "eabcd" )))
+})
+
+
+describe('bitwiseExchange', () => {
+  const abcdef = "000000010010001101000101" //"0000 0001 0010 0011 0100 0101"
+  it.only('exchange a and b', () => assert(compare( bitwiseExchange(abcdef, 0, 1), "000100000010001101000101" ))) //"0001 0000 0010 0011 0100 0101"
+  //it('exchange a and f', () => assert(compare( spin(1, "abcde" ), "eabcd" )))
 })
 
 describe('exchange', () => {
