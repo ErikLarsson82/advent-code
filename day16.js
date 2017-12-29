@@ -3,24 +3,32 @@ const { pad } = require('./day15')
 const fs = require('fs')
 const contentStr = fs.readFileSync('day16_input.txt', 'utf-8')
 
-function dance(str, amount = 1) {
-  let list = "abcdefghijklmnop"
+const foo = curry(() => {
+  return 123
+})
 
+function dance(str, amount = 1) {
+  let abcdef = parseInt("000000010010001101000101", 2) //"0000 0001 0010 0011 0100 0101"
+  //let abcdef = "abcdef"
   const instructionStrings = str.trim().split(",").map( x => x.trim() )
 
   const instructions = instructionStrings.map( translateInstruction )
 
-  /*times( () => {
-    list = instructions.reduce( (acc, curr) => curr(acc), list )
-  }, amount)*/
+  const length = instructions.length
+  console.log('Running with ' + instructions.length + ' iterations')
+
   while(amount > 0) {
     amount--
-    for ( var i = 0; i < instructions.length; i++) {
-      list = instructions[i](list)
+    for ( var i = 0; i < length; i++) {
+      if (instructions[i].operation === "exchange")
+        abcdef = bitwiseExchangeOpt(instructions[i][0], instructions[i][1], abcdef)
+      //console.log(instructions[i][0], instructions[i][1])
+      //abcdef = instructions[i](abcdef)
+      //abcdef = spinOpt(5, abcdef)
     }
   }
 
-  return list
+  return abcdef
   //const loop = new Array(amount).fill(1)
   //return loop.reduce( (_acc, _curr) => instructions.reduce( (acc, curr) => curr(acc), _acc ), list )
 }
@@ -34,21 +42,34 @@ function translateInstruction(str) {
     "p": translatePartner
   }
 
-  return mutations[operation](str.substring(1, str.length))
+  return mutations[operation](str.substring(1, str.length)) //
 }
 
 function translateSpin(str) {
-  return spin(parseInt(str))
+  return {}
+   //bitwiseSpin(parseInt(str))
 }
 
 function translateExchange(str) {
-  const targets = str.split("/").map(x => parseInt(x))
-  return exchange(targets[0], targets[1])
+  return {
+    operation: "exchange",
+    targets: str.split("/").map(x => parseInt(x))
+  }
+  //return bitwiseExchange(targets[0], targets[1])
 }
 
 function translatePartner(str) {
+  return {}
   const targets = str.split("/")
-  return partner(targets[0], targets[1])
+  return bitwisePartner(targets[0], targets[1])
+}
+
+function spinOpt(size, list) {
+  while(size > 0) {
+    size--
+    list = list[list.length-1] + list.substring(0, list.length-1)
+  }
+  return list
 }
 
 const spin = curry((size, list) => {
@@ -72,7 +93,24 @@ const positions = {
   5: parseInt("000000000000000000001111", 2)
 }
 
-function bitwiseExchange(data, x, y) {
+function bitwiseExchangeOpt(x, y, data) {
+  //const diff = Math.abs(x - y)
+  const clear = data & ~positions[x] & ~positions[y]
+  let first = data & positions[x]
+  let shift = (x < y) ? first >> Math.abs(x - y) * 4 : first << Math.abs(x - y) * 4
+  let sec = data & positions[y]
+  let secShift = (x < y) ? sec << Math.abs(x - y) * 4 : sec >> Math.abs(x - y) * 4
+  return clear | shift | secShift
+  /*console.log('clear', printBinary(clear))
+  console.log('fir  ', printBinary(first))
+  console.log('shift', printBinary(shift))
+  console.log('sec  ', printBinary(sec))
+  console.log('secSh', printBinary(secShift))
+  console.log('res  ', printBinary(result))*/
+  //return result
+}
+
+function bitwiseExchange(x, y, data) {
   const diff = Math.abs(x - y)
   const clear = data & ~positions[x] & ~positions[y]
   let first = data & positions[x]
@@ -89,7 +127,8 @@ function bitwiseExchange(data, x, y) {
   return result
 }
 
-function bitwiseSpin(data, amount) {
+const bitwiseSpin = curry((amount, data) => {
+  return data
   times( () => {
     const extract = data & positions[5]
     const movedExtract = extract << 4 * 5
@@ -102,11 +141,11 @@ function bitwiseSpin(data, amount) {
     //data = result
   }, amount)
   return data
-}
+})
 
-function bitwiseExchange(data) {
+const bitwisePartner = curry((x, y, data) => {
   return data
-}
+})
 
 const exchange = curry((x, y, str) => {
   //console.log('one list\n', x,y,str)
@@ -145,10 +184,10 @@ const partner = curry((x, y, list) => {
   return exchange(xIdx, yIdx, list)
 })
 
-//console.time('dance')
+console.time('dance')
 
-//dance(contentStr, 1000)
+dance(contentStr, 1000)
 
-//console.timeEnd('dance')
+console.timeEnd('dance')
 
 module.exports = { dance, spin, exchange, partner, bitwiseExchange, bitwiseSpin, printBinary }
