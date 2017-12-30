@@ -1,6 +1,9 @@
 const fs = require('fs')
 const contentStr = fs.readFileSync('day19_input.txt', 'utf-8')
 const clone = require('clone')
+const Jetty = require('jetty')
+var jetty = new Jetty(process.stdout)
+jetty.clear()
 
 const letters = "ABCDEFGIJKLMNOPQRSTUVQYZ"
 
@@ -23,16 +26,24 @@ function seriesOfTubes(str, callback) {
     if (acc.endFound)
       clearInterval(interval)
     callback(acc.trail.join(""))
-  }, 300)
+  }, 5)
 }
 
 function print(acc) {
   let newMap = clone(acc.tubes)
   newMap[acc.pos.y][acc.pos.x] = "@"
+  let slicePos = [0, 100]
+  if (acc.pos.y > 100)
+    slicePos = [100, 200]
+  if (acc.pos.y > 200)
+    slicePos = [200, 300]
   newMap = newMap.map( x => x.slice(0, 240) )
-  newMap = newMap.slice(0, 100)
+  newMap = newMap.slice(slicePos[0], slicePos[1])
   newMap = newMap.map( x => x.join("") + "\n" )
-  console.log(newMap.join(""))
+  
+  jetty.moveTo([0,0])
+  newMap.forEach( x => jetty.text(x) )
+  //console.log(newMap.join(""))
 }
 
 function traverse(acc) {
