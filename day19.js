@@ -1,12 +1,14 @@
 const fs = require('fs')
-const contentStr = fs.readFileSync('day19_example.txt', 'utf-8')
+const contentStr = fs.readFileSync('day19_input.txt', 'utf-8')
 
 const letters = "ABCDEFGIJKLMNOPQRSTUVQYZ"
 
 function seriesOfTubes(str) {
   const tubes = str.split("\n").map( x => x.split("") )
 
+  
   let pos = findStart(tubes)
+  console.log(str, pos)
 
   const acc = {
     pos,
@@ -24,10 +26,6 @@ function seriesOfTubes(str) {
 }
 
 function traverse(acc) {
-  if (acc.pos.x > 100 || acc.pos.y > 100 || acc.pos.x < -100 || acc.pos.y < -100) {
-    acc.endFound = true
-    return acc
-  }
   console.log(acc.pos, acc.tubes[acc.pos.y][acc.pos.x])
   const actions = {
     "up":    () => acc.pos.y--,
@@ -75,6 +73,6 @@ function findStart(tubes) {
   }
 }
 
-console.log(seriesOfTubes(contentStr).trail)
+console.log(seriesOfTubes(contentStr).trail.join(""))
 
 module.exports = { seriesOfTubes }
