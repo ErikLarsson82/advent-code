@@ -1,6 +1,8 @@
 const fs = require('fs')
+const contentStrEx = fs.readFileSync('day19_example.txt', 'utf-8')
 const contentStr = fs.readFileSync('day19_input.txt', 'utf-8')
 const clone = require('clone')
+const { curry } = require('ramda')
 const Jetty = require('jetty')
 var jetty = new Jetty(process.stdout)
 jetty.clear()
@@ -47,6 +49,14 @@ function print(acc) {
   newMap.forEach( x => jetty.text(x) )
 }
 
+function isSomething(pos) {
+  return pos && pos !== " "
+}
+
+const findInTubes = curry((tubes, pos, modX, modY) => {
+  return tubes[pos.y + modY][pos.x + modX]
+})
+
 function traverse(acc) {
   acc.steps++
   const actions = {
@@ -56,33 +66,39 @@ function traverse(acc) {
     "right": () => acc.pos.x++
   }
   actions[acc.direction]()
-  if (letters.indexOf(acc.tubes[acc.pos.y][acc.pos.x]) !== -1)
-    acc.trail = acc.trail.concat(acc.tubes[acc.pos.y][acc.pos.x])
 
-  function isSomething(pos) {
-    return pos && pos !== " "
+  const find = findInTubes(acc.tubes, acc.pos)
+
+  if (letters.indexOf(find(0,0)) !== -1)
+    acc.trail = acc.trail.concat(find(0,0))
+
+  const horizontal = () => {
+    const up = find(0, -1)
+    const down = find(0, +1)
+    if (isSomething(up))
+      acc.direction = "up"
+    if (isSomething(down))
+      acc.direction = "down"
   }
 
-  function find(modX, modY) {
-    return acc.tubes[acc.pos.y + modY][acc.pos.x + modX]
+  const vertical = () => {
+    const left = find(-1, 0)
+    const right = find(+1, 0)
+    if (isSomething(left))
+      acc.direction = "left"
+    if (isSomething(right))
+      acc.direction = "right"
   }
 
-  if (find(0,0) === "+") {
-    if (acc.direction === "up" || acc.direction === "down") {
-      if (isSomething(find(-1, 0)))
-        acc.direction = "left"
-      if (isSomething(find(+1, 0)))
-        acc.direction = "right"
-    } else {
-      if (isSomething(find(0, -1)))
-        acc.direction = "up"
-      if (isSomething(find(0, +1)))
-        acc.direction = "down"
-    }
-  } else if (acc.tubes[acc.pos.y][acc.pos.x] === " ") {
-    acc.endFound = true
-  }
+  const cornerFound = (find(0,0) === "+")
+  const isVertical = (acc.direction === "up" || acc.direction === "down")
+  const isEmpty = (find(0,0) === " ")
 
+  const move = () => (isVertical) ? vertical() : horizontal()
+  const checkForEnd = () => (isEmpty) ? acc.endFound = true : null;
+
+  (cornerFound) ? move() : checkForEnd()
+  
   return acc
 }
 
