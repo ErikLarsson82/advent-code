@@ -1,15 +1,14 @@
 const fs = require('fs')
 const contentStr = fs.readFileSync('day19_input.txt', 'utf-8')
+const clone = require('clone')
 
 const letters = "ABCDEFGIJKLMNOPQRSTUVQYZ"
 
-function seriesOfTubes(str) {
+function seriesOfTubes(str, callback) {
   const tubes = str.split("\n").map( x => x.split("") )
 
-  
   let pos = findStart(tubes)
-  console.log(str, pos)
-
+  
   const acc = {
     pos,
     direction: "down",
@@ -18,15 +17,26 @@ function seriesOfTubes(str) {
     tubes
   }
 
-  while(!acc.endFound) {
+  let interval = setInterval(() => {
+    print(acc)
     traverse(acc)
-  }
+    if (acc.endFound)
+      clearInterval(interval)
+    callback(acc.trail.join(""))
+  }, 300)
+}
 
-  return acc
+function print(acc) {
+  let newMap = clone(acc.tubes)
+  newMap[acc.pos.y][acc.pos.x] = "@"
+  newMap = newMap.map( x => x.slice(0, 240) )
+  newMap = newMap.slice(0, 100)
+  newMap = newMap.map( x => x.join("") + "\n" )
+  console.log(newMap.join(""))
 }
 
 function traverse(acc) {
-  console.log(acc.pos, acc.tubes[acc.pos.y][acc.pos.x])
+  
   const actions = {
     "up":    () => acc.pos.y--,
     "down":  () => acc.pos.y++,
@@ -73,6 +83,6 @@ function findStart(tubes) {
   }
 }
 
-console.log(seriesOfTubes(contentStr).trail.join(""))
+seriesOfTubes(contentStr, console.log)
 
 module.exports = { seriesOfTubes }
