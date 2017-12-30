@@ -17,15 +17,17 @@ function seriesOfTubes(str, callback) {
     direction: "down",
     trail: [],
     endFound: false,
+    steps: 0,
     tubes
   }
 
   let interval = setInterval(() => {
     print(acc)
     traverse(acc)
-    if (acc.endFound)
+    if (acc.endFound) {
       clearInterval(interval)
-    callback(acc.trail.join(""))
+      callback(acc.trail.join(""), acc.steps)
+    }
   }, 5)
 }
 
@@ -43,11 +45,10 @@ function print(acc) {
   
   jetty.moveTo([0,0])
   newMap.forEach( x => jetty.text(x) )
-  //console.log(newMap.join(""))
 }
 
 function traverse(acc) {
-  
+  acc.steps++
   const actions = {
     "up":    () => acc.pos.y--,
     "down":  () => acc.pos.y++,
