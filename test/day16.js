@@ -35,7 +35,7 @@ describe('spin', () => {
 })
 
 
-describe.only('bitwiseSpin', () => {
+describe('bitwiseSpin', () => {
   const abcdef = parseInt("000000010010001101000101", 2) //"0000 0001 0010 0011 0100 0101"
   const allF =   parseInt("111111111111111111111111", 2)
   it('spins 1',     () => assert(printBinary(bitwiseSpin(abcdef, 1)) === "010100000001001000110100")) // "0101 0000 0001 0010 0011 0100"
@@ -46,7 +46,7 @@ describe.only('bitwiseSpin', () => {
 })
 
 
-describe.only('bitwiseExchange', () => {
+describe('bitwiseExchange', () => {
   const abcdef = parseInt("000000010010001101000101", 2) //"0000 0001 0010 0011 0100 0101"
   const allF =   parseInt("111111111111111111111111", 2)
   it('exchange pos 0 and 1', () => assert(printBinary(bitwiseExchange(abcdef, 0, 1)) === "000100000010001101000101")) //"0001 0000 0010 0011 0100 0101"
