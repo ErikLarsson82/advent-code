@@ -1,5 +1,3 @@
-const fs = require('fs')
-const contentStr = fs.readFileSync('day18_example.txt', 'utf-8')
 
 function duet(str) {
   const instructionStrings = str.trim().split("\n").map( x => x.trim() )
@@ -19,7 +17,6 @@ function duet(str) {
 }
 
 function excecute(acc, curr) {
-  console.log(acc, curr)
   const parts = curr.split(" ").map( x => x.trim() )
   const operation = parts[0]
   const register = parts[1]
@@ -41,7 +38,6 @@ function excecute(acc, curr) {
     },
     "jgz": (reg, tar) => {
       if (acc.register[reg] > 0) {
-        console.log(registryOrValue(tar))
         acc.counter = acc.counter + registryOrValue(tar)
       } else {
         acc.counter++
@@ -57,6 +53,4 @@ function excecute(acc, curr) {
   return acc
 }
 
-console.log(duet(contentStr))
-
-module.exports = { duet }
+module.exports = { duet, excecute }
