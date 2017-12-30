@@ -22,13 +22,13 @@ function seriesOfTubes(str, callback) {
   }
 
   let interval = setInterval(() => {
-    print(acc)
+    //print(acc)
     traverse(acc)
     if (acc.endFound) {
       clearInterval(interval)
       callback(acc.trail.join(""), acc.steps)
     }
-  }, 5)
+  }, 1)
 }
 
 function print(acc) {
@@ -63,23 +63,21 @@ function traverse(acc) {
     return pos && pos !== " "
   }
 
-  if (acc.tubes[acc.pos.y][acc.pos.x] === "+") {
+  function find(modX, modY) {
+    return acc.tubes[acc.pos.y + modY][acc.pos.x + modX]
+  }
+
+  if (find(0,0) === "+") {
     if (acc.direction === "up" || acc.direction === "down") {
-      if (isSomething(acc.tubes[acc.pos.y][acc.pos.x-1])) {
+      if (isSomething(find(-1, 0)))
         acc.direction = "left"
-      } else if (isSomething(acc.tubes[acc.pos.y][acc.pos.x+1])) {
+      if (isSomething(find(+1, 0)))
         acc.direction = "right"
-      } else {
-        acc.endFound = true
-      }
     } else {
-      if (isSomething(acc.tubes[acc.pos.y-1][acc.pos.x])) {
+      if (isSomething(find(0, -1)))
         acc.direction = "up"
-      } else if (isSomething(acc.tubes[acc.pos.y+1][acc.pos.x])) {
+      if (isSomething(find(0, +1)))
         acc.direction = "down"
-      } else {
-        acc.endFound = true 
-      }
     }
   } else if (acc.tubes[acc.pos.y][acc.pos.x] === " ") {
     acc.endFound = true
