@@ -2,7 +2,7 @@ const puzzleInput = require('./day_23_input.json')
 const splitInput = puzzleInput.map(x => x.split(" "))
 
 const registers = {
-  a: 0,
+  a: 1,
   b: 0,
   c: 0,
   d: 0,
@@ -27,7 +27,7 @@ function registerOrValue(input) {
 function run() {
   while(splitInput[currentInstructionIdx] !== undefined) {
     counter++
-    if (counter % 100 === 0)
+    if (counter % 100000000 === 0)
       console.log('iteration', counter, registers)
 
     const currentInstruction = splitInput[currentInstructionIdx][0]
