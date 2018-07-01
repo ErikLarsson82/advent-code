@@ -372,6 +372,7 @@ console.log(traverse([[]], "0"))
   "9/10"
 ]*/
 
+
 const data = [
   "24/14",
   "30/24",
@@ -469,7 +470,11 @@ const traverse = (paths, connection) => {
 const sumPath = (acc, curr) => acc + parseInt(curr.split("/")[0]) + parseInt(curr.split("/")[1])
 
 const allPaths = traverse([], "0")
-const scores = allPaths.map(x => x.reduce(sumPath, 0)).sort((a, b) => a > b)
-console.log(scores)
-console.log(allPaths)
+const sortedByLength = allPaths.sort((a, b) => a.length > b.length)
+
+const allOfTheLongest = allPaths.filter(x => x.length === sortedByLength[sortedByLength.length-1].length)
+//const scores = allPaths.map(x => x.reduce(sumPath, 0)).sort((a, b) => a > b)
+//console.log(scores)
+const scores = allOfTheLongest.map(x => x.reduce(sumPath, 0)).sort((a, b) => a > b)
+//console.log()
 console.log('\n\nAnswer: ', scores[scores.length-1])
