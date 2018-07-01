@@ -35,11 +35,13 @@ function dance(str, amount = 1) {
     if (amount % 10000 === 0)
       console.log('Iteration ', amount)
 
-    let len = instr.length
+    let len = 0
+    let total = instr.length
 
     do {
-      const move = instr[len-1].move
-      const options = instr[len-1].options
+      
+      const move = instr[len].move
+      const options = instr[len].options
       if (move === "s") {
         let size = options[0]
         do {
@@ -114,7 +116,7 @@ function dance(str, amount = 1) {
         idx1 = arr[1]
         idx0 = arr[0]
       }
-    } while (--len > 0)
+    } while (++len < total)
   } while (--amount > 0)
 }
 
