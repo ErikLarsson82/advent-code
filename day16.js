@@ -33,7 +33,7 @@ function dance(str, amount = 1) {
 
 
     if (amount % 10000 === 0)
-      console.log('Iteration ', amount)
+      console.log('Iteration', amount, [idx0,idx1,idx2,idx3,idx4,idx5,idx6,idx7,idx8,idx9,idx10,idx11,idx12,idx13,idx14,idx15].join(""))
 
     let len = 0
     let total = instr.length
@@ -120,9 +120,9 @@ function dance(str, amount = 1) {
   } while (--amount > 0)
 }
 
-console.time('dance')
+//console.time('dance')
 
-dance(contentStr, 1)
+dance(contentStr, 1000000000)
 
 console.log([
   idx0,
@@ -143,6 +143,6 @@ console.log([
   idx15
 ].join(""))
 
-console.timeEnd('dance')
+//console.timeEnd('dance')
 
 module.exports = { dance }
