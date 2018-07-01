@@ -2,7 +2,7 @@ const r = require('ramda')
 const fs = require('fs')
 const contentStrInput = fs.readFileSync('day13_input.txt', 'utf-8')
 
-function step({ pos, range, down }) {
+const step = ({ pos, range, down }) => {
   if (typeof pos === "undefined" || typeof range === "undefined")
     return {}
 
@@ -21,9 +21,7 @@ function step({ pos, range, down }) {
   return { pos, range, down }
 }
 
-
-
-function createPacketScanners(str) {
+const createPacketScanners = (str) => {
   const rangeStrings = str.trim().split("\n")
 
   const pairs = rangeStrings.map( x => x.split(":") )
@@ -68,15 +66,28 @@ function executePicoSecond({ firewall, depth, severitySum, caught }) {
   return { firewall, depth, severitySum, caught }
 }
 
+// 240000 almost halts
+// 195000 process out of memory
+const bufferedStepping = r.memoizeWith((x, y) => y.toString(), (firewall, delay) => {
+  if (delay === 0)
+    return firewall
+  if (delay % 100000 === 0 || delay > 230000) {
+    for (var i = 0; i <= delay; i++) {
+      firewall = firewall.map(step)
+    }
+    return firewall
+  }
+  return bufferedStepping(firewall, delay-1).map(step)
+})
 
-
+let lastFirewall
 function packetScanner(str, delay = 0) {
-  let firewall = createPacketScanners(str)
+
+  //let firewall = 
   
-  r.times( () => {
-    firewall = firewall.map( step )
-  }, delay )
-  
+  firewall = lastFirewall ? lastFirewall.map(step) : createPacketScanners(str)
+   //bufferedStepping(firewall, delay)
+  lastFirewall = firewall
   //repeat for as long as the firewall is
   //return severitySum
   return firewall.reduce( executePicoSecond, { firewall, depth: -1, severitySum: 0, caught: false } )
@@ -120,16 +131,29 @@ function firewallPrinter(firewall, depth, amount) {
 function firewallDelaySolver(str) {
   let delay = 0
   let result = { caught: true }
+  let best = Infinity
   while(result.caught === true) {
     result = packetScanner(str, delay)
-    //if (delay % 500 === 0)
-    //  console.log('Testing with delay: ' + delay + ' and caught was ' + result.caught + ' and severity was ' + result.severitySum)
+    if (result.severitySum < best)
+      best = result.severitySum
+    if (result.severitySum === 0) {
+      console.log('Iteration with delay', delay, " gives severity 0 and caught " + result.caught)
+    }
+    if (result.caught === false) {
+      console.log('Iteration with delay', delay, " gives caught false " + result.caught)
+    }
+    if (delay % 5000 === 0)
+      console.log(delay + ', caught ' + result.caught + ' and severity ' + result.severitySum + " best " + best)
     delay++
   }
   return delay - 1
 }
 
-//console.log(firewallDelaySolver(contentStrInput))
+console.log(firewallDelaySolver(contentStrInput))
+//console.log(bufferedStepping(createPacketScanners(contentStrInput), 1), "\n\n")
+//console.log("\n\n", bufferedStepping(createPacketScanners(contentStrInput), 2))
+//console.log("\n\n", bufferedStepping(createPacketScanners(contentStrInput), 3))
+//console.log("\n\n", bufferedStepping(createPacketScanners(contentStrInput), 6))
 //console.log(packetScanner(contentStrInput, 6).severitySum)
 
 module.exports = { step, packetScanner, firewallDelaySolver }
