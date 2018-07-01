@@ -1,5 +1,4 @@
 const { curry, times } = require('ramda')
-const { pad } = require('./day15')
 const fs = require('fs')
 const contentStr = fs.readFileSync('day16_input.txt', 'utf-8')
 
@@ -9,74 +8,70 @@ function dance(str, amount = 1) {
   
   const instructionStrings = str.trim().split(",").map( x => x.trim() )
 
-  const instructions = instructionStrings.map( translateInstruction )
+  //const instructions = instructionStrings.map( translateInstruction )
 
-  const length = instructions.length
+  //const length = instructions.length
   
   while(amount > 0) {
     amount--
     if (amount % 10000 === 0)
       console.log('Iteration ', amount)
-    for ( var i = 0; i < length; i++) {
-      abcdef = instructions[i](abcdef)
+    for ( var i = 0; i < instructionStrings.length; i++) {
+      abcdef = translateInstruction(instructionStrings[i], abcdef)
     }
   }
 
   return abcdef
 }
 
-function translateInstruction(str) {
-  //console.log(str)
-  const operation = str[0]
-
+function translateInstruction(instructionStr, seq) {
+  
+  const operation = instructionStr[0]
+  const tail = instructionStr.substring(1, instructionStr.length).split("/")
+  
   const mutations = {
-    "s": translateSpin,
-    "x": translateExchange,
-    "p": translatePartner
+    "s": spin,
+    "x": exchange,
+    "p": partner
   }
-
-  return mutations[operation](str.substring(1, str.length)) //
+  
+  return mutations[operation](tail, seq) //
 }
 
-function translateSpin(str) {
-  return spin(parseInt(str))
-}
-
-function translateExchange(str) {
-  const targets = str.split("/").map(x => parseInt(x))
-  return exchange(targets[0], targets[1])
-}
-
-function translatePartner(str) {
-  const targets = str.split("/")
-  return partner(targets[0], targets[1])
-}
-
-const spin = curry((size, list) => {
+// 2.5 sek på 1000
+const spin = (instructionArray, seq) => {
+  let size = parseInt(instructionArray[0])
   while(size > 0) {
     size--
-    list = list[list.length-1] + list.substring(0, list.length-1)
+    seq = seq[seq.length-1] + seq.substring(0, seq.length-1)
   }
-  return list
-})
+  return seq
+}
 
-const exchange = curry((x, y, str) => {
-  const tmp = str.split("")
-  const swapTmp = tmp[x]
-  tmp[x] = tmp[y]
-  tmp[y] = swapTmp
-  return tmp.join("")
-})
+// 2.5 sek på 1000
+const exchange = (instructionArray, seq) => {
+  const instructions = instructionArray.map(x => parseInt(x))
+  const x = instructions[0]
+  const y = instructions[1]
+  if (x < y) {
+    return seq.substring(0, x) + seq[y] + seq.substring(x + 1, y) + seq[x] + seq.substring(y + 1, seq.length) 
+  }
+  return seq.substring(0, y) + seq[x] + seq.substring(y + 1, x) + seq[y] + seq.substring(x + 1, seq.length) 
+}
 
-const partner = curry((x, y, list) => {
-  const xIdx = list.indexOf(x)
-  const yIdx = list.indexOf(y)
-  return exchange(xIdx, yIdx, list)
-})
+// 0.2 sek på tusen
+const partner = (instructionArray, seq) => {
+  const x = instructionArray[0]
+  const y = instructionArray[1]
+  const xIdx = seq.indexOf(x)
+  const yIdx = seq.indexOf(y)
+  return exchange([xIdx.toString(), yIdx.toString()], seq)
+}
 
 console.time('dance')
 
-console.log(dance(contentStr, 1000))
+console.log(dance(contentStr, 1))
+// Before optz, 1000 iterations in 6725.485ms
 
 console.timeEnd('dance')
 
