@@ -11,8 +11,7 @@ function dual_duet(str) {
     }))
 
   let iterations = 0
-  let flip = true
-
+  
   const program0 = {
     register: {
       p: 0
@@ -20,7 +19,7 @@ function dual_duet(str) {
     counter: 0,
     value_sent: 0,
     did_rcv: 0,
-    stack: [],
+    queue: [],
     played: null,
     recover: null,
     instructions: instructions
@@ -33,7 +32,7 @@ function dual_duet(str) {
     counter: 0,
     value_sent: 0,
     did_rcv: 0,
-    stack: [],
+    queue: [],
     played: null,
     recover: null,
     instructions: instructions
@@ -41,22 +40,24 @@ function dual_duet(str) {
 
   do {
     iterations++
-    flip = !flip
     
-    if (flip) {
+    if (is_waiting(program1)) {
+      //console.log(`\nRunning 0`)
       excecute(program0, program1)
     } else {
+      //console.log(`\nRunning 1`)
       excecute(program1, program0)
     }
-    if (iterations % 100000 === 0) {
-      console.log(`\nRunning ${flip ? 'Program 0' : 'Program 1'}`)
+    
+    if (iterations % 1000000 === 0) {
+      //console.log(`\nRunning ${flip ? 'Program 0' : 'Program 1'}`)
       console.log(`Iteration: ${iterations}`)
-      console.log(`Program 0 is at ${program0.counter}, status ${program0.instructions[program0.counter].operation}, stack size ${program0.stack.length}, values sent: ${program0.value_sent}`)
+      console.log(`Program 0 is at ${program0.counter}, status ${program0.instructions[program0.counter].operation}, queue size ${program0.queue.length}, values sent: ${program0.value_sent}`)
       console.log(program0.register)
-      console.log(`Program 1 is at ${program1.counter}, status ${program1.instructions[program1.counter].operation}, stack size ${program1.stack.length}, values sent: ${program1.value_sent}`)
+      console.log(`Program 1 is at ${program1.counter}, status ${program1.instructions[program1.counter].operation}, queue size ${program1.queue.length}, values sent: ${program1.value_sent}`)
       console.log(program1.register)
     }
-  } while(!(is_waiting(program0) && is_waiting(program1))) //  && program0.stack.length < 30 // 
+  } while(!(is_waiting(program0) && is_waiting(program1))) //  && program0.queue.length < 30 // 
 
   console.log(`Program 1 sent ${program1.value_sent} values`)
   console.log(`Program 0 did rcv ${program0.did_rcv} times`)
@@ -65,7 +66,7 @@ function dual_duet(str) {
 function is_waiting(program) {
   const ci = program.instructions[program.counter]
   
-  return ci.operation === "rcv" && program.stack.length === 0
+  return ci.operation === "rcv" && program.queue.length === 0
 }
 
 function parts(str) {
@@ -100,7 +101,7 @@ function excecute(program, partner) {
   switch(operation) {
     case "snd": 
       program.value_sent++
-      partner.stack.push(program.register[register])
+      partner.queue.push(program.register[register])
       program.counter++
       break;
     case "set": 
@@ -120,15 +121,16 @@ function excecute(program, partner) {
       program.counter++
       break;
     case "rcv":
-      if (program.stack.length === 0)
+      if (program.queue.length === 0)
         return
-      const result = program.stack.shift()
+      const result = program.queue.shift()
+      
       program.register[register] = result
       program.counter++
       program.did_rcv++
       break;
     case "jgz":
-      if (program.register[register] > 0) {
+      if (registryOrValue(register) > 0) {
         program.counter = program.counter + registryOrValue(target)
       } else {
         program.counter++
