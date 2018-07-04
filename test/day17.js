@@ -1,15 +1,18 @@
 const { spinlock, spinlockStep, nextPos } = require('../day17.js')
 const assert = require('assert')
+const { equal } = require('assert')
 
 function compare(a, b) {
   return JSON.stringify(a) === JSON.stringify(b)
 }
 
 const steps = 3
+const stepsPuzzleInput = 363
 
 describe('spinlock', () => {
-  it('computes example', () => assert( spinlock(steps) === 638) )
-  it('computes puzzle input', () => assert( spinlock(363) === 136) )
+  //it('computes example', () => assert( spinlock(steps) === 638) )
+  it('computes puzzle input', () => equal( spinlock(stepsPuzzleInput, 2017),  136) )
+  it.only('computes part two of puzzle input', () => equal( spinlock(stepsPuzzleInput) === 136) )
 })
 
 describe('nextPos', () => {
