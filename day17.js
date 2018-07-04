@@ -1,13 +1,15 @@
 const { curry, times } = require('ramda')
 
-function spinlock(amount) {
+function spinlock(amount, max = 2017) {
   let counter = 0
   let list = [0]
-  while(counter < 2017) {
+  while(counter < max) {
     list = spinlockStep(amount, counter, list)
     counter++
+    if (counter % 10000 === 0)
+      console.log('at iteration', counter, list[1])
   }
-  return list[list.indexOf(2017)+1]
+  return list[1] //[list.indexOf(2017)+1]
 }
 
 function nextPos(steps, prevPos, length) {
