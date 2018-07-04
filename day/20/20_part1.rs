@@ -1,3 +1,5 @@
+// Execute with ./20_part1.exe puzzle_input.txt
+
 use std::env;
 use std::fs::File;
 use std::io::prelude::*;
@@ -58,7 +60,6 @@ fn main() {
             println!("Distance : {} {}", minimum, idx);
         }
     }
-
 }
 
 fn update_particle(particle: &mut Particle) -> &mut Particle {
@@ -78,7 +79,7 @@ fn distance(particle: &Particle) -> i64 {
 
 
 fn create_particle(x: &&str) -> Particle {
-    let particle_str: Vec<&str> = x.split(", ").collect();
+    let particle_str: Vec<&str> = x.trim().split(", ").collect();
 
     let position_string: String = particle_str[0].chars().skip(3).take(particle_str[0].len() - 4).collect();
     let position_vector: Vec<i64> = position_string.trim().split(",").map(|x| x.parse::<i64>().unwrap()).collect();
