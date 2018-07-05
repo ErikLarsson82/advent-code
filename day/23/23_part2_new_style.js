@@ -3,6 +3,20 @@ var a = 1, b, c, d, e, f, h = 0
 b = 107900
 c = 124900
 
+let count = 0
+for (var x = 107900; x < 124900; x = x + 17) {
+  let prime = true
+  for (var y = 2; y < x; y++) {
+    if (x % y === 0) {
+      prime = false
+    }
+  }
+  if (prime)
+    count++
+}
+console.log(count)
+return
+
 while (true) {
 
   f = true
