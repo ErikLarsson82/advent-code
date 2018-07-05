@@ -13,13 +13,13 @@ do {
     }
   }
 
-  if (!f) {
+  if (!f)
     h++
-  }
+
   if (b - c === 0) { break }
 
-  b = b + 17
+  b += 17
 
 } while (true)
 
-console.log('h', h)
+console.log('h:', h)
