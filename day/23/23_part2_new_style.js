@@ -12,8 +12,8 @@ while (true) {
     do {
       if ((d * e) - b === 0) {
         f = false
-        e = e + 1
       }
+      e = e + 1
     } while(e - b !== 0)
 
     d = d + 1
@@ -28,5 +28,4 @@ while (true) {
     return
   }
   b = b + 17
-
 }
