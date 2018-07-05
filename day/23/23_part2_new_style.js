@@ -5,13 +5,13 @@ c = 124900
 
 while (true) {
 
-  f = 1
+  f = true
   d = 2
   do {
     e = 2
     do {
       if ((d * e) - b === 0) {
-        f = 0
+        f = false
         e = e + 1
       }
     } while(e - b !== 0)
@@ -20,7 +20,7 @@ while (true) {
 
   } while(d - b !== 0)
 
-  if (f === 0) {
+  if (f === true) {
     h = h + 1
   }
   if (b - c === 0) {
