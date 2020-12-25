@@ -16,12 +16,18 @@ function parse(data) {
 }
 
 function totalFuelRequirement(modules) {
-  const fuel = modules.map(fuelRequirement)
+  const fuel = modules.map(module => recursiveFuelRequirement(module) - module)
   return fuel.reduce(sum, 0)
 }
 
 function print(x) {
-  console.log('2020 / 1 / Part 1\nTotal fuel requirement:', x)
+  console.log('2020 / 1 / Part 2\nTotal recursive fuel requirement:', x)
+}
+
+const recursiveFuelRequirement = mass => {
+  return fuelRequirement(mass) <= 0
+    ? mass
+    : recursiveFuelRequirement(fuelRequirement(mass)) + mass
 }
 
 const fuelRequirement = mass => Math.floor(mass / 3) - 2
@@ -32,3 +38,10 @@ function pipe(a,b,c,d) {
     return d(c(b(a(...arguments))))
   }
 }
+
+/*
+// Tests
+console.log( recursiveFuelRequirement(14) - 14 === 2)
+console.log( recursiveFuelRequirement(1969) - 1969 === 966 )
+console.log( recursiveFuelRequirement(100756) - 100756 === 50346 )
+*/
