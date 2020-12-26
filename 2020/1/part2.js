@@ -1,27 +1,15 @@
 
-require('fs').readFile('./puzzle-input.txt', 'utf-8', pipe(data, parse, totalFuelRequirement, print))
+const { data, parse, pipe } = require('../common')
 
-function data(err, data) {
-  if (err) {
-    console.log('error', err)
-  }
-  return data
-}
+require('fs').readFile('./puzzle-input.txt', 'utf-8', pipe(data, parse('\n'), totalFuelRequirement, print))
 
-function parse(data) {
-  return data.trim()
-    .split('\n')
-    .map(x => x.trim())
-    .map(x => parseInt(x))
+function print(x) {
+  console.log('2020 / 1 / Part 2\nTotal recursive fuel requirement:', x)
 }
 
 function totalFuelRequirement(modules) {
   const fuel = modules.map(module => recursiveFuelRequirement(module) - module)
   return fuel.reduce(sum, 0)
-}
-
-function print(x) {
-  console.log('2020 / 1 / Part 2\nTotal recursive fuel requirement:', x)
 }
 
 const recursiveFuelRequirement = mass => {
@@ -32,16 +20,3 @@ const recursiveFuelRequirement = mass => {
 
 const fuelRequirement = mass => Math.floor(mass / 3) - 2
 const sum = (acc, curr) => acc + curr
-
-function pipe(a,b,c,d) {
-  return function() {
-    return d(c(b(a(...arguments))))
-  }
-}
-
-/*
-// Tests
-console.log( recursiveFuelRequirement(14) - 14 === 2)
-console.log( recursiveFuelRequirement(1969) - 1969 === 966 )
-console.log( recursiveFuelRequirement(100756) - 100756 === 50346 )
-*/
