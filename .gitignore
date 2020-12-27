@@ -2,3 +2,4 @@ node_modules
 *.exe
 *.pdb
 *.o
+wire-schematic.json
