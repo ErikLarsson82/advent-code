@@ -1,32 +1,19 @@
 
 function testDigits(digitsInt) {
-	const adj = adjacent(digitsInt)
-	const dec = decrease(digitsInt)
+	const adjacent = traverse((a,b) => a === b, digitsInt)
+	const decreasing = traverse((a,b) => a > b, digitsInt)
 
-	return adj && !dec
+	return adjacent && !decreasing
 }
 
-function adjacent(digitsInt) {
+function traverse(compareFunction, digitsInt) {
 	const digitsString = digitsInt.toString()
 	let found = false
 	for (var i = 0; i < digitsString.length; i++) {
-		if (digitsString[i] === digitsString[i+1]) {
+		if (compareFunction(digitsString[i], digitsString[i+1])) {
 			found = true
 		}
 	}
-
-	return found
-}
-
-function decrease(digitsInt) {
-	const digitsString = digitsInt.toString()
-	let found = false
-	for (var i = 0; i < digitsString.length; i++) {
-		if (digitsString[i] > digitsString[i+1]) {
-			found = true
-		}
-	}
-
 	return found
 }
 
