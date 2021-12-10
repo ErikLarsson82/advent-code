@@ -1,9 +1,19 @@
 require('fs').readFile('./puzzle-input.txt', 'utf-8', (err, data) => {
 	
+	/*
 	const heightMap = data.trim().split('\n').map(row => {
 		return row.split('').map(x => parseInt(x))
 	})
-		
+	*/
+
+	const heightMap = [
+		'2199943210',
+		'3987894921',
+		'9856789892',
+		'8767896789',
+		'9899965678',
+	].map(row => row.split('').map(height => parseInt(height))
+	
 	function neighbours(x, y) {
 		return [
 			heightMap[x-1] && heightMap[x-1][y],
@@ -21,6 +31,13 @@ require('fs').readFile('./puzzle-input.txt', 'utf-8', (err, data) => {
 		}).length === 0
 
 		return output
+	}
+
+	function traverseBasin(found, x, y) {
+		const neigh = neighbours(x, y)
+		neigh.filter(n => {
+			return found.includes(n)
+		})
 	}
 
 	let riskLevels = []
