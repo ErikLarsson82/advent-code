@@ -1,6 +1,8 @@
 
 require('fs').readFile('./puzzle-input.txt', 'utf-8', (err, data) => {
 	const lanternFish = data.trim().split(',').map(x=>parseInt(x))
+
+	const start = new Date()
 	
 	const status = {
 		0: lanternFish.filter(x => x === 0).length,
@@ -29,21 +31,23 @@ require('fs').readFile('./puzzle-input.txt', 'utf-8', (err, data) => {
 
 	const duration = 256
 
-	printStatus()
+	// printStatus()
 	for (var i = 0; i < duration; i++) {
-		console.log('\n')
+		// console.log('\n')
 		if (i % 10 === 0) {
-			console.log('Running iteration', i)
+			// console.log('Running iteration', i)
 		}		
 		tickDay()
-		printStatus()
+		// printStatus()
 	}
 	console.log(`after ${duration} iterations`)
 	console.log('amount', sum())
+	console.log('time (ms)', new Date().getTime() - start.getTime())
 
 	function sum() {
 		return status[0] + status[1] + status[2] + status[3] + status[4] + status[5] + status[6] + status[7] + status[8]
 	}
+
 	function printStatus() {
 		for (s in status) {
 			console.log(s, status[s])
