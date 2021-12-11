@@ -1,3 +1,4 @@
+
 const puzzleInput = [
 	'5433566276',
 	'6376253438',
@@ -120,6 +121,16 @@ function printNeighbours(arr) {
 	console.log(str + '\n')
 }
 
+function detectFlash() {
+	let sum = 0
+	forEachInGrid(grid, x => {
+		if (x === 0) {
+			sum++
+		}
+	})
+	return sum === 100
+}
+
 function printGrid() {
 	let str = ''
 	for (let i = 0; i < grid.length; i++) {
@@ -179,11 +190,19 @@ console.log('')
 
 let sumFlashes = 0
 
-for (let k = 0; k <= 100-1; k++) {
+for (let k = 0; k <= 500-1; k++) {
 	
 	sumFlashes += simulate()	
 	
-	console.log(`Grid after iteration ${k+1} - sum flashes so far ${sumFlashes}`)
-	console.log(printGrid())
-	console.log('')
+	if (detectFlash()) {
+		console.log('Flash detected at iteration', k+1)
+	}
+	
+	/*
+	if (k + 1 === 195) {
+		console.log(`Grid after iteration ${k+1} - sum flashes so far ${sumFlashes}`)
+		console.log(printGrid())
+		console.log('')
+	}
+	*/
 }
