@@ -1,11 +1,8 @@
 require('fs').readFile('./puzzle-input.txt', 'utf-8', (err, data) => {
 
-	//console.log(JSON.stringify(data))
 	const polymerTemplate = data.split('\n\n')[0]
-	//console.log('wat', polymerTemplate)
-	//return
 
-	const pairInsertionRules = data.split('\n\n')[1].trim().split('\n').map(row => {
+	const pairInsertionRules = data.split('\n\n')[1].split('\n').map(row => {
 		const [pair, insertion] = row.split(' -> ')
 		return { pair, insertion }
 	})
@@ -63,6 +60,10 @@ require('fs').readFile('./puzzle-input.txt', 'utf-8', (err, data) => {
 		}).filter(noNumbers).join('')
 	}
 
+	function fastAppend(arr) {
+		return arr.push(...arr)
+	}
+
 	function noNumbers(item) {
 		return typeof item !== 'number'
 	}
@@ -96,11 +97,61 @@ require('fs').readFile('./puzzle-input.txt', 'utf-8', (err, data) => {
 		return common(str).reverse()[0]
 	}
 
+	let counter = 0
+	let start = {}
+
+	let previous = start     
+	while (true && counter < 200000000) {
+		counter++
+
+		const next = { idx: Math.random() } // { prev: previous, idx: Math.random() }
+		if (counter % 1000000 === 0) {
+			console.log('creating', next, 'at count', counter)
+		}
+		previous.next = next
+		previous = next
+	}
+	let target = start
+	let counter2 = 0
+	while (target) {
+		counter2++
+		if (counter2 % 1000000 === 0) {
+			console.log('i found', target.idx, 'at count', counter2)
+		}
+		target = target.next
+	}
+	/*
 	console.log('Polymer before algorithm', polymerTemplate)
-	let str = polymerTemplate
+	let index = 0
+	let strA = new Array(Math.pow(2, 32) - 1)
+	strA[0] = '1'
+	strA[1] = '1'
+	strA[2] = '1'
+	index = 3
+
+	let strB = new Array(Math.pow(2, 32) - 1)
+	
+	let target = strA[0]
+	while (target) {
+		strB[0] = target
+		strB[0+index] = target
+		index = index * 2
+
+		target = 
+	}
+	*/
+	return
+
 	for (let i = 0; i < 40; i++) {
-		str = append(str)
-		console.log(`after ${i+1} iterations: ${str} length ${str.length}`)
+
+		console.time('Execution Time');
+
+		// str = append(str)
+		fastAppend(str)
+
+		console.timeEnd('Execution Time');
+
+		console.log(`after ${i+1} iterations: length ${str.length}`)
 
 		if (i === 39) {
 			const [, mostCommonQuantity] = mostCommon(str)
@@ -109,3 +160,7 @@ require('fs').readFile('./puzzle-input.txt', 'utf-8', (err, data) => {
 		}
 	}
 })
+
+// HBHVVNPCNFPSVKBPPCBH
+// HOBBHBVSVSNFPVCHNBFOPSSFVVKVBFPBPVCSBBH
+// HCOOBHBBHOBKVOSFVOSVNBFOPVVFCNHONCBKFKOKPSSPSKFPVSVVKFVCBKFOPHBFPVVFCHSPBHBBH
