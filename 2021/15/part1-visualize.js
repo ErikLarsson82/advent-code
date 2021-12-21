@@ -130,16 +130,13 @@ function findNull() {
 	for (let x = 0; x < width; x++) {
 		for (let y = 0; y < height; y++) {
 			const origin = grid[x][y]
-			for (let i = 0; i < 3; i++) {
-				const direction = ['north', 'east', 'south', 'west'][i]
+			for (let i = 0; i <= 3; i++) {
+				const direction = x > y ? ['south', 'east', 'west', 'north'][i] : ['east', 'south', 'west', 'north'][i]
 				const test = apply(direction, { x, y })
 				const target = grid[test.x] && grid[test.x][test.y]
 				if (target && target.best) {				
-					// compare my result with the current stored
-					//console.log('there is a best, compare')
 					if (origin.best.sum + target.cost < target.best.sum) {
-						//console.log('i improved it')
-							grid[test.x][test.y] = {
+						grid[test.x][test.y] = {
 							cost: target.cost,
 							best: {
 								sum: origin.best.sum + target.cost,
@@ -147,12 +144,8 @@ function findNull() {
 							}
 						}
 						return false
-					} else {
-						//console.log('what i found was better')
 					}					
 				} else if (target) {
-					// there is a thing here but no best
-					// console.log('a thing here but no best', test.x, test.y)
 					grid[test.x][test.y] = {
 						cost: target.cost,
 						best: {
@@ -161,10 +154,6 @@ function findNull() {
 						}
 					}
 					return false
-				} else {
-					// ignore
-					// console.log('ignore', direction)
-					// return
 				}				
 			}
 		}
@@ -179,13 +168,5 @@ window.addEventListener('keydown', e => {
 		findNull()
 	}
 })
-/*
-let done = false
-while (!done) {
-	done = findNull()
-	// console.clear()
-}
 
-console.log(printGrid())	
-console.log(grid[width-1][height-1].best.path)
-*/
+// console.log(grid[width-1][height-1].best.path)
