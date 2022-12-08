@@ -10,6 +10,7 @@ const slashes = x => x.split('').filter(x => x === '/').length
 
 function size(dir) {
   const files = dataA.filter(x => x.dir.substring(0, dir.length) === dir)
+  console.log('with dir:', dir, 'i get these files', files)
   return files.map(fileSize).reduce(sum, 0)
 }
 
@@ -20,9 +21,9 @@ function directories(acc, curr, idx, list) {
   return acc
 }
 
-require('fs').readFile('./puzzle-input.txt', 'utf-8', (err, data) => {
+require('fs').readFile('./puzzle-input.txt', 'utf-8', (err, _data) => {
   
-  const d2 = `$ cd /
+  const data = `$ cd /
 $ ls
 dir a
 14848514 b.txt
@@ -44,13 +45,20 @@ $ ls
 4060174 j
 8033020 d.log
 5626152 d.ext
-7214296 k`
+dir a
+7214296 k
+$ cd a
+$ ls
+123 hej`
 
-  data.split('$ ').filter(x => x !== '').map(x=>x.trim()).forEach(processInstruction)
+  data.split('$').filter(x => x !== '').map(x=>x.trim()).forEach(processInstruction)
 
-  dataA.forEach(x => console.log(x))
+  //dataA.forEach(x => console.log(x))
+  //debug.forEach(x => console.log('debug', x))
+  //return
 
   const totalSum = dataA.reduce(directories, []).map(dir).map(size).filter(x => x <= 100000).reduce(sum, 0)
+  //totalSum.forEach(x => console.log(x))
   console.log(totalSum)
 })
 
@@ -91,6 +99,8 @@ function processInstruction(instruction) {
         console.log('adding file', file, 'to path', path)
       }
     })
+    return
   }
+  throw new Error('Missing handling for this', instruction)
 }
 
