@@ -1,0 +1,1063 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"playB",
+				"playButtonContainer"
+			],
+			[
+				"animate",
+				"animateAwayDeadLand"
+			],
+			[
+				"pro",
+				"progress"
+			],
+			[
+				"welc",
+				"welcomeFlapB"
+			],
+			[
+				"con",
+				"container"
+			],
+			[
+				"forea",
+				"forEachHexagon"
+			],
+			[
+				"converter",
+				"converterSprite"
+			],
+			[
+				"isn",
+				"isNectarSackEmpty"
+			],
+			[
+				"isHo",
+				"isHoneyFull"
+			],
+			[
+				"isHoney",
+				"isHoneySackEmpty"
+			],
+			[
+				"adjacent",
+				"adjacentHexagons"
+			],
+			[
+				"ad",
+				"adjacentHexagons"
+			],
+			[
+				"hide",
+				"hideAllAnimations"
+			],
+			[
+				"pollina",
+				"pollinationLevel"
+			],
+			[
+				"prog",
+				"progressSprite"
+			],
+			[
+				"pixel",
+				"pixelCoordinate"
+			],
+			[
+				"text",
+				"textureA"
+			],
+			[
+				"polymer",
+				"polymerTemplate"
+			],
+			[
+				"pair",
+				"pairInsertionRules"
+			],
+			[
+				"lea",
+				"leastCommonQuantity"
+			],
+			[
+				"polym",
+				"polymerTemplate"
+			],
+			[
+				"forEach",
+				"forEachInGrid"
+			],
+			[
+				"flash",
+				"flashDetected"
+			],
+			[
+				"neigh",
+				"neighbours"
+			],
+			[
+				"trans",
+				"translationTable"
+			],
+			[
+				"segmen",
+				"segmentP"
+			],
+			[
+				"pu",
+				"puzzleInputRaw"
+			],
+			[
+				"exam",
+				"exampleInput"
+			],
+			[
+				"ex",
+				"exampleInput"
+			],
+			[
+				"is",
+				"isHoneySackFull"
+			],
+			[
+				"isPo",
+				"isPollenEmpty"
+			],
+			[
+				"dista",
+				"distanceToTarget"
+			],
+			[
+				"target",
+				"targetSprite"
+			],
+			[
+				"game",
+				"gameSpeed"
+			],
+			[
+				"job",
+				"jobsPanel"
+			],
+			[
+				"add",
+				"addChild"
+			],
+			[
+				"butt",
+				"buttonMode"
+			],
+			[
+				"nectar",
+				"nectarSack"
+			],
+			[
+				"targ",
+				"targetSprite"
+			],
+			[
+				"flower",
+				"flowerResult"
+			],
+			[
+				"flowe",
+				"flowerResult"
+			],
+			[
+				"isNec",
+				"isNectarSackEmpty"
+			],
+			[
+				"isNectar",
+				"isNectarSackEmpty"
+			],
+			[
+				"NEC",
+				"NECTAR_SACK_CAPACITY"
+			],
+			[
+				"isPollen",
+				"isPollenSackFull"
+			],
+			[
+				"POLL",
+				"POLLEN_SACK_CAPACITY"
+			],
+			[
+				"PO",
+				"POLLEN_HEX_CAPACITY"
+			],
+			[
+				"isAt",
+				"isAtType"
+			],
+			[
+				"hex",
+				"hexGrid"
+			],
+			[
+				"filter",
+				"filterHexagon"
+			],
+			[
+				"convert",
+				"converterSprite"
+			],
+			[
+				"broo",
+				"broodSprite"
+			],
+			[
+				"larvae",
+				"larvaeHex"
+			],
+			[
+				"larv",
+				"larvaeHex"
+			],
+			[
+				"H",
+				"HUNGER_CAPACITY"
+			],
+			[
+				"pollen",
+				"pollenSprite"
+			],
+			[
+				"honey",
+				"honeyHex"
+			],
+			[
+				"back",
+				"background"
+			],
+			[
+				"setC",
+				"setContents"
+			],
+			[
+				"digi",
+				"digitsInt"
+			],
+			[
+				"digit",
+				"digitsString"
+			],
+			[
+				"dig",
+				"digitsString"
+			],
+			[
+				"wire",
+				"wireIdx"
+			],
+			[
+				"in",
+				"instruction"
+			],
+			[
+				"instruc",
+				"instructionPos"
+			],
+			[
+				"fuel",
+				"fuelRequirement"
+			],
+			[
+				"inner",
+				"innerWidth"
+			],
+			[
+				"camer",
+				"cameraMovement"
+			],
+			[
+				"Inner",
+				"innerHeight"
+			],
+			[
+				"inn",
+				"innerWidth"
+			],
+			[
+				"G",
+				"GRAVITY"
+			],
+			[
+				"ch",
+				"children"
+			],
+			[
+				"al",
+				"alphaDegrees"
+			],
+			[
+				"ang",
+				"angleOfAttack"
+			],
+			[
+				"coll",
+				"collidee"
+			],
+			[
+				"prefix",
+				"prefixFunc"
+			],
+			[
+				"isP",
+				"isPew"
+			],
+			[
+				"prefi",
+				"prefixHull"
+			],
+			[
+				"wave",
+				"waveObject"
+			],
+			[
+				"5-e",
+				"5-enemies-crazy-hard"
+			],
+			[
+				"ge",
+				"generateNewWave"
+			],
+			[
+				"WAV",
+				"ENEMIES_PER_WAVE"
+			],
+			[
+				"sinus",
+				"mini-sinus"
+			],
+			[
+				"pre",
+				"prefixObject"
+			],
+			[
+				"ghost",
+				"ghostSprite"
+			],
+			[
+				"on",
+				"onlySuccess"
+			],
+			[
+				"sortedP",
+				"sortedPolicyDistribution"
+			],
+			[
+				"ran",
+				"randomAgent"
+			],
+			[
+				"exp",
+				"experienceSnapshots"
+			],
+			[
+				"experience",
+				"experienceSequences"
+			],
+			[
+				"FITNE",
+				"FITNESS_TESTS"
+			],
+			[
+				"prefixT",
+				"prefixTimer"
+			],
+			[
+				"h",
+				"highscore"
+			],
+			[
+				"high",
+				"highscoreText"
+			],
+			[
+				"enemy",
+				"enemyKills"
+			],
+			[
+				"enem",
+				"enemyKills"
+			],
+			[
+				"ene",
+				"enemyKills"
+			],
+			[
+				"P2",
+				"P2_START_Y"
+			],
+			[
+				"P2_",
+				"P2_START_X"
+			],
+			[
+				"P1",
+				"P1_START_X"
+			],
+			[
+				"pref",
+				"prefixGodmode"
+			],
+			[
+				"P1_S",
+				"P1_START_Y"
+			],
+			[
+				"bla",
+				"blastHullTexture"
+			],
+			[
+				"mineblass",
+				"mineBlasts"
+			],
+			[
+				"mineb",
+				"mineBlast"
+			],
+			[
+				"mini",
+				"miniSinusEnemySprite"
+			],
+			[
+				"play",
+				"players"
+			],
+			[
+				"pla",
+				"players"
+			],
+			[
+				"playerD",
+				"playerDeaths"
+			],
+			[
+				"playerDe",
+				"playerDeaths"
+			],
+			[
+				"playerDea",
+				"playerDeathText"
+			],
+			[
+				"enemyK",
+				"enemyKillText"
+			],
+			[
+				"dis",
+				"distance"
+			],
+			[
+				"snap",
+				"snapshots"
+			],
+			[
+				"cu",
+				"cubeStates"
+			],
+			[
+				"scra",
+				"scrambleMove"
+			],
+			[
+				"thre",
+				"threatLevel-1"
+			],
+			[
+				"start",
+				"startUfos"
+			],
+			[
+				"st",
+				"startInterceptors"
+			],
+			[
+				"train",
+				"trainingStats"
+			],
+			[
+				"class",
+				"classifierReady"
+			],
+			[
+				"clas",
+				"classifierReady"
+			],
+			[
+				"background",
+				"backgroundColor"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "2022/01/part2.js",
+			"settings":
+			{
+				"buffer_size": 568,
+				"encoding": "UTF-8",
+				"line_ending": "Windows",
+				"name": "part1.js"
+			}
+		},
+		{
+			"file": "2022/02/part2.js",
+			"settings":
+			{
+				"buffer_size": 1223,
+				"encoding": "UTF-8",
+				"line_ending": "Windows",
+				"name": "part1.js"
+			}
+		},
+		{
+			"file": "2022/03/part2.js",
+			"settings":
+			{
+				"buffer_size": 990,
+				"encoding": "UTF-8",
+				"line_ending": "Windows",
+				"name": "part1.js"
+			}
+		},
+		{
+			"file": "2022/04/part2.js",
+			"settings":
+			{
+				"buffer_size": 785,
+				"encoding": "UTF-8",
+				"line_ending": "Windows",
+				"name": "part1.js"
+			}
+		},
+		{
+			"file": "2022/05/part2.js",
+			"settings":
+			{
+				"buffer_size": 1370,
+				"encoding": "UTF-8",
+				"line_ending": "Windows",
+				"name": "part1.js"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/F/Dev/advent-code",
+		"/F/Dev/advent-code/2021",
+		"/F/Dev/advent-code/2021/01",
+		"/F/Dev/advent-code/2022",
+		"/F/Dev/advent-code/2022/01",
+		"/F/Dev/advent-code/2022/02",
+		"/F/Dev/advent-code/2022/04"
+	],
+	"file_history":
+	[
+		"/F/Dev/advent-code/advent-code.sublime-project",
+		"/F/Dev/hexagons/src/game-over-menu.js",
+		"/F/Dev/hexagons/src/setup-splash.js",
+		"/F/Dev/hexagons/src/setupCookies.js",
+		"/F/Dev/hexagons/src/setup-world-map-3.js",
+		"/F/Dev/hexagons/src/main.js",
+		"/F/Dev/hexagons/src/setup-pixi.js",
+		"/F/Dev/hexagons/index.html",
+		"/F/Dev/hexagons/src/help-functions.js",
+		"/F/Dev/hexagons/src/setup-game.js",
+		"/F/Dev/hexagons/package.json",
+		"/F/Dev/hexagons/src/sprite-factories.js",
+		"/F/Dev/hexagons/src/game-loop.js",
+		"/F/Dev/hexagons/src/animate-sprite.js",
+		"/F/Dev/hexagons/src/bee.js",
+		"/F/Dev/hexagons/src/create-map.js",
+		"/F/Dev/hexagons/src/setup-menu.js",
+		"/F/Dev/hexagons/src/cells.js",
+		"/F/Dev/hexagons/src/bezier.js",
+		"/F/Dev/hexagons/node_modules/bezier-js/src/bezier.js",
+		"/F/Dev/hexagons/node_modules/bezier-js/dist/bezier.cjs",
+		"/F/Dev/hexagons/src/setup-world-map.js",
+		"/F/Dev/hexagons/src/ui.js",
+		"/F/Dev/hexagons/src/key-binds.js",
+		"/F/Dev/hexagons/src/flowers.js",
+		"/F/Dev/hexagons/src/hex.js",
+		"/F/Dev/hexagons/src/create-warning-sign.js",
+		"/F/Dev/hexagons/main.js",
+		"/F/Dev/hexagons/hex.js",
+		"/F/Dev/pixel-art-top-down/export.js",
+		"/F/Dev/pixel-art-top-down/index.html",
+		"/F/Dev/pixel-art-top-down/export.tmj",
+		"/F/Dev/pixel-art-top-down/main.js",
+		"/F/Dev/to-do-list/package-lock.json",
+		"/F/Dev/advent-code/2021/22/part1-reactor-reboot.js",
+		"/F/Dev/advent-code/2021/22/part1.js",
+		"/F/Dev/advent-code/2021/14/documenation.js",
+		"/F/Dev/advent-code/2021/14/smart-way-attempt-part2.js",
+		"/F/Dev/advent-code/2021/14/stream-test.js",
+		"/F/Dev/advent-code/2021/14/input.txt",
+		"/F/Dev/advent-code/2021/14/smart-way.js",
+		"/F/Dev/advent-code/2021/14/part2-polymerization.js",
+		"/F/Dev/advent-code/2021/14/part1-polymerization.js",
+		"/F/Dev/advent-code/2021/14/i-0.txt",
+		"/F/Dev/advent-code/2021/14/i-4.txt",
+		"/F/Dev/advent-code/2021/14/i-3.txt",
+		"/F/Dev/advent-code/2021/14/i-2.txt",
+		"/F/Dev/advent-code/2021/14/i-1.txt",
+		"/F/Dev/advent-code/2021/14/i-6.txt",
+		"/F/Dev/advent-code/2021/12/part2-caves.js",
+		"/F/Dev/advent-code/2021/13/part1-origami.js",
+		"/F/Dev/advent-code/2021/10/part1-chunks.js",
+		"/F/Dev/advent-code/2021/10/part2-chunks.js",
+		"/F/Dev/advent-code/2021/11/part2-octopus.js",
+		"/F/Dev/advent-code/2021/09/part2-lava-tubes.js",
+		"/F/Dev/advent-code/2021/09/part1.js",
+		"/F/Dev/advent-code/2021/08/part2.js",
+		"/F/Dev/advent-code/2021/07/part2-align-crabs.js",
+		"/F/Dev/advent-code/2021/06/part2-lanternfish.js",
+		"/F/Dev/advent-code/2021/04/part2.js",
+		"/F/Dev/advent-code/2021/05/part2-hydrothermal-vents.js",
+		"/F/Dev/advent-code/2021/02/part1.js",
+		"/F/Dev/hexagons/.gitignore",
+		"/F/Dev/oskar-space-ship-mashup/index.html",
+		"/F/Dev/oskar-space-ship-mashup/main.js",
+		"/F/Dev/advent-code/2019/2/part2.js",
+		"/F/Dev/advent-code/2019/5/part1-intcode-computer.js",
+		"/C/Users/Erik/Downloads/thisisbrad-CopyInserters-1.0.0/README.md",
+		"/F/Dev/advent-code/2019/4/part1.js",
+		"/F/Dev/advent-code/.gitignore",
+		"/F/Dev/advent-code/2019/4/part2.js",
+		"/F/Dev/advent-code/2019/3/part2-create-circuit-board.js",
+		"/F/Dev/advent-code/2019/3/part1.js",
+		"/F/Dev/advent-code/part1.js",
+		"/F/Dev/advent-code/2020/1/puzzle-input-example.txt",
+		"/F/Dev/advent-code/2020/1/part1.js",
+		"/F/Dev/advent-code/2020/3/part2-create-circuit-board.js",
+		"/F/Dev/advent-code/2020/3/part2-calculate-wire-distance.js",
+		"/F/Dev/advent-code/2020/2/part2.js",
+		"/F/Dev/advent-code/2020/common.js",
+		"/F/Dev/advent-code/2020/1/part2.js",
+		"/F/Dev/poc-save/host.js",
+		"/F/Dropbox/04 Kids/Julbrev 2020.txt",
+		"/C/Users/Erik/Desktop/test.html",
+		"/C/Users/Erik/AppData/Roaming/Sublime Text 3/Packages/Default/Preferences.sublime-settings",
+		"/F/Dev/push-bot2/src/Scenes/LoaderScene.js",
+		"/F/Dev/push-bot2/src/main.js",
+		"/F/Dev/push-bot2/package.json",
+		"/F/Dropbox/04 Kids/brev-elliot.txt",
+		"/F/Dropbox/04 Kids/brev-william.txt",
+		"/F/Dev/hyper-pilot-tacu/octo-spec.txt",
+		"/F/Dev/hyper-pilot-tacu/package.json",
+		"/F/Dev/hyper-pilot-tacu/index.html",
+		"/F/Dev/hyper-pilot-tacu/main.js",
+		"/F/Dev/pews-and-mines/slim-prototype.js",
+		"/F/Dev/pews-and-mines/levels.js",
+		"/F/Dev/pews-and-mines/main.js",
+		"/F/Dev/rubiks-solver/2x2/3d-cube.html",
+		"/F/Dev/rubiks-solver/2x2/common.js",
+		"/F/Dev/rubiks-solver/package.json",
+		"/F/Dev/rubiks-solver/.env",
+		"/F/Dev/rubiks-solver/2x2/testhtml.html",
+		"/F/Dev/rubiks-solver/server.js",
+		"/F/Dev/rubiks-solver/2x2/random-robot-name-generator.js",
+		"/F/Dev/rubiks-solver/2x2/trainer.js",
+		"/F/Dev/rubiks-solver/2x2/test.js",
+		"/F/Dev/lord-gigamungus.json",
+		"/F/Dev/rubiks-solver/2x2/brains/janne-joffert-mkvi.json",
+		"/F/Dev/rubiks-solver/2x2/src/cube.js",
+		"/F/Dev/rubiks-solver/2x2/src/index.js",
+		"/F/Dev/rubiks-solver/2x2/picture-analyse.js",
+		"/F/Dev/lemon-data-visualisering/index.html",
+		"/F/Dev/lemon-data-visualisering/main.js",
+		"/F/Dev/rubiks-solver/2x2/fitness-logs/fitness.json",
+		"/F/Dev/rubiks-solver/2x2/fitness-benchmark.js",
+		"/F/Dev/rubiks-solver/2x2/scramble-permutation-generator.js",
+		"/F/Dev/rubiks-solver/2x2/deep-scramble-generator.js",
+		"/F/Dev/rubiks-solver/2x2/training-data/training.json",
+		"/F/Dev/skeleton-hill-action/main.js",
+		"/F/Dev/skeleton-hill-action/index.html",
+		"/F/Dev/rubiks-solver/2x2/README.md",
+		"/F/Dev/skeleton-hill-action/package.json",
+		"/F/Dev/skeleton-hill-action/.gitignore",
+		"/F/Dev/rubiks-solver/.gitignore",
+		"/F/Dev/rubiks-solver/2x2/src/test.js",
+		"/F/Dev/rubiks-solver/.babelrc",
+		"/F/Dev/rubiks-solver/webpack.config.js",
+		"/F/Dev/rubiks-solver/2x2/dist/build.js"
+	],
+	"find":
+	{
+		"height": 29.0
+	},
+	"find_in_files":
+	{
+		"height": 319.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"prepareMoveSet",
+			"compose",
+			"priorityUppercase",
+			"(s",
+			"splice",
+			"('",
+			"you",
+			"largestCalorieSum"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 4,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "2022/01/part2.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 568,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								300,
+								0
+							]
+						],
+						"settings":
+						{
+							"auto_name": "part1.js",
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "2022/02/part2.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1223,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								182,
+								0
+							]
+						],
+						"settings":
+						{
+							"auto_name": "part1.js",
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "2022/03/part2.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 990,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								72,
+								0
+							]
+						],
+						"settings":
+						{
+							"auto_name": "part1.js",
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "2022/04/part2.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 785,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								250,
+								0
+							]
+						],
+						"settings":
+						{
+							"auto_name": "part1.js",
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "2022/05/part2.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1370,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								631,
+								631
+							]
+						],
+						"settings":
+						{
+							"auto_name": "part1.js",
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 29.0
+	},
+	"input":
+	{
+		"height": 109.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "advent-code.sublime-project",
+	"replace":
+	{
+		"height": 54.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"bee",
+				"src\\bee.js"
+			],
+			[
+				"createm",
+				"src\\create-map.js"
+			],
+			[
+				"main",
+				"src\\main.js"
+			],
+			[
+				"cell",
+				"src\\cells.js"
+			],
+			[
+				"flowe",
+				"src\\flowers.js"
+			],
+			[
+				"cells",
+				"src\\cells.js"
+			],
+			[
+				"bee.",
+				"src\\bee.js"
+			],
+			[
+				"help",
+				"src\\help-functions.js"
+			],
+			[
+				"create",
+				"src\\create-map.js"
+			],
+			[
+				"createp",
+				"src\\create-map.js"
+			],
+			[
+				"pack",
+				"package.json"
+			],
+			[
+				"trainer",
+				"2x2\\trainer.js"
+			],
+			[
+				"comm",
+				"2x2\\common.js"
+			],
+			[
+				"app.s",
+				"src\\App.js"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": false,
+	"side_bar_width": 296.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+		"max_columns": 1
+	}
+}
