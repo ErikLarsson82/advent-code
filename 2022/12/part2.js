@@ -3,23 +3,33 @@ const START = 'S'
 const END = 'E'
 
 let map = []
+let blueprint = null
 let startX = null
 let startY = null
 let counter = 0
 let highscore = null
+let highscores = []
 
 require('fs').readFile('./puzzle-input.txt', 'utf-8', (err, data) => {
 
   generateHeightMap(data)
-  console.log(printMap(null, null))
-  traverse([], startX, startY, 'a'.charCodeAt(0))
-  console.log('Shortest path found', highscore)
+  blueprint = map
 
+  doForAllHeights(blueprint, (xP, yP) => {
+    if (blueprint[xP][yP].letter === 'a' || blueprint[xP][yP].letter === 'S') {
+      highscore = Infinity
+      console.log('Running sim for', xP, yP)
+      generateHeightMap(data)
+      traverse([], xP, yP, 'a'.charCodeAt(0))
+      highscores.push(highscore)
+    }
+  })
+  console.log('Shortest paths found', highscores.reduce(smallest, Infinity))
 })
 
 function traverse(arr, x, y, fromHeight) {
   counter++
-  if (counter % 2000 === 0) {
+  if (false && counter % 1000 === 0) {
     console.clear()
     console.log(printMap(null, null, true))
   }
@@ -45,7 +55,7 @@ function traverse(arr, x, y, fromHeight) {
     // Keep traversing but save the score and the path
     target.score = currentLength
     target.path = arr.concat({ x, y })
-    if (target.letter === END) {
+    if (target.letter === END && currentLength-1 < highscore) {
       highscore = currentLength-1
       return null
     }  
@@ -76,15 +86,15 @@ function walk(trail) {
 
 function printMap(xP, yP, onlyHeight) {
   let str = ''
-  doForAllHeights((x, y) => {    
+  doForAllHeights(map, (y, x) => {    
     if (onlyHeight) {
-      str += map[y][x].score === null ? '   .' : pad(map[y][x].score)
+      str += map[x][y].score === null ? '   .' : pad(map[x][y].score)
       return
     }
     if (y === xP && x === yP) {
       str += ' '
     } else {
-      str += ' ' + map[y][x].letter
+      str += ' ' + map[x][y].letter
     }
   }, () => {
     str += '\n'
@@ -115,10 +125,10 @@ function generateHeightMap(str) {
   })
 }
 
-function doForAllHeights(f, fPrime) {
-  for (let x = 0; x < map[0].length; x++) {
-    for (let y = 0; y < map.length; y++) {
-      f(x, y)
+function doForAllHeights(m, f, fPrime) {
+  for (let x = 0; x < m[0].length; x++) {
+    for (let y = 0; y < m.length; y++) {
+      f(y, x)
     }
     fPrime && fPrime()
   }
@@ -140,4 +150,8 @@ function pad(int) {
   if (int.toString().length === 2) return '  ' + int
   if (int.toString().length === 1) return '   ' + int
   return                                  '    ' + int
+}
+
+function smallest(acc, curr) {
+  return curr < acc ? curr : acc
 }
