@@ -1,8 +1,16 @@
 require('fs').readFile('./puzzle-input.txt', 'utf-8', (err, data) => {
 
-  generateForest(data)
+  const exampleInput = `30373
+  25512
+  65332
+  33549
+  35390`
+
+  generateForest(exampleInput)
 
   console.log(printTrees())
+
+  return
 
   let visibleTrees = 0
 
@@ -22,12 +30,6 @@ require('fs').readFile('./puzzle-input.txt', 'utf-8', (err, data) => {
 
 })
 
-const exampleInput = `30373
-25512
-65332
-33549
-35390`
-
 const trees = []
 
 function generateForest(str) {
@@ -41,6 +43,7 @@ function generateForest(str) {
 
   rows.forEach((row, yIdx) => {  
     row.split('').forEach((column, xIdx) => {
+      console.log('adding', column, xIdx, yIdx)
       trees[xIdx][yIdx] = column
     })
   })
