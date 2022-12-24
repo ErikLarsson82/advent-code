@@ -13,18 +13,24 @@ function forward(idx, arr) {
 }
 
 function backward(idx, arr) {
-  const from = idx
-  let to = idx - 1 % arr.length
-  
-  if (to === -1) {
-    to = arr.length - 2
+  if (idx === 0) {
+    const item = arr.splice(0, 1)
+    arr = arr.concat(item)
+    return swap(arr.length-2, arr.length-1, arr)
+  } else {
+    const from = idx
+    let to = idx - 1 % arr.length
+    
+    if (to === -1) {
+      throw new Error('this should not happen')
+    }
+    let afterSwap = swap(from, to, arr)
+    if (to === 0) {
+      const stump = afterSwap.splice(0, 1)
+      afterSwap = afterSwap.concat(stump)
+    }
+    return afterSwap  
   }
-  let afterSwap = swap(from, to, arr)
-  if (to === 0) {
-    const stump = afterSwap.splice(0, 1)
-    afterSwap = afterSwap.concat(stump)
-  }
-  return afterSwap  
 }
 
 function swap(from, to, arr) {
@@ -40,10 +46,10 @@ function swap(from, to, arr) {
 
 require('fs').readFile('./puzzle-input.txt', 'utf-8', (err, data) => {
 
-  //const instructions = data.trim().split('\n').map(x=>x.trim()).map(x=>parseInt(x))
-  const instructions = [1,2,-3,3,-2,0,4]
+  const instructions = data.trim().split('\n').map(x=>x.trim()).map(x=>parseInt(x))
+  //const instructions = [1,2,-3,3,-2,0,4]
   let mixer = [...instructions]
-
+  
   instructions.forEach(instruction => {
     if (instruction === 0) return
     for (let i = 0; i < Math.abs(instruction); i++) {
@@ -51,7 +57,6 @@ require('fs').readFile('./puzzle-input.txt', 'utf-8', (err, data) => {
       const applier = instruction > 0 ? forward : backward;
       mixer = applier(index, mixer)
     }
-    console.log('after', instruction, mixer)
   })
 
   const findZero = mixer.findIndex(x=>x===0)
@@ -67,3 +72,6 @@ require('fs').readFile('./puzzle-input.txt', 'utf-8', (err, data) => {
   console.log('threeThousanth', threeThousanth)
   console.log('sum', sum)
 })
+
+//const input = [-1,-2,-3]
+//console.log('testing input', [...input], 'with instruction', 4, 'result', backward(1, input))
