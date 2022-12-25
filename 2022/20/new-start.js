@@ -1,15 +1,22 @@
 
 function forward(idx, arr) {
-	const from = idx
-  const to = (idx + 1) % arr.length
-  let afterSwap = swap(from, to, arr)
-  if (to === arr.length-1) {
-    const stump = afterSwap.splice(afterSwap.length-1, 1)
-    afterSwap = stump.concat(afterSwap)
-  } else if (to === 0) {
-    afterSwap = swap(0, 1, afterSwap)
+  if (idx === arr.length-1) {
+    const item = arr.splice(arr.length-1, 1)
+    arr = item.concat(arr)
+    return swap(0, 1, arr)
+  } else {
+    const from = idx
+    const to = (idx + 1) % arr.length
+    if (to < 0 || to > arr.length || from < 0 || from > arr.length) {
+      throw new Error('This should not happen')
+    }
+    let afterSwap = swap(from, to, arr)
+    if (to === arr.length-1) {
+      const stump = afterSwap.splice(arr.length-1, 1)
+      afterSwap = stump.concat(afterSwap)
+    }
+    return afterSwap  
   }
-  return afterSwap
 }
 
 function backward(idx, arr) {
@@ -21,8 +28,8 @@ function backward(idx, arr) {
     const from = idx
     let to = idx - 1 % arr.length
     
-    if (to === -1) {
-      throw new Error('this should not happen')
+    if (to < 0 || to > arr.length || from < 0 || from > arr.length) {
+      throw new Error('This should not happen')
     }
     let afterSwap = swap(from, to, arr)
     if (to === 0) {
@@ -45,9 +52,9 @@ function swap(from, to, arr) {
 }
 
 require('fs').readFile('./puzzle-input.txt', 'utf-8', (err, data) => {
-
-  const instructions = data.trim().split('\n').map(x=>x.trim()).map(x=>parseInt(x))
-  //const instructions = [1,2,-3,3,-2,0,4]
+  //const instructions = data.trim().split('\n').map(x=>x.trim()).map(x=>parseInt(x))
+  return
+  const instructions = [1,2,-3,3,-2,0,4]
   let mixer = [...instructions]
   
   instructions.forEach(instruction => {
@@ -57,6 +64,7 @@ require('fs').readFile('./puzzle-input.txt', 'utf-8', (err, data) => {
       const applier = instruction > 0 ? forward : backward;
       mixer = applier(index, mixer)
     }
+    console.log(mixer)
   })
 
   const findZero = mixer.findIndex(x=>x===0)
@@ -73,5 +81,5 @@ require('fs').readFile('./puzzle-input.txt', 'utf-8', (err, data) => {
   console.log('sum', sum)
 })
 
-//const input = [-1,-2,-3]
-//console.log('testing input', [...input], 'with instruction', 4, 'result', backward(1, input))
+const input = [-2,-1,-3,-4,-5]
+console.log('testing input', [...input], 'result', backward(1, input))
