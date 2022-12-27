@@ -10,12 +10,15 @@ function forward(idx, arr) {
     if (to < 0 || to > arr.length || from < 0 || from > arr.length) {
       throw new Error('This should not happen')
     }
+    return swap(from, to, arr)
+    /*
     let afterSwap = swap(from, to, arr)
     if (to === arr.length-1) {
       const stump = afterSwap.splice(arr.length-1, 1)
       afterSwap = stump.concat(afterSwap)
     }
     return afterSwap  
+    */
   }
 }
 
@@ -52,19 +55,47 @@ function swap(from, to, arr) {
 }
 
 require('fs').readFile('./puzzle-input.txt', 'utf-8', (err, data) => {
-  //const instructions = data.trim().split('\n').map(x=>x.trim()).map(x=>parseInt(x))
-  return
-  const instructions = [1,2,-3,3,-2,0,4]
-  let mixer = [...instructions]
-  
+  const allNumbers = data.trim().split('\n').map(x=>x.trim()).map(x=>parseInt(x))
+  //const allNumbers = [1,2,-3,3,-2,0,4]
+  let mixer = [...allNumbers]
+
+  const instructions = [...allNumbers]
+  /*
+  allNumbers.forEach(value => {
+    if (instructions.find(x => x === value) === undefined) {
+      instructions.push(value)
+    }
+  })
+  */
+
   instructions.forEach(instruction => {
     if (instruction === 0) return
     for (let i = 0; i < Math.abs(instruction); i++) {
-      const index = mixer.findIndex(x=>x===instruction)
-      const applier = instruction > 0 ? forward : backward;
-      mixer = applier(index, mixer)
+      
+      let indexes = []
+      mixer.forEach((value, index) => {
+        if (value === instruction) {
+          indexes.push(index)
+        }
+      })
+
+      Math.random() < 0.0001 && console.log('indexes', indexes)
+      
+      for (let j = 0; j < indexes.length; j++) {
+        /*let indexesPrime = []
+        mixer.forEach((value, index) => {
+          if (value === instruction) {
+            indexesPrime.push(index)
+          }
+        })*/
+        /*if (JSON.stringify(indexes) !== JSON.stringify(indexesPrime)) {
+          console.log(indexes,'is different to', indexesPrime)
+          throw new Error('panic')
+        }*/
+        const applier = instruction > 0 ? forward : backward;
+        mixer = applier(indexes[j], mixer)
+      }
     }
-    console.log(mixer)
   })
 
   const findZero = mixer.findIndex(x=>x===0)
@@ -81,5 +112,5 @@ require('fs').readFile('./puzzle-input.txt', 'utf-8', (err, data) => {
   console.log('sum', sum)
 })
 
-const input = [-2,-1,-3,-4,-5]
-console.log('testing input', [...input], 'result', backward(1, input))
+//const input = [1,2,3,4,5,1337]
+//console.log('testing input', [...input], 'result', forward(5, input))
