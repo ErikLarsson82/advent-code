@@ -55,9 +55,12 @@ function swap(from, to, arr) {
 }
 
 require('fs').readFile('./puzzle-input.txt', 'utf-8', (err, data) => {
+  return
   const allNumbers = data.trim().split('\n').map(x=>x.trim()).map(x=>parseInt(x))
+
   //const allNumbers = [1,2,-3,3,-2,0,4]
   let mixer = [...allNumbers]
+  console.log('0 is at', mixer.findIndex(x=>x===6992))
 
   const instructions = [...allNumbers]
   /*
@@ -112,5 +115,6 @@ require('fs').readFile('./puzzle-input.txt', 'utf-8', (err, data) => {
   console.log('sum', sum)
 })
 
-//const input = [1,2,3,4,5,1337]
-//console.log('testing input', [...input], 'result', forward(5, input))
+const input = [null,null,null,null,0,null,1,2,3,4,1]
+console.log('testing input', [...input], 'result', forward(6, input))
+console.log('testing input', [...input], 'result', forward(10, input))
