@@ -1,40 +1,57 @@
-const f = {
-  value: 6,
-  link: null
-}
 
-const e = {
-  value: 5,
-  link: f
-}
+let instructions
+let zero
+let previous
 
-const d = {
-  value: '1a',
-  link: e
-}
+require('fs').readFile('./puzzle-input.txt', 'utf-8', (err, _data) => {
 
-const c = {
-  value: 3,
-  link: d
-}
+  const data = `1
+2
+-3
+3
+-2
+0
+4`
 
-const b = {
-  value: 2,
-  link: c
-}
+  instructions = data.trim().split('\n').map(x => parseInt(x));
 
-const a = {
-  value: '1b',
-  link: b
-}
+  const [a, b] = data.split('\n0\n')
 
-const zero = {
-  value: 0,
-  link: a
-}
+  zero = {
+    value: 0,
+    link: null
+  };
+  previous = zero;
 
-//final link
-f.link = zero
+  (b + '\n' + a).trim().split('\n').forEach(value => {
+    const created = {
+      value: parseInt(value),
+      link: null
+    }
+    previous.link = created
+    previous = created
+  })
+
+  previous.link = zero
+
+  relinkPrevious()
+
+  //printLinkedChain('Initial')
+  //printInvertedLinkedChain('Initial (inverted)')
+
+  instructions.forEach(instruction => {
+    console.log('Instruction', instruction)
+    if (instruction === 0) return
+    const func = instruction > 0 ? moveForward : moveBackward
+
+    new Array(Math.abs(instruction)).fill().forEach(() => func(instruction))
+    //printLinkedChain('After instruction ' + instruction)  
+    //printInvertedLinkedChain('After instruction (inverted)' + instruction)
+  })
+
+  count()
+
+})
 
 function printObject(obj) {
   console.log('Value=', obj.value,'links to', obj.link.value)
@@ -46,6 +63,10 @@ function printLinkedChain(status) {
   let currentObject = zero
   do {
     str += currentObject.value
+    if (currentObject.link === null) {
+      console.log(str)
+      throw new Error('missing link, panic')
+    }
     currentObject = currentObject.link
     if (currentObject.value !== 0) {
       str += ','
@@ -54,39 +75,103 @@ function printLinkedChain(status) {
   console.log(str)
 }
 
-function findWhoHasMeAsLink(me) {
-  let current = me
+function printInvertedLinkedChain(status) {
+  console.log(status)
+  let str = ''
+  let currentObject = zero
   do {
-    current = current.link
-  } while (current.link !== me)
-  return current
+    str += currentObject.value
+    if (currentObject.previousLink === null) {
+      console.log(str)
+      throw new Error('missing link, panic')
+    }
+    currentObject = currentObject.previousLink
+    if (currentObject.value !== 0) {
+      str += ','
+    }
+  } while (currentObject.value !== 0)
+  console.log(str)
 }
 
-function moveTwo() {
+function relinkPrevious() {
+  let current = zero
+  let previous// = zero
+  do {
+    previous = current
+    current = current.link
+    current.previousLink = previous
+  } while (current.value !== 0)
+}
+
+function moveForward(inputValue) {
   let currentObject = zero
 
   do {
-    if (currentObject.value === '1a' || currentObject.value === '1b') {
-      const from = findWhoHasMeAsLink(currentObject)      
-      const next = currentObject.link
-      const afterNext = currentObject.link.link
+    
+    if (currentObject.value === inputValue) {
+      const a = currentObject.previousLink
+      const b = currentObject.link
+      const c = currentObject.link.link
       
-      from.link = next
-      currentObject.link = afterNext
-      next.link = currentObject
+      a.link = b
+      currentObject.link = c
+      b.link = currentObject
+
+      relinkPrevious()
+
+      if (b.value === 0) {
+        break;
+      }
     }
     currentObject = currentObject.link
   } while (currentObject.value !== 0)
 }
 
-printLinkedChain('Initial')
-moveTwo()
-printLinkedChain('After move 1')
-moveTwo()
-printLinkedChain('After move 2')
-moveTwo()
-printLinkedChain('After move 3')
-moveTwo()
-printLinkedChain('After move 4')
-moveTwo()
-printLinkedChain('After move 5')
+function moveBackward(inputValue) {
+  let currentObject = zero
+
+  do {
+    if (currentObject.value === inputValue) {
+      const a = currentObject.link
+      const b = currentObject.previousLink
+      const c = currentObject.previousLink.previousLink
+      
+      c.link = currentObject
+      currentObject.link = b
+      b.link = a
+
+      relinkPrevious()
+
+      if (b.value === 0) {
+        break;
+      }
+    }
+    currentObject = currentObject.previousLink
+  } while (currentObject.value !== 0)
+}
+
+function count() {
+  let oneThousand
+  let twoThousand
+  let threeThousand
+  let c = 0
+
+  let currentObject = zero
+
+  do {
+    currentObject = currentObject.link
+    c++
+    if (c === 1000) {
+      oneThousand = currentObject.value
+    }
+    if (c === 2000) {
+      twoThousand = currentObject.value
+    }
+    if (c === 3000) {
+      threeThousand = currentObject.value
+    }
+    
+  } while (c <= 3000)
+
+  console.log('Numbers are', oneThousand, twoThousand, threeThousand, 'Final sum is', oneThousand + twoThousand + threeThousand)
+}
