@@ -1,11 +1,12 @@
 
 let instructions
+let first
 let zero
 let previous
 
-require('fs').readFile('./puzzle-input.txt', 'utf-8', (err, _data) => {
+require('fs').readFile('./puzzle-input.txt', 'utf-8', (err, data) => {
 
-  const data = `1
+  const _data = `1
 2
 -3
 3
@@ -13,38 +14,40 @@ require('fs').readFile('./puzzle-input.txt', 'utf-8', (err, _data) => {
 0
 4`
 
-  instructions = data.trim().split('\n').map(x => parseInt(x));
+  instructions = data.trim().split('\n').map((x, id) => ({ instructionValue: parseInt(x), id }));
 
-  const [a, b] = data.split('\n0\n')
-
-  zero = {
-    value: 0,
-    link: null
-  };
-  previous = zero;
-
-  (b + '\n' + a).trim().split('\n').forEach(value => {
+  data.trim().split('\n').map(x=>x.trim()).forEach((value, id) => {
     const created = {
       value: parseInt(value),
+      id,
       link: null
     }
-    previous.link = created
+    if (!first) {
+      first = created
+    }
+    if (previous !== undefined) {
+      previous.link = created
+    }
     previous = created
+
+    if (parseInt(value) === 0) {
+      zero = created
+    }
   })
 
-  previous.link = zero
+  previous.link = first
 
   relinkPrevious()
 
   //printLinkedChain('Initial')
   //printInvertedLinkedChain('Initial (inverted)')
 
-  instructions.forEach(instruction => {
-    console.log('Instruction', instruction)
-    if (instruction === 0) return
-    const func = instruction > 0 ? moveForward : moveBackward
+  instructions.forEach(({ instructionValue, id }) => {
+    console.log('Instruction value', instructionValue, 'id', id)
+    if (instructionValue === 0) return
+    const func = instructionValue > 0 ? moveForward : moveBackward
 
-    new Array(Math.abs(instruction)).fill().forEach(() => func(instruction))
+    new Array(Math.abs(instructionValue)).fill().forEach(() => func(id))
     //printLinkedChain('After instruction ' + instruction)  
     //printInvertedLinkedChain('After instruction (inverted)' + instruction)
   })
@@ -95,7 +98,7 @@ function printInvertedLinkedChain(status) {
 
 function relinkPrevious() {
   let current = zero
-  let previous// = zero
+  let previous
   do {
     previous = current
     current = current.link
@@ -103,12 +106,12 @@ function relinkPrevious() {
   } while (current.value !== 0)
 }
 
-function moveForward(inputValue) {
+function moveForward(id) {
   let currentObject = zero
 
   do {
     
-    if (currentObject.value === inputValue) {
+    if (currentObject.id === id) {
       const a = currentObject.previousLink
       const b = currentObject.link
       const c = currentObject.link.link
@@ -127,11 +130,11 @@ function moveForward(inputValue) {
   } while (currentObject.value !== 0)
 }
 
-function moveBackward(inputValue) {
+function moveBackward(id) {
   let currentObject = zero
 
   do {
-    if (currentObject.value === inputValue) {
+    if (currentObject.id === id) {
       const a = currentObject.link
       const b = currentObject.previousLink
       const c = currentObject.previousLink.previousLink
