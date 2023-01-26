@@ -1,3 +1,4 @@
+// this solution moves one swap at a time, which was not feasible for part 2
 
 function forward(idx, arr) {
   if (idx === arr.length-1) {

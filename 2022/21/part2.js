@@ -47,7 +47,7 @@ require('fs').readFile('./puzzle-input.txt', 'utf-8', (err, data) => {
   findMonkey('root').operation = (a,b) => a === b
   findMonkey('humn').operation = (x) => x
 
-  for (let i = 99999; i < 200000; i++) {
+  for (let i = 1985000; i < 1985000 + 500000; i++) {
     (i % 1000 === 0) && console.log('iteration', i)
     reset()
     while(true) {

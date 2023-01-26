@@ -8,6 +8,8 @@ let sandResting = 0
 
 const WIDTH = 200 // 200 works
 const HEIGHT = 400 // 400 works
+
+// I have a better one
 const cave = generateCave(WIDTH, HEIGHT)
 
 require('fs').readFile('./puzzle-input.txt', 'utf-8', (err, data) => {

@@ -1,4 +1,4 @@
-
+let start = { x: 1, y: 0 }
 let players = [{x:1,y:0}]
 let newPlayers = []
 let iteration = 0
@@ -18,6 +18,8 @@ let height
 let map
 
 let ending = null
+
+let phase = 'first'
 
 /*
 const readline = require('readline');
@@ -91,24 +93,31 @@ require('fs').readFile('./puzzle-input.txt', 'utf-8', (err, data) => {
 
   ending = { x: width-2, y: height-1 }
 
-  printMap('standard')
+  // printMap('standard')
 
   console.log('found map with', width, height, ending)
   
   while (true) {
     moveWinds()
     console.log('Winds move')
-    printMap('standard')
+    const part1 = printMap('standard')
 
     newPlayers = []
     players.forEach(movePlayer)
     players = newPlayers
-    console.log(players)
     console.log('Players move')
-    printMap('players-only')
+    printMap('players-only', part1)
 
-    if (players.find(same(ending.x, ending.y)) !== undefined) {
+    if (phase === 'first' && players.find(same(ending.x, ending.y)) !== undefined) {
       console.log('Player found exit at', iteration + 1, 'moves')
+      players = [{ x: ending.x, y: ending.y }]
+      phase = 'second'
+    } else if (phase === 'second' && players.find(same(start.x, start.y)) !== undefined) {
+      console.log('Player found start! at', iteration + 1, 'moves')
+      players = [{ x: start.x, y: start.y }]
+      phase = 'third'
+    } else if (phase === 'third' && players.find(same(ending.x, ending.y)) !== undefined) {
+      console.log('Player found ultimate exit at', iteration + 1, 'moves')
       break;
     }
 
@@ -121,7 +130,7 @@ function checkPositions(x, y) {
   Object.keys(playerOptions).forEach(option => {
     const target = playerOptions[option](x, y)
     const isWall = map[target.x][target.y] === '#'
-    const isOutsideBoundary = target.y < 0
+    const isOutsideBoundary = target.y < 0 || target.y > height-1
     const isWind = winds.filter(same(target.x,target.y)).length > 0
     if (!isWall && !isOutsideBoundary && !isWind) {
       options.push(option)
@@ -171,7 +180,7 @@ function same(x, y) {
   return ({x: xP, y: yP}) => x === xP && y === yP
 }
 
-function printMap(setting) {
+function printMap(setting, part1) {
   let str = ''
   doForAllMountainSpots(map, (x, y) => { 
     if (setting === 'players-only') {
@@ -200,7 +209,10 @@ function printMap(setting) {
   }, () => {
     str += '\n'
   })
-  console.log(str)
+  if (setting !== 'standard') {
+    console.log(part1)
+    console.log(str)
+  }
   return str
 }
 

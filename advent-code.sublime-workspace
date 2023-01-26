@@ -4,6 +4,234 @@
 		"selected_items":
 		[
 			[
+				"robot",
+				"robotAmount"
+			],
+			[
+				"robo",
+				"robotPurchases"
+			],
+			[
+				"simula",
+				"simulationId"
+			],
+			[
+				"all",
+				"allRobots"
+			],
+			[
+				"test",
+				"testStatus"
+			],
+			[
+				"rota",
+				"rotateDirection"
+			],
+			[
+				"roa",
+				"rotateDirection"
+			],
+			[
+				"rotat",
+				"rotationPrime"
+			],
+			[
+				"rot",
+				"rotationTransformed"
+			],
+			[
+				"posi",
+				"positionTransformed"
+			],
+			[
+				"trans",
+				"transformedRotation"
+			],
+			[
+				"le",
+				"length"
+			],
+			[
+				"to",
+				"toMakeItPositive"
+			],
+			[
+				"targ",
+				"targetIndex"
+			],
+			[
+				"mixer",
+				"mixerAfterRemoval"
+			],
+			[
+				"offset",
+				"offsetIndex"
+			],
+			[
+				"targetInd",
+				"targetIndexBeforeInsertion"
+			],
+			[
+				"arra",
+				"arrayLength"
+			],
+			[
+				"ins",
+				"instructionValue"
+			],
+			[
+				"new",
+				"newArray"
+			],
+			[
+				"current",
+				"currentObject"
+			],
+			[
+				"tag",
+				"targetValue"
+			],
+			[
+				"one",
+				"oneIsStillNaN"
+			],
+			[
+				"side",
+				"sideB"
+			],
+			[
+				"target",
+				"targetIsSeawater"
+			],
+			[
+				"sear",
+				"searches"
+			],
+			[
+				"base",
+				"base10sum"
+			],
+			[
+				"base10to",
+				"base10ToSnafu"
+			],
+			[
+				"acc",
+				"accumulator"
+			],
+			[
+				"sn",
+				"snafuChar"
+			],
+			[
+				"snafu",
+				"snafuToBase10"
+			],
+			[
+				"player",
+				"playerPaths"
+			],
+			[
+				"manha",
+				"manhattanDistance"
+			],
+			[
+				"pla",
+				"playerPaths"
+			],
+			[
+				"opt",
+				"options"
+			],
+			[
+				"is",
+				"isWind"
+			],
+			[
+				"pler",
+				"playerOptions"
+			],
+			[
+				"after",
+				"afterSwap"
+			],
+			[
+				"mix",
+				"mixArray"
+			],
+			[
+				"targetV",
+				"targetValueAbs"
+			],
+			[
+				"can",
+				"canAffordHighTierB"
+			],
+			[
+				"parse",
+				"parseMaterialCost"
+			],
+			[
+				"clay",
+				"clayBuyLimit"
+			],
+			[
+				"cle",
+				"findClearEdge"
+			],
+			[
+				"rocks",
+				"rocksPutToRest"
+			],
+			[
+				"rock",
+				"rockSpawnIdx"
+			],
+			[
+				"va",
+				"valves"
+			],
+			[
+				"has",
+				"hasMoved"
+			],
+			[
+				"get",
+				"getNextStep"
+			],
+			[
+				"valves",
+				"valvesWithFlowRate"
+			],
+			[
+				"path",
+				"pathToDestination"
+			],
+			[
+				"sim",
+				"simulationScore"
+			],
+			[
+				"naive",
+				"naiveLookup"
+			],
+			[
+				"movem",
+				"movements"
+			],
+			[
+				"prot",
+				"protagonistPosition"
+			],
+			[
+				"pro",
+				"protagonistPosition"
+			],
+			[
+				"con",
+				"concat"
+			],
+			[
 				"ste",
 				"stepsToReach"
 			],
@@ -60,10 +288,6 @@
 				"division"
 			],
 			[
-				"base",
-				"base10result"
-			],
-			[
 				"addOne",
 				"addOneDiv3"
 			],
@@ -108,16 +332,8 @@
 				"animateAwayDeadLand"
 			],
 			[
-				"pro",
-				"progress"
-			],
-			[
 				"welc",
 				"welcomeFlapB"
-			],
-			[
-				"con",
-				"container"
 			],
 			[
 				"forea",
@@ -192,10 +408,6 @@
 				"neighbours"
 			],
 			[
-				"trans",
-				"translationTable"
-			],
-			[
 				"segmen",
 				"segmentP"
 			],
@@ -212,20 +424,12 @@
 				"exampleInput"
 			],
 			[
-				"is",
-				"isHoneySackFull"
-			],
-			[
 				"isPo",
 				"isPollenEmpty"
 			],
 			[
 				"dista",
 				"distanceToTarget"
-			],
-			[
-				"target",
-				"targetSprite"
 			],
 			[
 				"game",
@@ -246,10 +450,6 @@
 			[
 				"nectar",
 				"nectarSack"
-			],
-			[
-				"targ",
-				"targetSprite"
 			],
 			[
 				"flower",
@@ -314,211 +514,20 @@
 			[
 				"H",
 				"HUNGER_CAPACITY"
-			],
-			[
-				"pollen",
-				"pollenSprite"
-			],
-			[
-				"honey",
-				"honeyHex"
-			],
-			[
-				"back",
-				"background"
-			],
-			[
-				"setC",
-				"setContents"
-			],
-			[
-				"digi",
-				"digitsInt"
-			],
-			[
-				"digit",
-				"digitsString"
-			],
-			[
-				"dig",
-				"digitsString"
-			],
-			[
-				"wire",
-				"wireIdx"
-			],
-			[
-				"in",
-				"instruction"
-			],
-			[
-				"instruc",
-				"instructionPos"
-			],
-			[
-				"fuel",
-				"fuelRequirement"
-			],
-			[
-				"inner",
-				"innerWidth"
-			],
-			[
-				"camer",
-				"cameraMovement"
-			],
-			[
-				"Inner",
-				"innerHeight"
-			],
-			[
-				"inn",
-				"innerWidth"
-			],
-			[
-				"G",
-				"GRAVITY"
-			],
-			[
-				"ch",
-				"children"
-			],
-			[
-				"al",
-				"alphaDegrees"
-			],
-			[
-				"ang",
-				"angleOfAttack"
-			],
-			[
-				"coll",
-				"collidee"
-			],
-			[
-				"prefix",
-				"prefixFunc"
-			],
-			[
-				"isP",
-				"isPew"
-			],
-			[
-				"prefi",
-				"prefixHull"
-			],
-			[
-				"wave",
-				"waveObject"
-			],
-			[
-				"5-e",
-				"5-enemies-crazy-hard"
-			],
-			[
-				"ge",
-				"generateNewWave"
-			],
-			[
-				"WAV",
-				"ENEMIES_PER_WAVE"
-			],
-			[
-				"sinus",
-				"mini-sinus"
-			],
-			[
-				"pre",
-				"prefixObject"
-			],
-			[
-				"ghost",
-				"ghostSprite"
-			],
-			[
-				"on",
-				"onlySuccess"
-			],
-			[
-				"sortedP",
-				"sortedPolicyDistribution"
-			],
-			[
-				"ran",
-				"randomAgent"
-			],
-			[
-				"exp",
-				"experienceSnapshots"
-			],
-			[
-				"experience",
-				"experienceSequences"
-			],
-			[
-				"FITNE",
-				"FITNESS_TESTS"
-			],
-			[
-				"prefixT",
-				"prefixTimer"
-			],
-			[
-				"h",
-				"highscore"
-			],
-			[
-				"enemy",
-				"enemyKills"
-			],
-			[
-				"enem",
-				"enemyKills"
-			],
-			[
-				"ene",
-				"enemyKills"
-			],
-			[
-				"P2",
-				"P2_START_Y"
-			],
-			[
-				"P2_",
-				"P2_START_X"
-			],
-			[
-				"P1",
-				"P1_START_X"
-			],
-			[
-				"pref",
-				"prefixGodmode"
-			],
-			[
-				"P1_S",
-				"P1_START_Y"
-			],
-			[
-				"bla",
-				"blastHullTexture"
-			],
-			[
-				"mineblass",
-				"mineBlasts"
-			],
-			[
-				"mineb",
-				"mineBlast"
-			],
-			[
-				"mini",
-				"miniSinusEnemySprite"
 			]
 		]
 	},
 	"buffers":
 	[
+		{
+			"file": "2022/19/part1-recursive.js",
+			"settings":
+			{
+				"buffer_size": 7870,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -553,10 +562,40 @@
 	"expanded_folders":
 	[
 		"/F/Dev/advent-code",
-		"/F/Dev/advent-code/2022"
+		"/F/Dev/advent-code/2022",
+		"/F/Dev/advent-code/2022/19"
 	],
 	"file_history":
 	[
+		"/F/Dev/advent-code/2022/22/transformation.js",
+		"/F/Dev/advent-code/2022/22/part2.js",
+		"/F/Dev/advent-code/2022/22/part2-working-prototype.js",
+		"/F/Dev/advent-code/2022/14/part1.js",
+		"/F/Dev/advent-code/2022/20/testbed.js",
+		"/F/Dev/advent-code/2022/20/linked-list.js",
+		"/F/Dev/advent-code/2022/20/linked-list-part2.js",
+		"/F/Dev/advent-code/2022/20/part2-clean.js",
+		"/F/Dev/advent-code/2022/20/zero-is-gone.js",
+		"/F/Dev/advent-code/2022/20/new-start.js",
+		"/F/Dev/advent-code/2022/20/part2-testbed-basis.js",
+		"/F/Dev/advent-code/2022/21/part2-find-one-part.js",
+		"/F/Dev/advent-code/2022/20/girlpower2022.JU",
+		"/F/Dev/advent-code/2022/21/part2.js",
+		"/F/Dev/advent-code/2022/18/part2-parsing-solution.js",
+		"/F/Dev/advent-code/2022/25/part1.js",
+		"/F/Dev/advent-code/2022/25/fresh-start.js",
+		"/F/Dev/advent-code/2022/17/stress.rs",
+		"/F/Dev/advent-code/2022/24/part2.js",
+		"/F/Dev/advent-code/2022/15/part1.js",
+		"/F/Dev/advent-code/2022/20/part1.js",
+		"/F/Dev/advent-code/2022/19/generate-instruction-list.js",
+		"/F/Dev/advent-code/2022/17/part2.js",
+		"/F/Dev/advent-code/2022/17/stress-test.js",
+		"/F/Dev/advent-code/2022/18/part1.js",
+		"/F/Dev/advent-code/2022/19/part1.js",
+		"/F/Dev/advent-code/2022/16/test-all-permutations.js",
+		"/F/Dev/advent-code/2022/16/permutations-deux.js",
+		"/F/Dev/advent-code/2022/16/stress-test.js",
 		"/F/Dev/advent-code/2022/16/part1.js",
 		"/F/Dev/advent-code/2022/15/part2.js",
 		"/F/Dev/advent-code/2022/15/part1-manhattan-only.js",
@@ -655,36 +694,7 @@
 		"/F/Dev/advent-code/2021/08/part2.js",
 		"/F/Dev/advent-code/2021/07/part2-align-crabs.js",
 		"/F/Dev/advent-code/2021/06/part2-lanternfish.js",
-		"/F/Dev/advent-code/2021/04/part2.js",
-		"/F/Dev/advent-code/2021/05/part2-hydrothermal-vents.js",
-		"/F/Dev/advent-code/2021/02/part1.js",
-		"/F/Dev/hexagons/.gitignore",
-		"/F/Dev/oskar-space-ship-mashup/index.html",
-		"/F/Dev/oskar-space-ship-mashup/main.js",
-		"/F/Dev/advent-code/2019/2/part2.js",
-		"/F/Dev/advent-code/2019/5/part1-intcode-computer.js",
-		"/C/Users/Erik/Downloads/thisisbrad-CopyInserters-1.0.0/README.md",
-		"/F/Dev/advent-code/2019/4/part1.js",
-		"/F/Dev/advent-code/.gitignore",
-		"/F/Dev/advent-code/2019/4/part2.js",
-		"/F/Dev/advent-code/2019/3/part2-create-circuit-board.js",
-		"/F/Dev/advent-code/2019/3/part1.js",
-		"/F/Dev/advent-code/part1.js",
-		"/F/Dev/advent-code/2020/1/puzzle-input-example.txt",
-		"/F/Dev/advent-code/2020/1/part1.js",
-		"/F/Dev/advent-code/2020/3/part2-create-circuit-board.js",
-		"/F/Dev/advent-code/2020/3/part2-calculate-wire-distance.js",
-		"/F/Dev/advent-code/2020/2/part2.js",
-		"/F/Dev/advent-code/2020/common.js",
-		"/F/Dev/advent-code/2020/1/part2.js",
-		"/F/Dev/poc-save/host.js",
-		"/F/Dropbox/04 Kids/Julbrev 2020.txt",
-		"/C/Users/Erik/Desktop/test.html",
-		"/C/Users/Erik/AppData/Roaming/Sublime Text 3/Packages/Default/Preferences.sublime-settings",
-		"/F/Dev/push-bot2/src/Scenes/LoaderScene.js",
-		"/F/Dev/push-bot2/src/main.js",
-		"/F/Dev/push-bot2/package.json",
-		"/F/Dropbox/04 Kids/brev-elliot.txt"
+		"/F/Dev/advent-code/2021/04/part2.js"
 	],
 	"find":
 	{
@@ -695,6 +705,9 @@
 		"height": 319.0,
 		"where_history":
 		[
+			".",
+			"../",
+			""
 		]
 	},
 	"find_state":
@@ -702,134 +715,134 @@
 		"case_sensitive": false,
 		"find_history":
 		[
-			"splice",
-			"x_min",
-			"xPersist",
-			"4000000",
-			"sensor",
-			"beacons",
-			"bufferedX",
-			"mapForEach",
-			"clearedSections",
-			"manhattanDistance",
-			"walkAndClear",
-			"walkAndClearDeux",
-			"clearArea",
-			"beacon",
-			"map.find",
-			"x",
-			"\"B\"",
-			"\"S\" ",
-			"cave",
-			"doForAllCaveSpots",
+			"type",
+			"cost",
+			"*/    ",
+			"highscore",
+			"highScore",
+			"simulate",
+			"highestGeodes",
+			"_robot",
+			"_bank",
+			"_nextPurchase",
+			"iteration",
+			"_iteration",
+			"simulate",
+			"canAff",
+			"canAfford",
+			"nextTier",
+			"result",
+			"simulationId",
+			"simulation id",
+			"testCounter",
+			"ore",
+			"obsidian",
+			"Testcounter",
+			"simulate",
+			"bank",
+			"mix",
+			"simulate",
+			"{ ore",
+			"simulate",
+			"mineralA",
+			"mineralB",
+			"mineralA",
+			"clay",
+			"obsidian",
+			"geode",
+			"simulate",
+			"_blueprints",
+			"canAffordHighTier",
+			"haveEnoughOre",
+			"canAfford",
+			"spend",
+			"getCostForMineral",
+			"getGeodeCost",
+			"getCostForMineral",
+			"haveEnoughOre",
+			"simulate",
+			"probePosition",
+			"mirrorPositionFlipX",
+			"mirrorPosition",
+			"oppositeX",
+			"opposite",
+			"mirrorFlatX",
+			"flip",
+			"flipX",
+			"mirrorFlatX",
+			"mirrorPosition",
+			"rotate",
+			"Rotate",
+			"rotate",
+			"rotateOnly",
+			" }",
+			"func:",
+			"console.log",
+			"side",
+			"checkMovement",
+			"teleport",
+			"generateMountain",
 			"generateCave",
-			"    Sensor at : closest beacon is at ",
-			" = \"B\"",
-			"is at ",
-			"Sensor at ",
-			"z",
-			"y",
-			"x",
-			"%",
-			"10",
-			"doForAllHeights",
-			" vs ",
-			"console.log",
-			"smallest",
-			"[y][x]",
-			"doForAllHeights",
-			"map",
-			"trails",
-			"console.log",
-			"compareHeight",
-			"arr",
-			" && ",
-			", ",
-			"0,0",
-			"north",
-			"branch",
-			"tail",
-			"north",
-			"east",
-			"nmorth",
-			"east",
-			"column",
-			"trees",
-			"north",
-			"trees",
-			"makeBN",
-			"divisible by ",
-			"isEven",
-			"isOdd",
-			"Operation",
-			"divisible",
-			"Operation",
-			"0",
-			"maxGap",
-			"12",
-			"17",
-			"3",
-			"7",
-			"13",
-			"17",
-			"13",
-			"19",
-			"23",
-			"monkey0",
-			"x /",
-			"13",
-			"13) === x / 13 : false,\n  trueTarget: 1,",
-			"19",
-			"23",
-			"cycle-1",
-			"row",
-			"16",
-			"bar",
-			"str",
-			"y: 1",
+			"array",
+			"mod(from, len)",
+			"distancePrime",
+			"fromPrime",
+			"distance",
+			"from",
+			"distance",
+			"mixer.length",
+			"console",
+			"DEBUG",
+			"map(id)",
+			"map(instructionValue)",
+			"insertionIndexWithoutRemoval",
+			"insertionIndex",
+			"//",
+			"value",
+			"newArray",
+			"array",
+			"Array",
+			"array",
+			"Array",
+			"array",
+			"Array",
+			"array",
+			"value",
 			"1",
-			"y: 5",
-			"10",
-			"ropeSegment",
-			"x: 0, y: 0",
-			"b.",
-			"tail.",
-			"head.",
-			"ropeSegment",
-			"head",
-			"7",
-			"2",
-			"5",
-			"head, tail",
+			"value",
+			"counter",
+			"//",
+			"linkA",
+			"targetIndex",
+			"sideB",
+			"applicable",
+			"trim",
+			"reduceMultiplication",
+			"isLefthand",
+			"value",
+			"monkey.operation",
+			"/",
+			"-",
+			"+",
+			"-",
+			"+",
+			"/",
+			"+",
+			"*",
+			"target",
+			"pBM",
+			"pAM",
+			"pBM",
+			"pAM",
+			"reduceMultiplication",
+			"m2",
+			"me",
+			"//console.lo",
 			"console.log",
-			"head",
-			"x",
-			"visible",
-			"visibleRight",
-			"visibleLeft",
-			"visibleDown",
-			"visibleUp",
-			"found",
-			"row",
-			"column",
-			"row",
-			"str.split('\\n')",
-			"rows",
-			"largest",
-			"commandStr",
-			"'/'",
-			"path",
-			"console.log",
-			"e",
-			"a",
-			"rest",
-			"false",
-			"true",
-			"isMarker",
-			"||",
-			"hasDuplicates",
-			"noDuplicates",
-			"isAllSame"
+			"//console.log",
+			", blueprint",
+			"blueprint",
+			"console.log"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -847,8 +860,39 @@
 	"groups":
 	[
 		{
+			"selected": 0,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "2022/19/part1-recursive.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 7870,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2124,
+								2124
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1440.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
 			]
 		}
 	],

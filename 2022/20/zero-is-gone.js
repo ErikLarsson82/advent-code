@@ -1,3 +1,4 @@
+// dont even remeber the thinking about this one
 
 //1,2,-3,3,-2,0,4 // example input
 

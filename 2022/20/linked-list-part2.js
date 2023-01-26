@@ -1,5 +1,4 @@
-// this solved part 1 the first time, in about 20 minutes
-
+// this was not feasible, it got stuck on the second value forever
 let instructions
 let first
 let zero
@@ -7,7 +6,7 @@ let previous
 
 require('fs').readFile('./puzzle-input.txt', 'utf-8', (err, _data) => {
 
-  const ___data = `1
+  const data = `1
 2
 -3
 3
@@ -15,19 +14,11 @@ require('fs').readFile('./puzzle-input.txt', 'utf-8', (err, _data) => {
 0
 4`
 
-  const data = `1
-1
-1
-8
-1
-0
-1`
-
-  instructions = data.trim().split('\n').map((x, id) => ({ instructionValue: parseInt(x), id }));
+  instructions = data.trim().split('\n').map((x, id) => ({ instructionValue: parseInt(x) * 811589153, id }));
 
   data.trim().split('\n').map(x=>x.trim()).forEach((value, id) => {
     const created = {
-      value: parseInt(value),
+      value: parseInt(value) * 811589153,
       id,
       link: null
     }
@@ -48,25 +39,23 @@ require('fs').readFile('./puzzle-input.txt', 'utf-8', (err, _data) => {
 
   relinkPrevious()
 
-  const DEBUG = true
+  const DEBUG = false
+  
   DEBUG && printLinkedChain('Initial')
-  //DEBUG && printInvertedLinkedChain('Initial (inverted)')
+  DEBUG && printInvertedLinkedChain('Initial (inverted)')
 
-  new Array(Math.abs(8)).fill().forEach(() => moveForward(3))
-  DEBUG && printLinkedChain('After')  
-  //DEBUG && printInvertedLinkedChain('After (inverted)')
-  
-  return
-  
-  instructions.forEach(({ instructionValue, id }) => {
-    console.log('Instruction value', instructionValue, 'id', id)
-    if (instructionValue === 0) return
-    const func = instructionValue > 0 ? moveForward : moveBackward
+  for (let i = 0; i < 10; i++) {
+    instructions.forEach(({ instructionValue, id }) => {
+      console.log('Instruction value', instructionValue, 'id', id)
+      if (instructionValue === 0) return
+      const func = instructionValue > 0 ? moveForward : moveBackward
 
-    new Array(Math.abs(instructionValue)).fill().forEach(() => func(id))
-    DEBUG && printLinkedChain('After instruction ' + instructionValue)  
-    //DEBUG && printInvertedLinkedChain('After instruction (inverted)' + instructionValue)
-  })
+      new Array(Math.abs(instructionValue)).fill().forEach(() => func(id))
+      
+      DEBUG && printLinkedChain('After instruction ' + instruction)  
+      DEBUG && printInvertedLinkedChain('After instruction (inverted)' + instruction)
+    })
+  }
 
   count()
 
